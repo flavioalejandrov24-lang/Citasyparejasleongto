@@ -10,7 +10,7 @@
     
     <style>
 /* ================================================
-   LIONMATCH - ESTILOS MODERNOS Y VIBRANTES
+   LIONMATCH - ESTILOS MODERNOS Y VIBRANTES V2
    ================================================ */
 
 * {
@@ -35,8 +35,9 @@
     --orange: #fb5607;
     --green: #06ffa5;
     
-    /* Fondos con gradientes */
+    /* Fondos con gradientes - NUEVOS */
     --bg-dark: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --bg-pink: linear-gradient(135deg, #ff006e 0%, #ff6b6b 30%, #ffffff 100%);
     --bg-light: #f8f9fd;
     --bg-card: #ffffff;
     
@@ -68,12 +69,13 @@
 
 body {
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg-light);
+    background: var(--bg-pink); /* FONDO ROSA CON DEGRADADO BLANCO */
     color: var(--text-dark);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    min-height: 100vh;
 }
 
 .app-container {
@@ -82,7 +84,11 @@ body {
     background: var(--bg-card);
     min-height: 100vh;
     position: relative;
-    box-shadow: 0 0 80px rgba(102, 126, 234, 0.2);
+    box-shadow: 0 0 80px rgba(102, 126, 234, 0.3);
+    border-radius: var(--radius-lg);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
 }
 
 /* ================================================
@@ -114,7 +120,7 @@ body {
    ================================================ */
 
 #login-screen {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* CONTENEDOR PURPURA */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -245,7 +251,7 @@ body {
 }
 
 /* ================================================
-   FORMULARIOS CON EFECTOS MODERNOS
+   FORMULARIOS CON EFECTOS MODERNOS - SIN TRANSPARENCIA
    ================================================ */
 
 .auth-form {
@@ -293,12 +299,11 @@ body {
     padding: 1rem 1.25rem;
     border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--text-white);
+    background: rgba(255, 255, 255, 0.95); /* FONDO BLANCO OPACO - SIN TRANSPARENCIA */
+    color: var(--text-dark);
     font-size: 1rem;
     font-family: inherit;
     transition: var(--transition);
-    backdrop-filter: blur(20px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -311,9 +316,9 @@ body {
 #edit-profile-screen .form-group input,
 #edit-profile-screen .form-group select,
 #edit-profile-screen .form-group textarea {
-    background: white;
+    background: white; /* BLANCO PURO */
     color: var(--text-dark);
-    border-color: rgba(102, 126, 234, 0.2);
+    border-color: rgba(102, 126, 234, 0.3);
 }
 
 .form-group input:focus,
@@ -321,7 +326,7 @@ body {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--primary);
-    background: rgba(255, 255, 255, 0.15);
+    background: white;
     box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2), 0 8px 25px rgba(0, 212, 255, 0.3);
     transform: translateY(-2px);
 }
@@ -342,7 +347,7 @@ body {
 .form-group input::placeholder,
 .form-group select::placeholder,
 .form-group textarea::placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    color: #9ca3af;
 }
 
 #register-screen .form-group input::placeholder,
@@ -351,7 +356,7 @@ body {
     color: #9ca3af;
 }
 
-/* Input de contraseña con ojo */
+/* Input de contraseña con ojo - COLOR NEGRO TRANSPARENTE */
 .password-input-wrapper {
     position: relative;
 }
@@ -369,14 +374,14 @@ body {
     border: none;
     cursor: pointer;
     padding: 0.5rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(0, 0, 0, 0.6); /* COLOR NEGRO TRANSPARENTE */
     transition: var(--transition);
 }
 
 #register-screen .toggle-password,
 #onboarding-screen .toggle-password,
 #edit-profile-screen .toggle-password {
-    color: var(--text-light);
+    color: rgba(0, 0, 0, 0.6); /* COLOR NEGRO TRANSPARENTE */
 }
 
 .toggle-password:hover {
@@ -656,9 +661,7 @@ body {
     margin-top: 2rem;
 }
 
-/* Resto de estilos... (continúa con los demás componentes) */
-/* Por brevedad, incluiré solo los esenciales aquí */
-
+/* Resto de estilos... */
 .progress-bar {
     height: 6px;
     background: rgba(102, 126, 234, 0.2);
@@ -884,6 +887,169 @@ body {
 #register-screen .btn.loading::after {
     border-top-color: #667eea;
 }
+
+/* ================================================
+   MODALES PERSONALIZADOS - ESTILO WINDOWS MODERNO
+   ================================================ */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal {
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 90%;
+    width: 400px;
+    position: relative;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active .modal {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.modal-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.modal-title {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.modal-close {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.modal-close:hover {
+    opacity: 1;
+}
+
+.modal-body {
+    padding: 2rem;
+    text-align: center;
+}
+
+.modal-message {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e5e7eb;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.3s;
+}
+
+.modal-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.modal-btn {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.95rem;
+}
+
+.modal-btn-primary {
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+    color: white;
+}
+
+.modal-btn-secondary {
+    background: #e5e7eb;
+    color: var(--text-dark);
+}
+
+.modal-btn-danger {
+    background: linear-gradient(135deg, #ff006e 0%, #cc0057 100%);
+    color: white;
+}
+
+.modal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón de registro más visible */
+#register-screen .btn-success {
+    background: linear-gradient(135deg, #ff006e 0%, #cc0057 100%);
+    color: white;
+    box-shadow: 0 10px 40px rgba(255, 0, 110, 0.4);
+}
+
+#register-screen .btn-success:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 50px rgba(255, 0, 110, 0.6);
+}
     </style>
 </head>
 <body>
@@ -997,7 +1163,7 @@ body {
                     </div>
 
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-success">Guardar</button>
+                        <button type="submit" class="btn btn-success">Crear Cuenta</button>
                         <button type="button" class="btn btn-danger" id="cancel-register">Cancelar</button>
                     </div>
                 </form>
@@ -1116,6 +1282,59 @@ body {
 
         <!-- Toast de notificaciones -->
         <div id="toast" class="toast"></div>
+
+        <!-- Modal de recuperación de contraseña -->
+        <div id="password-modal" class="modal-overlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <div class="modal-icon">📧</div>
+                    <h3 class="modal-title">Recuperar Contraseña</h3>
+                    <button class="modal-close" id="close-password-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-message">Ingresa tu correo electrónico y te enviaremos instrucciones para restablecer tu contraseña</p>
+                    <input type="email" class="modal-input" id="modal-email" placeholder="tucorreo@ejemplo.com">
+                    <div class="modal-buttons">
+                        <button class="modal-btn modal-btn-secondary" id="cancel-password-modal">Cancelar</button>
+                        <button class="modal-btn modal-btn-primary" id="send-password-modal">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de confirmación -->
+        <div id="confirm-modal" class="modal-overlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <div class="modal-icon">✅</div>
+                    <h3 class="modal-title">Registro Exitoso</h3>
+                    <button class="modal-close" id="close-confirm-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-message">¡Excelente! Tu cuenta ha sido creada. Revisa tu correo electrónico para confirmar tu cuenta y activar tu perfil.</p>
+                    <div class="modal-buttons">
+                        <button class="modal-btn modal-btn-primary" id="ok-confirm-modal">Entendido</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de error -->
+        <div id="error-modal" class="modal-overlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <div class="modal-icon">❌</div>
+                    <h3 class="modal-title">Error</h3>
+                    <button class="modal-close" id="close-error-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p class="modal-message" id="error-message">Ha ocurrido un error.</p>
+                    <div class="modal-buttons">
+                        <button class="modal-btn modal-btn-danger" id="ok-error-modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Script de Supabase -->
@@ -1124,7 +1343,7 @@ body {
     <!-- JavaScript de la aplicación -->
     <script>
 // ================================================
-// LIONMATCH - APLICACIÓN JAVASCRIPT
+// LIONMATCH - APLICACIÓN JAVASCRIPT V2
 // ================================================
 
 // Configuración de Supabase - ¡CORREGIDO! Eliminados espacios en blanco
@@ -1187,7 +1406,7 @@ function initializeEventListeners() {
     // Login
     document.getElementById('login-form')?.addEventListener('submit', handleLogin);
     document.getElementById('go-to-register')?.addEventListener('click', () => showScreen('register'));
-    document.getElementById('forgot-password-link')?.addEventListener('click', handleForgotPassword);
+    document.getElementById('forgot-password-link')?.addEventListener('click', () => showModal('password-modal'));
     
     // Registro
     document.getElementById('register-form')?.addEventListener('submit', handleRegister);
@@ -1237,6 +1456,17 @@ function initializeEventListeners() {
             hiddenInput.value = this.getAttribute('data-value');
         });
     });
+    
+    // Modales
+    document.getElementById('close-password-modal')?.addEventListener('click', () => hideModal('password-modal'));
+    document.getElementById('cancel-password-modal')?.addEventListener('click', () => hideModal('password-modal'));
+    document.getElementById('send-password-modal')?.addEventListener('click', handlePasswordRecovery);
+    
+    document.getElementById('close-confirm-modal')?.addEventListener('click', () => hideModal('confirm-modal'));
+    document.getElementById('ok-confirm-modal')?.addEventListener('click', () => hideModal('confirm-modal'));
+    
+    document.getElementById('close-error-modal')?.addEventListener('click', () => hideModal('error-modal'));
+    document.getElementById('ok-error-modal')?.addEventListener('click', () => hideModal('error-modal'));
 }
 
 // ================================================
@@ -1250,12 +1480,12 @@ async function handleLogin(e) {
     const ageConfirmation = document.getElementById('age-confirmation').checked;
     
     if (!ageConfirmation) {
-        showToast('Debes confirmar que eres mayor de edad', 'error');
+        showErrorModal('Debes confirmar que eres mayor de 18 años');
         return;
     }
     
     if (!email || !password) {
-        showToast('Completa todos los campos', 'error');
+        showErrorModal('Completa todos los campos');
         return;
     }
     
@@ -1277,7 +1507,7 @@ async function handleLogin(e) {
         showScreen('discovery');
     } catch (error) {
         console.error('Error en login:', error);
-        showToast(error.message || 'Email o contraseña incorrectos', 'error');
+        showErrorModal(error.message || 'Email o contraseña incorrectos');
     } finally {
         // Restaurar botón
         loginBtn.classList.remove('loading');
@@ -1295,30 +1525,119 @@ async function handleRegister(e) {
     
     // Validaciones
     if (!ageConfirmation) {
+        showErrorModal('Debes confirmar que eres mayor de 18 años');
+        return;
+    }
+    
+    if (password !== passwordConfirm) {
+        showErrorModal('Las contraseñas no coinciden');
+        return;
+    }
+    
+    if (password.length < 6) {
+        showErrorModal('La contraseña debe tener al menos 6 caracteres');
+        return;
+    }
+    
+    if (!email || !password) {
+        showErrorModal('Completa todos los campos');
+        return;
+    }
+    
+    // Validar que el correo no exista
+    try {
+        const { data: existingUser } = await supabaseClient
+            .from('profiles')
+            .select('user_id')
+            .eq('email', email)
+            .single();
+        
+        if (existingUser) {
+            showErrorModal('Este correo ya está registrado');
+            return;
+        }
+    } catch (error) {
+        // Error PGRST116 significa que no se encontró ningún registro (lo cual es bueno)
+        if (error.code !== 'PGRST116') {
+            console.error('Error checking email:', error);
+        }
+    }
+    
+    // Mostrar estado de carga
+    const registerBtn = document.querySelector('#register-form .btn-success');
+    registerBtn.classList.add('loading');
+    registerBtn.disabled = true;
+    
+    try {
+        // Intentar crear la cuenta
+        const { data, error } = await supabaseClient.auth.signUp({
+            email,
+            password,
+            options: {
+                 {
+                    email
+                },
+                // 👇 REDIRECCIÓN FORZADA A TU PÁGINA 👇
+                emailRedirectTo: 'https://flavioalejandrov24-lang.github.io/Citasyparejasleongto/'
+            }
+        });
+        
+        if (error) {
+            // Manejar errores específicos de Supabase
+            if (error.message.includes('already registered')) {
+                showErrorModal('Este correo ya está registrado');
+            } else {
+                showErrorModal(error.message || 'Error al crear la cuenta');
+            }
+            return;
+        }
+        
+        currentUser = data.user;
+        
+        // Crear perfil vacío en la base de datos
+        const { error: profileError } = await supabaseClient.from('profiles').insert({
+            user_id: currentUser.id,
+            email: email,
+            created_at: new Date().toISOString()
+        });
+        
+        if (profileError) {
+            console.error('Error creating profile:', profileError);
+            // No detenemos el proceso, solo registramos el error
+        }
+        
+        // Mostrar modal de confirmación
+        showModal('confirm-modal');
+    } catch (error) {
+        console.error('Error en registro:', error);
+        showErrorModal('Error al crear la cuenta. Intenta nuevamente.');
+    } finally {
+        // Restaurar botón
+        registerBtn.classList.remove('loading');
         registerBtn.disabled = false;
     }
 }
-        
-async function handleForgotPassword(e) {
-    e.preventDefault();
-    const email = prompt('Ingresa tu correo electrónico para restablecer tu contraseña:');
+
+async function handlePasswordRecovery() {
+    const email = document.getElementById('modal-email').value.trim();
     
     if (!email || !email.includes('@')) {
-        showToast('Por favor ingresa un correo electrónico válido', 'error');
+        showErrorModal('Por favor ingresa un correo electrónico válido');
         return;
     }
     
     try {
-        const { error } = await supabaseClient.auth.resetPasswordForEmail(email.trim(), {
-            redirectTo: window.location.origin
+        const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+            redirectTo: 'https://flavioalejandrov24-lang.github.io/Citasyparejasleongto/'
         });
         
         if (error) throw error;
         
+        hideModal('password-modal');
         showToast('Te enviamos un email para restablecer tu contraseña', 'success');
     } catch (error) {
         console.error('Error en recuperación de contraseña:', error);
-        showToast('Error al enviar el email. Verifica tu correo e intenta nuevamente.', 'error');
+        showErrorModal('Error al enviar el email. Verifica tu correo e intenta nuevamente.');
     }
 }
 
@@ -1335,7 +1654,7 @@ async function handleLogout() {
         document.getElementById('age-confirmation').checked = false;
     } catch (error) {
         console.error('Error al cerrar sesión:', error);
-        showToast('Error al cerrar sesión', 'error');
+        showErrorModal('Error al cerrar sesión');
     }
 }
 
@@ -1367,7 +1686,7 @@ async function cancelOnboarding() {
             showScreen('login');
         } catch (error) {
             console.error('Error al cancelar onboarding:', error);
-            showToast('Error al cancelar el registro', 'error');
+            showErrorModal('Error al cancelar el registro');
         }
     }
 }
@@ -1415,7 +1734,7 @@ function nextOnboardingStep() {
         
         if (!seeking) {
             isValid = false;
-            showToast('Selecciona qué tipo de personas buscas', 'error');
+            showErrorModal('Selecciona qué tipo de personas buscas');
         }
     }
     
@@ -1484,28 +1803,28 @@ async function handleCompleteProfile(e) {
     
     // Validaciones finales
     if (!name || name.length < 2) {
-        showToast('El nombre es requerido', 'error');
+        showErrorModal('El nombre es requerido');
         return;
     }
     
     if (!birthdate) {
-        showToast('La fecha de nacimiento es requerida', 'error');
+        showErrorModal('La fecha de nacimiento es requerida');
         return;
     }
     
     const age = calculateAge(birthdate);
     if (age < 18) {
-        showToast('Debes ser mayor de 18 años para usar esta aplicación', 'error');
+        showErrorModal('Debes ser mayor de 18 años para usar esta aplicación');
         return;
     }
     
     if (!gender) {
-        showToast('Selecciona tu género', 'error');
+        showErrorModal('Selecciona tu género');
         return;
     }
     
     if (!seeking) {
-        showToast('Selecciona qué tipo de personas buscas', 'error');
+        showErrorModal('Selecciona qué tipo de personas buscas');
         return;
     }
     
@@ -1538,12 +1857,41 @@ async function handleCompleteProfile(e) {
         showScreen('discovery');
     } catch (error) {
         console.error('Error al completar el perfil:', error);
-        showToast('Error al guardar el perfil. Intenta nuevamente.', 'error');
+        showErrorModal('Error al guardar el perfil. Intenta nuevamente.');
     } finally {
         // Restaurar botón
         completeBtn.classList.remove('loading');
         completeBtn.disabled = false;
     }
+}
+
+// ================================================
+// MODALES PERSONALIZADOS
+// ================================================
+function showModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.add('active');
+        // Limpiar campos si es el modal de contraseña
+        if (modalId === 'password-modal') {
+            document.getElementById('modal-email').value = '';
+        }
+    }
+}
+
+function hideModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('active');
+    }
+}
+
+function showErrorModal(message) {
+    const errorMessage = document.getElementById('error-message');
+    if (errorMessage) {
+        errorMessage.textContent = message;
+    }
+    showModal('error-modal');
 }
 
 // ================================================
@@ -1613,7 +1961,7 @@ function markFieldError(fieldId, message) {
         field.style.boxShadow = '0 0 0 3px rgba(255, 0, 110, 0.2)';
         
         // Mostrar mensaje de error temporalmente
-        showToast(message, 'error');
+        showErrorModal(message);
     }
 }
 
