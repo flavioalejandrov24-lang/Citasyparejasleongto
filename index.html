@@ -1295,78 +1295,10 @@ async function handleRegister(e) {
     
     // Validaciones
     if (!ageConfirmation) {
-        showToast('Debes confirmar que eres mayor de 18 años', 'error');
-        return;
-    }
-    
-    if (password !== passwordConfirm) {
-        showToast('Las contraseñas no coinciden', 'error');
-        return;
-    }
-    
-    if (password.length < 6) {
-        showToast('La contraseña debe tener al menos 6 caracteres', 'error');
-        return;
-    }
-    
-    if (!email || !password) {
-        showToast('Completa todos los campos', 'error');
-        return;
-    }
-    
-    // Mostrar estado de carga
-    const registerBtn = document.querySelector('#register-form .btn-success');
-    registerBtn.classList.add('loading');
-    registerBtn.disabled = true;
-    
-    try {
-        // Intentar crear la cuenta
-        const { data, error } = await supabaseClient.auth.signUp({
-            email,
-            password,
-            options: {
-                data: {
-                    email
-                }
-            }
-        });
-        
-        if (error) {
-            // Manejar errores específicos de Supabase
-            if (error.message.includes('already registered')) {
-                showToast('Este correo ya está registrado', 'error');
-            } else {
-                showToast(error.message || 'Error al crear la cuenta', 'error');
-            }
-            return;
-        }
-        
-        currentUser = data.user;
-        
-        // Crear perfil vacío en la base de datos
-        const { error: profileError } = await supabaseClient.from('profiles').insert({
-            user_id: currentUser.id,
-            email: email,
-            created_at: new Date().toISOString()
-        });
-        
-        if (profileError) {
-            console.error('Error creating profile:', profileError);
-            // No detenemos el proceso, solo registramos el error
-        }
-        
-        showToast('¡Cuenta creada! Completa tu perfil', 'success');
-        showScreen('onboarding');
-    } catch (error) {
-        console.error('Error en registro:', error);
-        showToast('Error al crear la cuenta. Intenta nuevamente.', 'error');
-    } finally {
-        // Restaurar botón
-        registerBtn.classList.remove('loading');
         registerBtn.disabled = false;
     }
 }
-
+        
 async function handleForgotPassword(e) {
     e.preventDefault();
     const email = prompt('Ingresa tu correo electrónico para restablecer tu contraseña:');
