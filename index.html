@@ -792,6 +792,7 @@ body {
     transition: all 0.3s ease;
     font-weight: 600;
     max-width: 90%;
+    text-align: center;
 }
 
 .toast.show {
@@ -825,7 +826,64 @@ body {
     background-clip: text;
 }
 
-/* Simplificado para los demás componentes */
+/* Botón de cancelar en onboarding */
+.cancel-onboarding {
+    background: none;
+    border: none;
+    color: var(--secondary);
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.cancel-onboarding:hover {
+    color: var(--secondary-dark);
+    text-decoration: underline;
+}
+
+/* Estilos para el loader */
+.loader {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.btn.loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+}
+
+#register-screen .btn.loading::after {
+    border-top-color: #667eea;
+}
     </style>
 </head>
 <body>
@@ -930,6 +988,13 @@ body {
                             </button>
                         </div>
                     </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="register-age-confirmation" required>
+                            <span>Confirmo que soy mayor de 18 años</span>
+                        </label>
+                    </div>
 
                     <div class="form-actions">
                         <button type="submit" class="btn btn-success">Guardar</button>
@@ -942,6 +1007,12 @@ body {
         <!-- Pantalla simple de onboarding -->
         <div id="onboarding-screen" class="screen">
             <div class="onboarding-container">
+                <button class="back-button" id="cancel-onboarding">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                
                 <div class="progress-bar">
                     <div class="progress-fill" id="onboarding-progress"></div>
                 </div>
@@ -986,6 +1057,7 @@ body {
                                 </svg>
                                 <input type="text" value="León, Guanajuato" disabled>
                             </div>
+                            <p class="help-text">Tu ubicación está bloqueada en León, Gto para conectar con personas locales</p>
                         </div>
                     </div>
                     <div class="form-step" data-step="3">
@@ -996,7 +1068,7 @@ body {
                         </div>
                         <div class="form-group">
                             <label for="profile-interests">Intereses</label>
-                            <input type="text" id="profile-interests" placeholder="Ej: Fotografía, Deportes">
+                            <input type="text" id="profile-interests" placeholder="Ej: Fotografía, Deportes, Música">
                         </div>
                     </div>
                     <div class="form-navigation">
@@ -1005,6 +1077,7 @@ body {
                         <button type="submit" class="btn btn-success" id="complete-profile" style="display: none;">Completar</button>
                     </div>
                 </form>
+                <button type="button" class="cancel-onboarding" id="cancel-onboarding-full">Cancelar registro</button>
             </div>
         </div>
 
@@ -1012,10 +1085,32 @@ body {
         <div id="discovery-screen" class="screen">
             <header class="app-header">
                 <h1 class="header-logo">LionMatch</h1>
+                <button class="btn btn-danger" id="logout-button" style="width: auto; padding: 0.5rem 1rem; font-size: 0.9rem;">Cerrar Sesión</button>
             </header>
             <div style="padding: 2rem; text-align: center;">
-                <h2>Bienvenido a Discovery</h2>
-                <p>Aquí aparecerán los perfiles para hacer match</p>
+                <div style="margin-bottom: 2rem;">
+                    <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #00d4ff, #ff006e); border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 3rem; font-weight: bold; color: white;">🎉</span>
+                    </div>
+                    <h2 style="font-size: 2rem; margin-bottom: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">¡Bienvenido a LionMatch!</h2>
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem;">Tu perfil ha sido completado exitosamente. Pronto podrás descubrir personas en León, Gto.</p>
+                    <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)); border-radius: var(--radius-md); padding: 1.5rem; margin-top: 1.5rem;">
+                        <p style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text-dark);">Próximamente:</p>
+                        <ul style="text-align: left; padding-left: 1.5rem; color: var(--text-light);">
+                            <li>Descubre perfiles cerca de ti</li>
+                            <li>Conecta con personas que comparten tus intereses</li>
+                            <li>Chatea en tiempo real</li>
+                            <li>Eventos locales en León, Gto</li>
+                        </ul>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="edit-profile-button" style="max-width: 300px; margin: 0 auto;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                    Editar mi perfil
+                </button>
             </div>
         </div>
 
@@ -1032,30 +1127,37 @@ body {
 // LIONMATCH - APLICACIÓN JAVASCRIPT
 // ================================================
 
-// Configuración de Supabase
-const SUPABASE_URL = 'https://fjevgfyqqsfankvledpl.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqZXZnZnlxcXNmYW5rdmxlZHBsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA2Nzk0NjIsImV4cCI6MjA4NjI1NTQ2Mn0.AmysLsRq_KBXYculm0Nyw3a0abWLQ8zTt-2OSo-6PSA';
+// Configuración de Supabase - ¡CORREGIDO! Eliminados espacios en blanco
+const SUPABASE_URL = 'https://fjevgfyqqsfankvledpl.supabase.co'.trim();
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqZXZnZnlxcXNmYW5rdmxlZHBsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA2Nzk0NjIsImV4cCI6MjA4NjI1NTQ2Mn0.AmysLsRq_KBXYculm0Nyw3a0abWLQ8zTt-2OSo-6PSA'.trim();
 
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Variables globales
 let currentUser = null;
 let onboardingStep = 1;
+let toastTimeout = null;
 
 // ================================================
 // INICIALIZACIÓN
 // ================================================
 document.addEventListener('DOMContentLoaded', async () => {
+    // Limpiar cualquier sesión anterior al cargar
     const { data: { session } } = await supabaseClient.auth.getSession();
     
     if (session) {
         currentUser = session.user;
-        const { data: profile } = await supabaseClient
+        const { data: profile, error: profileError } = await supabaseClient
             .from('profiles')
             .select('*')
             .eq('user_id', currentUser.id)
             .single();
         
+        if (profileError && profileError.code !== 'PGRST116') {
+            console.error('Error fetching profile:', profileError);
+        }
+        
+        // Verificar si el perfil está completo (tiene nombre)
         if (profile && profile.name) {
             showScreen('discovery');
         } else {
@@ -1066,6 +1168,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     
     initializeEventListeners();
+    
+    // Inicializar el contador de biografía
+    const bioInput = document.getElementById('profile-bio');
+    const bioCount = document.getElementById('bio-count');
+    if (bioInput && bioCount) {
+        bioInput.addEventListener('input', () => {
+            bioCount.textContent = bioInput.value.length;
+        });
+        bioCount.textContent = bioInput.value.length;
+    }
 });
 
 // ================================================
@@ -1102,24 +1214,28 @@ function initializeEventListeners() {
     document.getElementById('onboarding-form')?.addEventListener('submit', handleCompleteProfile);
     document.getElementById('next-step')?.addEventListener('click', nextOnboardingStep);
     document.getElementById('prev-step')?.addEventListener('click', prevOnboardingStep);
+    document.getElementById('cancel-onboarding')?.addEventListener('click', cancelOnboarding);
+    document.getElementById('cancel-onboarding-full')?.addEventListener('click', cancelOnboarding);
+    
+    // Discovery
+    document.getElementById('logout-button')?.addEventListener('click', handleLogout);
+    document.getElementById('edit-profile-button')?.addEventListener('click', () => showScreen('onboarding'));
     
     // Choice buttons
     document.querySelectorAll('.choice-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             const group = this.parentElement;
-            const hiddenInput = group.nextElementSibling;
+            const hiddenInput = document.getElementById('profile-seeking');
             
+            // Remover clase activa de todos los botones en el grupo
             group.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('active'));
+            
+            // Agregar clase activa al botón seleccionado
             this.classList.add('active');
+            
+            // Establecer el valor en el input oculto
             hiddenInput.value = this.getAttribute('data-value');
         });
-    });
-    
-    // Bio counter
-    const bioInput = document.getElementById('profile-bio');
-    const bioCount = document.getElementById('bio-count');
-    bioInput?.addEventListener('input', () => {
-        bioCount.textContent = bioInput.value.length;
     });
 }
 
@@ -1129,7 +1245,7 @@ function initializeEventListeners() {
 async function handleLogin(e) {
     e.preventDefault();
     
-    const email = document.getElementById('login-email').value;
+    const email = document.getElementById('login-email').value.trim();
     const password = document.getElementById('login-password').value;
     const ageConfirmation = document.getElementById('age-confirmation').checked;
     
@@ -1137,6 +1253,16 @@ async function handleLogin(e) {
         showToast('Debes confirmar que eres mayor de edad', 'error');
         return;
     }
+    
+    if (!email || !password) {
+        showToast('Completa todos los campos', 'error');
+        return;
+    }
+    
+    // Mostrar estado de carga
+    const loginBtn = document.querySelector('#login-form .btn-primary');
+    loginBtn.classList.add('loading');
+    loginBtn.disabled = true;
     
     try {
         const { data, error } = await supabaseClient.auth.signInWithPassword({
@@ -1151,16 +1277,27 @@ async function handleLogin(e) {
         showScreen('discovery');
     } catch (error) {
         console.error('Error en login:', error);
-        showToast('Email o contraseña incorrectos', 'error');
+        showToast(error.message || 'Email o contraseña incorrectos', 'error');
+    } finally {
+        // Restaurar botón
+        loginBtn.classList.remove('loading');
+        loginBtn.disabled = false;
     }
 }
 
 async function handleRegister(e) {
     e.preventDefault();
     
-    const email = document.getElementById('register-email').value;
+    const email = document.getElementById('register-email').value.trim();
     const password = document.getElementById('register-password').value;
     const passwordConfirm = document.getElementById('register-password-confirm').value;
+    const ageConfirmation = document.getElementById('register-age-confirmation').checked;
+    
+    // Validaciones
+    if (!ageConfirmation) {
+        showToast('Debes confirmar que eres mayor de 18 años', 'error');
+        return;
+    }
     
     if (password !== passwordConfirm) {
         showToast('Las contraseñas no coinciden', 'error');
@@ -1172,74 +1309,185 @@ async function handleRegister(e) {
         return;
     }
     
+    if (!email || !password) {
+        showToast('Completa todos los campos', 'error');
+        return;
+    }
+    
+    // Mostrar estado de carga
+    const registerBtn = document.querySelector('#register-form .btn-success');
+    registerBtn.classList.add('loading');
+    registerBtn.disabled = true;
+    
     try {
-        const { data: existingUser } = await supabaseClient
-            .from('profiles')
-            .select('user_id')
-            .eq('email', email)
-            .single();
+        // Intentar crear la cuenta
+        const { data, error } = await supabaseClient.auth.signUp({
+            email,
+            password,
+            options: {
+                data: {
+                    email
+                }
+            }
+        });
         
-        if (existingUser) {
-            showToast('Este correo ya está registrado', 'error');
+        if (error) {
+            // Manejar errores específicos de Supabase
+            if (error.message.includes('already registered')) {
+                showToast('Este correo ya está registrado', 'error');
+            } else {
+                showToast(error.message || 'Error al crear la cuenta', 'error');
+            }
             return;
         }
         
-        const { data, error } = await supabaseClient.auth.signUp({
-            email,
-            password
-        });
-        
-        if (error) throw error;
-        
         currentUser = data.user;
         
-        await supabaseClient.from('profiles').insert({
+        // Crear perfil vacío en la base de datos
+        const { error: profileError } = await supabaseClient.from('profiles').insert({
             user_id: currentUser.id,
             email: email,
             created_at: new Date().toISOString()
         });
         
+        if (profileError) {
+            console.error('Error creating profile:', profileError);
+            // No detenemos el proceso, solo registramos el error
+        }
+        
         showToast('¡Cuenta creada! Completa tu perfil', 'success');
         showScreen('onboarding');
     } catch (error) {
         console.error('Error en registro:', error);
-        showToast('Error al crear la cuenta', 'error');
+        showToast('Error al crear la cuenta. Intenta nuevamente.', 'error');
+    } finally {
+        // Restaurar botón
+        registerBtn.classList.remove('loading');
+        registerBtn.disabled = false;
     }
 }
 
 async function handleForgotPassword(e) {
     e.preventDefault();
-    const email = prompt('Ingresa tu correo electrónico:');
+    const email = prompt('Ingresa tu correo electrónico para restablecer tu contraseña:');
     
-    if (!email) return;
+    if (!email || !email.includes('@')) {
+        showToast('Por favor ingresa un correo electrónico válido', 'error');
+        return;
+    }
     
     try {
-        const { error } = await supabaseClient.auth.resetPasswordForEmail(email);
+        const { error } = await supabaseClient.auth.resetPasswordForEmail(email.trim(), {
+            redirectTo: window.location.origin
+        });
+        
         if (error) throw error;
+        
         showToast('Te enviamos un email para restablecer tu contraseña', 'success');
     } catch (error) {
-        showToast('Error al enviar el email', 'error');
+        console.error('Error en recuperación de contraseña:', error);
+        showToast('Error al enviar el email. Verifica tu correo e intenta nuevamente.', 'error');
+    }
+}
+
+async function handleLogout() {
+    try {
+        await supabaseClient.auth.signOut();
+        currentUser = null;
+        showToast('Sesión cerrada correctamente', 'success');
+        showScreen('login');
+        
+        // Limpiar campos del formulario de login
+        document.getElementById('login-email').value = '';
+        document.getElementById('login-password').value = '';
+        document.getElementById('age-confirmation').checked = false;
+    } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+        showToast('Error al cerrar sesión', 'error');
     }
 }
 
 // ================================================
 // ONBOARDING
 // ================================================
+async function cancelOnboarding() {
+    if (!currentUser) {
+        showScreen('login');
+        return;
+    }
+    
+    if (confirm('¿Estás seguro que deseas cancelar el registro? Se cerrará tu sesión.')) {
+        try {
+            await supabaseClient.auth.signOut();
+            currentUser = null;
+            
+            // Limpiar campos del onboarding
+            document.getElementById('profile-name').value = '';
+            document.getElementById('profile-birthdate').value = '';
+            document.getElementById('profile-gender').value = '';
+            document.getElementById('profile-seeking').value = '';
+            document.querySelectorAll('.choice-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('profile-bio').value = '';
+            document.getElementById('profile-interests').value = '';
+            document.getElementById('bio-count').textContent = '0';
+            
+            showToast('Registro cancelado', 'success');
+            showScreen('login');
+        } catch (error) {
+            console.error('Error al cancelar onboarding:', error);
+            showToast('Error al cancelar el registro', 'error');
+        }
+    }
+}
+
 function nextOnboardingStep() {
     const currentStepElement = document.querySelector(`.form-step[data-step="${onboardingStep}"]`);
-    const inputs = currentStepElement.querySelectorAll('input[required], select[required]');
-    
     let isValid = true;
-    inputs.forEach(input => {
-        if (!input.value) {
+    
+    // Validar campos requeridos en el paso actual
+    if (onboardingStep === 1) {
+        const name = document.getElementById('profile-name').value.trim();
+        const birthdate = document.getElementById('profile-birthdate').value;
+        const gender = document.getElementById('profile-gender').value;
+        
+        if (!name || name.length < 2) {
             isValid = false;
-            input.style.borderColor = '#ff006e';
-            setTimeout(() => { input.style.borderColor = ''; }, 2000);
+            markFieldError('profile-name', 'El nombre es requerido');
+        } else {
+            clearFieldError('profile-name');
         }
-    });
+        
+        if (!birthdate) {
+            isValid = false;
+            markFieldError('profile-birthdate', 'La fecha de nacimiento es requerida');
+        } else {
+            // Verificar que sea mayor de 18 años
+            const age = calculateAge(birthdate);
+            if (age < 18) {
+                isValid = false;
+                markFieldError('profile-birthdate', 'Debes ser mayor de 18 años');
+            } else {
+                clearFieldError('profile-birthdate');
+            }
+        }
+        
+        if (!gender) {
+            isValid = false;
+            markFieldError('profile-gender', 'Selecciona un género');
+        } else {
+            clearFieldError('profile-gender');
+        }
+    } 
+    else if (onboardingStep === 2) {
+        const seeking = document.getElementById('profile-seeking').value;
+        
+        if (!seeking) {
+            isValid = false;
+            showToast('Selecciona qué tipo de personas buscas', 'error');
+        }
+    }
     
     if (!isValid) {
-        showToast('Completa todos los campos', 'error');
         return;
     }
     
@@ -1251,62 +1499,118 @@ function nextOnboardingStep() {
 
 function prevOnboardingStep() {
     if (onboardingStep > 1) {
+        // Limpiar errores del paso anterior al retroceder
+        clearAllFieldErrors();
         onboardingStep--;
         updateOnboardingUI();
     }
 }
 
 function updateOnboardingUI() {
+    // Ocultar todos los pasos
     document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+    
+    // Mostrar el paso actual
     document.querySelector(`.form-step[data-step="${onboardingStep}"]`).classList.add('active');
     
+    // Actualizar barra de progreso
     const progress = (onboardingStep / 3) * 100;
     document.getElementById('onboarding-progress').style.width = `${progress}%`;
     
-    document.getElementById('prev-step').style.display = onboardingStep > 1 ? 'block' : 'none';
-    document.getElementById('next-step').style.display = onboardingStep < 3 ? 'block' : 'none';
-    document.getElementById('complete-profile').style.display = onboardingStep === 3 ? 'block' : 'none';
+    // Actualizar botones de navegación
+    const prevBtn = document.getElementById('prev-step');
+    const nextBtn = document.getElementById('next-step');
+    const completeBtn = document.getElementById('complete-profile');
+    
+    if (onboardingStep === 1) {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'block';
+        completeBtn.style.display = 'none';
+        nextBtn.textContent = 'Siguiente';
+    } else if (onboardingStep === 2) {
+        prevBtn.style.display = 'block';
+        nextBtn.style.display = 'block';
+        completeBtn.style.display = 'none';
+        nextBtn.textContent = 'Siguiente';
+    } else if (onboardingStep === 3) {
+        prevBtn.style.display = 'block';
+        nextBtn.style.display = 'none';
+        completeBtn.style.display = 'block';
+    }
 }
 
 async function handleCompleteProfile(e) {
     e.preventDefault();
     
-    const name = document.getElementById('profile-name').value;
+    // Obtener valores del formulario
+    const name = document.getElementById('profile-name').value.trim();
     const birthdate = document.getElementById('profile-birthdate').value;
     const gender = document.getElementById('profile-gender').value;
     const seeking = document.getElementById('profile-seeking').value;
-    const bio = document.getElementById('profile-bio').value || '';
-    const interests = document.getElementById('profile-interests').value || '';
+    const bio = document.getElementById('profile-bio').value.trim() || '';
+    const interests = document.getElementById('profile-interests').value.trim() || '';
+    
+    // Validaciones finales
+    if (!name || name.length < 2) {
+        showToast('El nombre es requerido', 'error');
+        return;
+    }
+    
+    if (!birthdate) {
+        showToast('La fecha de nacimiento es requerida', 'error');
+        return;
+    }
     
     const age = calculateAge(birthdate);
-    
     if (age < 18) {
-        showToast('Debes ser mayor de 18 años', 'error');
+        showToast('Debes ser mayor de 18 años para usar esta aplicación', 'error');
+        return;
+    }
+    
+    if (!gender) {
+        showToast('Selecciona tu género', 'error');
         return;
     }
     
     if (!seeking) {
-        showToast('Selecciona qué buscas', 'error');
+        showToast('Selecciona qué tipo de personas buscas', 'error');
         return;
     }
     
+    // Mostrar estado de carga
+    const completeBtn = document.getElementById('complete-profile');
+    completeBtn.classList.add('loading');
+    completeBtn.disabled = true;
+    
     try {
+        // Actualizar perfil en la base de datos
         const { error } = await supabaseClient
             .from('profiles')
             .update({
-                name, birthdate, age, gender, seeking, bio, interests,
+                name, 
+                birthdate, 
+                age, 
+                gender, 
+                seeking, 
+                bio, 
+                interests,
                 location: 'León, Guanajuato',
-                updated_at: new Date().toISOString()
+                updated_at: new Date().toISOString(),
+                completed: true
             })
             .eq('user_id', currentUser.id);
         
         if (error) throw error;
         
-        showToast('¡Perfil completado!', 'success');
+        showToast('¡Perfil completado exitosamente!', 'success');
         showScreen('discovery');
     } catch (error) {
-        console.error('Error:', error);
-        showToast('Error al guardar el perfil', 'error');
+        console.error('Error al completar el perfil:', error);
+        showToast('Error al guardar el perfil. Intenta nuevamente.', 'error');
+    } finally {
+        // Restaurar botón
+        completeBtn.classList.remove('loading');
+        completeBtn.disabled = false;
     }
 }
 
@@ -1314,17 +1618,47 @@ async function handleCompleteProfile(e) {
 // UTILIDADES
 // ================================================
 function showScreen(screenId) {
-    document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
-    document.getElementById(`${screenId}-screen`).classList.add('active');
+    // Ocultar todas las pantallas
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
+    
+    // Mostrar la pantalla solicitada
+    const targetScreen = document.getElementById(`${screenId}-screen`);
+    if (targetScreen) {
+        targetScreen.classList.add('active');
+        
+        // Acciones específicas por pantalla
+        if (screenId === 'onboarding') {
+            // Reiniciar el onboarding si es necesario
+            onboardingStep = 1;
+            updateOnboardingUI();
+            clearAllFieldErrors();
+        }
+    } else {
+        console.error(`Screen not found: ${screenId}-screen`);
+    }
 }
 
 function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
+    
+    // Limpiar timeout anterior si existe
+    if (toastTimeout) {
+        clearTimeout(toastTimeout);
+    }
+    
+    // Configurar mensaje y tipo
     toast.textContent = message;
     toast.className = `toast ${type}`;
+    
+    // Mostrar toast
     toast.classList.add('show');
     
-    setTimeout(() => toast.classList.remove('show'), 3000);
+    // Ocultar después de 3 segundos
+    toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
 }
 
 function calculateAge(birthdate) {
@@ -1338,6 +1672,32 @@ function calculateAge(birthdate) {
     }
     
     return age;
+}
+
+function markFieldError(fieldId, message) {
+    const field = document.getElementById(fieldId);
+    if (field) {
+        field.style.borderColor = '#ff006e';
+        field.style.boxShadow = '0 0 0 3px rgba(255, 0, 110, 0.2)';
+        
+        // Mostrar mensaje de error temporalmente
+        showToast(message, 'error');
+    }
+}
+
+function clearFieldError(fieldId) {
+    const field = document.getElementById(fieldId);
+    if (field) {
+        field.style.borderColor = '';
+        field.style.boxShadow = '';
+    }
+}
+
+function clearAllFieldErrors() {
+    document.querySelectorAll('.form-group input, .form-group select').forEach(field => {
+        field.style.borderColor = '';
+        field.style.boxShadow = '';
+    });
 }
     </script>
 </body>
