@@ -378,4 +378,169 @@
                         </svg>
                         Editar Perfil
                     </button>
-                    <button class="btn btn-danger" id="delete-account
+                    <button class="btn btn-danger" id="delete-account-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                        Eliminar Cuenta
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PANTALLA 8: EDITAR PERFIL -->
+        <!-- ============================================ -->
+        <div id="edit-profile-screen" class="screen">
+            <div class="edit-profile-container">
+                <button class="back-button" id="back-from-edit">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+
+                <h2 class="screen-title">Editar Perfil</h2>
+
+                <form id="edit-profile-form" class="profile-form">
+                    <div class="form-group">
+                        <label for="edit-name">Nombre</label>
+                        <input type="text" id="edit-name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-bio">Biografía</label>
+                        <textarea id="edit-bio" rows="4" maxlength="300"></textarea>
+                        <span class="char-count"><span id="edit-bio-count">0</span>/300</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit-interests">Intereses</label>
+                        <input type="text" id="edit-interests">
+                    </div>
+
+                    <div class="form-group">
+                        <label>¿Qué buscas?</label>
+                        <div class="button-group">
+                            <button type="button" class="choice-btn" data-value="Hombres">Hombres</button>
+                            <button type="button" class="choice-btn" data-value="Mujeres">Mujeres</button>
+                            <button type="button" class="choice-btn" data-value="Todos">Todos</button>
+                        </div>
+                        <input type="hidden" id="edit-seeking" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-edit">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- MENÚ LATERAL (SIDEBAR) -->
+        <!-- ============================================ -->
+        <div id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h2>LionMatch</h2>
+                <p>León, Gto</p>
+                <button class="close-sidebar" id="close-sidebar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item" data-screen="discovery">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <span>Descubrir</span>
+                </a>
+                <a href="#" class="nav-item" data-screen="messages">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <span>Mensajes</span>
+                </a>
+                <a href="#" class="nav-item" data-screen="profile">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>Mi Perfil</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="logout-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+
+        <!-- Overlay para el sidebar -->
+        <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+        <!-- ============================================ -->
+        <!-- MODAL DE CONFIRMACIÓN DE ELIMINACIÓN -->
+        <!-- ============================================ -->
+        <div id="delete-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-icon danger">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                <h3>¿Eliminar cuenta?</h3>
+                <p>Esta acción es permanente y eliminará todos tus datos, matches y conversaciones.</p>
+                <div class="modal-actions">
+                    <button class="btn btn-danger" id="confirm-delete">Sí, eliminar</button>
+                    <button class="btn btn-secondary" id="cancel-delete">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- MODAL DE MATCH -->
+        <!-- ============================================ -->
+        <div id="match-modal" class="modal match-modal">
+            <div class="modal-content match-content">
+                <div class="match-animation">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                </div>
+                <h2>¡Es un Match!</h2>
+                <p>A ambos les gustaron. ¡Empiecen a chatear!</p>
+                <div class="match-profiles">
+                    <img src="" alt="" id="match-user-photo">
+                </div>
+                <div class="modal-actions">
+                    <button class="btn btn-success" id="send-match-message">Enviar mensaje</button>
+                    <button class="btn btn-secondary" id="close-match-modal">Continuar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- NOTIFICACIONES TOAST -->
+        <!-- ============================================ -->
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
