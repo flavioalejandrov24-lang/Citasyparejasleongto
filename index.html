@@ -7,1063 +7,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <style>
-/* ================================================
-   LIONMATCH - ESTILOS MODERNOS Y VIBRANTES V2
-   ================================================ */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    /* Colores vibrantes y modernos con gradientes */
-    --primary: #00d4ff;
-    --primary-dark: #0099cc;
-    --primary-light: #4de6ff;
-    --secondary: #ff006e;
-    --secondary-dark: #cc0057;
-    --accent: #ffbe0b;
-    --accent-dark: #ffa500;
-    
-    /* Nuevos colores complementarios */
-    --purple: #8338ec;
-    --pink: #ff006e;
-    --orange: #fb5607;
-    --green: #06ffa5;
-    
-    /* Fondos con gradientes - NUEVOS */
-    --bg-dark: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --bg-pink: linear-gradient(135deg, #ff006e 0%, #ff6b6b 30%, #ffffff 100%);
-    --bg-light: #f8f9fd;
-    --bg-card: #ffffff;
-    
-    /* Colores de texto */
-    --text-dark: #1a1a2e;
-    --text-light: #6b7280;
-    --text-white: #ffffff;
-    
-    /* Colores de estado con más vibración */
-    --success: #06ffa5;
-    --danger: #ff006e;
-    --warning: #ffbe0b;
-    --info: #00d4ff;
-    
-    /* Sombras con color */
-    --shadow-primary: 0 10px 40px rgba(0, 212, 255, 0.3);
-    --shadow-secondary: 0 10px 40px rgba(255, 0, 110, 0.3);
-    --shadow-accent: 0 10px 40px rgba(255, 190, 11, 0.3);
-    
-    /* Bordes redondeados */
-    --radius-sm: 0.5rem;
-    --radius-md: 1rem;
-    --radius-lg: 1.5rem;
-    --radius-xl: 2rem;
-    
-    /* Transiciones */
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-body {
-    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg-pink); /* FONDO ROSA CON DEGRADADO BLANCO */
-    color: var(--text-dark);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-    min-height: 100vh;
-}
-
-.app-container {
-    max-width: 480px;
-    margin: 0 auto;
-    background: var(--bg-card);
-    min-height: 100vh;
-    position: relative;
-    box-shadow: 0 0 80px rgba(102, 126, 234, 0.3);
-    border-radius: var(--radius-lg);
-    margin-top: 20px;
-    margin-bottom: 20px;
-    overflow: hidden;
-}
-
-/* ================================================
-   PANTALLAS - Sistema de navegación
-   ================================================ */
-
-.screen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    min-height: 100vh;
-    background: var(--bg-card);
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                opacity 0.4s ease;
-}
-
-.screen.active {
-    opacity: 1;
-    pointer-events: all;
-    transform: translateX(0);
-}
-
-/* ================================================
-   PANTALLA DE LOGIN - MEJORADA
-   ================================================ */
-
-#login-screen {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* CONTENEDOR PURPURA */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
-}
-
-#login-screen::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
-    animation: pulse 8s ease-in-out infinite;
-}
-
-#login-screen::after {
-    content: '';
-    position: absolute;
-    bottom: -30%;
-    right: -30%;
-    width: 150%;
-    height: 150%;
-    background: radial-gradient(circle, rgba(255, 0, 110, 0.2) 0%, transparent 60%);
-    animation: pulse 10s ease-in-out infinite reverse;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
-    50% { transform: scale(1.2) rotate(5deg); opacity: 0.8; }
-}
-
-.login-container {
-    width: 100%;
-    max-width: 400px;
-    position: relative;
-    z-index: 1;
-}
-
-.logo-section {
-    text-align: center;
-    margin-bottom: 3rem;
-    animation: fadeInDown 0.6s ease;
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.app-logo {
-    width: 90px;
-    height: 90px;
-    margin: 0 auto 1.5rem;
-    background: linear-gradient(135deg, #00d4ff 0%, #ff006e 100%);
-    border-radius: var(--radius-xl);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 60px rgba(0, 212, 255, 0.6), 0 0 80px rgba(255, 0, 110, 0.4);
-    animation: float 3s ease-in-out infinite;
-    position: relative;
-}
-
-.app-logo::before {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    background: linear-gradient(135deg, #00d4ff, #ff006e, #ffbe0b);
-    border-radius: var(--radius-xl);
-    z-index: -1;
-    opacity: 0.5;
-    filter: blur(10px);
-    animation: rotate 4s linear infinite;
-}
-
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(3deg); }
-    50% { transform: translateY(-15px) rotate(-3deg); }
-}
-
-.app-logo svg {
-    width: 45px;
-    height: 45px;
-    color: white;
-    fill: white;
-    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
-}
-
-.app-title {
-    font-size: 3.5rem;
-    font-weight: 900;
-    font-style: italic;
-    background: linear-gradient(135deg, #ffffff 0%, #00d4ff 50%, #ff006e 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.05em;
-    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-    animation: titleGlow 3s ease-in-out infinite;
-}
-
-@keyframes titleGlow {
-    0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5)); }
-    50% { filter: drop-shadow(0 0 30px rgba(255, 0, 110, 0.7)); }
-}
-
-.app-subtitle {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.1rem;
-    font-weight: 500;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* ================================================
-   FORMULARIOS CON EFECTOS MODERNOS - SIN TRANSPARENCIA
-   ================================================ */
-
-.auth-form {
-    animation: fadeInUp 0.6s ease 0.2s both;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--text-white);
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-#register-screen .form-group label,
-#onboarding-screen .form-group label,
-#edit-profile-screen .form-group label {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: none;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 1rem 1.25rem;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-md);
-    background: rgba(255, 255, 255, 0.95); /* FONDO BLANCO OPACO - SIN TRANSPARENCIA */
-    color: var(--text-dark);
-    font-size: 1rem;
-    font-family: inherit;
-    transition: var(--transition);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-#register-screen .form-group input,
-#register-screen .form-group select,
-#register-screen .form-group textarea,
-#onboarding-screen .form-group input,
-#onboarding-screen .form-group select,
-#onboarding-screen .form-group textarea,
-#edit-profile-screen .form-group input,
-#edit-profile-screen .form-group select,
-#edit-profile-screen .form-group textarea {
-    background: white; /* BLANCO PURO */
-    color: var(--text-dark);
-    border-color: rgba(102, 126, 234, 0.3);
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--primary);
-    background: white;
-    box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2), 0 8px 25px rgba(0, 212, 255, 0.3);
-    transform: translateY(-2px);
-}
-
-#register-screen .form-group input:focus,
-#register-screen .form-group select:focus,
-#register-screen .form-group textarea:focus,
-#onboarding-screen .form-group input:focus,
-#onboarding-screen .form-group select:focus,
-#onboarding-screen .form-group textarea:focus,
-#edit-profile-screen .form-group input:focus,
-#edit-profile-screen .form-group select:focus,
-#edit-profile-screen .form-group textarea:focus {
-    background: white;
-    border-color: var(--primary);
-}
-
-.form-group input::placeholder,
-.form-group select::placeholder,
-.form-group textarea::placeholder {
-    color: #9ca3af;
-}
-
-#register-screen .form-group input::placeholder,
-#onboarding-screen .form-group input::placeholder,
-#edit-profile-screen .form-group input::placeholder {
-    color: #9ca3af;
-}
-
-/* Input de contraseña con ojo - COLOR NEGRO TRANSPARENTE */
-.password-input-wrapper {
-    position: relative;
-}
-
-.password-input-wrapper input {
-    padding-right: 3.5rem;
-}
-
-.toggle-password {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    color: rgba(0, 0, 0, 0.6); /* COLOR NEGRO TRANSPARENTE */
-    transition: var(--transition);
-}
-
-#register-screen .toggle-password,
-#onboarding-screen .toggle-password,
-#edit-profile-screen .toggle-password {
-    color: rgba(0, 0, 0, 0.6); /* COLOR NEGRO TRANSPARENTE */
-}
-
-.toggle-password:hover {
-    color: var(--primary);
-    transform: translateY(-50%) scale(1.1);
-}
-
-.toggle-password .eye-icon {
-    width: 22px;
-    height: 22px;
-}
-
-.toggle-password.active .eye-icon {
-    position: relative;
-}
-
-.toggle-password.active .eye-icon::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: -2px;
-    right: -2px;
-    height: 2px;
-    background: currentColor;
-    transform: translateY(-50%) rotate(-45deg);
-}
-
-/* Checkbox moderno */
-.checkbox-group {
-    display: flex;
-    align-items: center;
-}
-
-.checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    cursor: pointer;
-    color: var(--text-white);
-    font-size: 0.9rem;
-    user-select: none;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.checkbox-label input[type="checkbox"] {
-    width: 22px;
-    height: 22px;
-    cursor: pointer;
-    accent-color: var(--primary);
-}
-
-/* Botones ultra modernos con gradientes */
-.btn {
-    width: 100%;
-    padding: 1.25rem 2rem;
-    border: none;
-    border-radius: var(--radius-md);
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    cursor: pointer;
-    transition: var(--transition);
-    font-family: inherit;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-.btn:hover::before {
-    width: 300px;
-    height: 300px;
-}
-
-.btn svg {
-    width: 20px;
-    height: 20px;
-    position: relative;
-    z-index: 1;
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
-    color: white;
-    box-shadow: var(--shadow-primary);
-    position: relative;
-}
-
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 50px rgba(0, 212, 255, 0.5);
-}
-
-.btn-primary:active {
-    transform: translateY(-1px);
-}
-
-.btn-secondary {
-    background: rgba(255, 255, 255, 0.15);
-    color: var(--text-white);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(20px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-}
-
-#register-screen .btn-secondary,
-#onboarding-screen .btn-secondary,
-#edit-profile-screen .btn-secondary {
-    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-    color: var(--text-dark);
-    border-color: #d1d5db;
-}
-
-.btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.25);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
-}
-
-#register-screen .btn-secondary:hover,
-#onboarding-screen .btn-secondary:hover,
-#edit-profile-screen .btn-secondary:hover {
-    background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
-}
-
-.btn-success {
-    background: linear-gradient(135deg, #06ffa5 0%, #00cc83 100%);
-    color: white;
-    box-shadow: 0 10px 40px rgba(6, 255, 165, 0.4);
-}
-
-.btn-success:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 50px rgba(6, 255, 165, 0.6);
-}
-
-.btn-danger {
-    background: linear-gradient(135deg, #ff006e 0%, #cc0057 100%);
-    color: white;
-    box-shadow: 0 10px 40px rgba(255, 0, 110, 0.4);
-}
-
-.btn-danger:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 50px rgba(255, 0, 110, 0.6);
-}
-
-/* Divisor moderno */
-.divider {
-    margin: 1.5rem 0;
-    text-align: center;
-    position: relative;
-}
-
-.divider::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-}
-
-.divider span {
-    position: relative;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 0 1rem;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-/* Olvidé mi contraseña - Estilo mejorado */
-.forgot-password {
-    display: block;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    margin-top: 1.5rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: var(--transition);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-.forgot-password:hover {
-    color: var(--primary);
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-}
-
-/* ================================================
-   PANTALLAS INTERNAS
-   ================================================ */
-
-#register-screen,
-#onboarding-screen,
-#edit-profile-screen {
-    background: linear-gradient(135deg, #f8f9fd 0%, #e9ecf5 100%);
-}
-
-.register-container,
-.onboarding-container,
-.edit-profile-container {
-    padding: 2rem;
-    max-width: 480px;
-    margin: 0 auto;
-}
-
-.screen-title {
-    font-size: 2.2rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 0.5rem;
-}
-
-.screen-subtitle {
-    color: var(--text-light);
-    margin-bottom: 2rem;
-}
-
-.back-button {
-    background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
-    border: 2px solid rgba(102, 126, 234, 0.2);
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    margin-bottom: 1.5rem;
-    transition: var(--transition);
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
-}
-
-.back-button:hover {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    transform: scale(1.1) rotate(-5deg);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-}
-
-.back-button:hover svg {
-    color: white;
-}
-
-.back-button svg {
-    width: 22px;
-    height: 22px;
-    color: #667eea;
-    transition: var(--transition);
-}
-
-.form-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-/* Resto de estilos... */
-.progress-bar {
-    height: 6px;
-    background: rgba(102, 126, 234, 0.2);
-    border-radius: 3px;
-    margin-bottom: 2rem;
-    overflow: hidden;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #00d4ff 0%, #ff006e 50%, #ffbe0b 100%);
-    width: 33.33%;
-    transition: width 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-}
-
-.form-step {
-    display: none;
-}
-
-.form-step.active {
-    display: block;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.button-group {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 0.75rem;
-}
-
-.choice-btn {
-    padding: 1.2rem;
-    border: 2px solid rgba(102, 126, 234, 0.2);
-    background: white;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    color: var(--text-light);
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.choice-btn:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
-}
-
-.choice-btn.active {
-    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
-    color: white;
-    border-color: var(--primary);
-    box-shadow: var(--shadow-primary);
-}
-
-.location-input-locked {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 1.25rem;
-    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-    border: 2px solid rgba(102, 126, 234, 0.2);
-    border-radius: var(--radius-md);
-}
-
-.location-input-locked svg {
-    width: 22px;
-    height: 22px;
-    color: #667eea;
-}
-
-.location-input-locked input {
-    flex: 1;
-    background: none;
-    border: none;
-    padding: 0;
-    color: var(--text-dark);
-    font-weight: 600;
-}
-
-.help-text {
-    margin-top: 0.5rem;
-    font-size: 0.85rem;
-    color: var(--text-light);
-}
-
-.char-count {
-    display: block;
-    text-align: right;
-    font-size: 0.85rem;
-    color: var(--text-light);
-    margin-top: 0.25rem;
-}
-
-.form-navigation {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.form-navigation .btn {
-    flex: 1;
-}
-
-.hidden {
-    display: none !important;
-}
-
-/* Toast con gradiente */
-.toast {
-    position: fixed;
-    top: 2rem;
-    left: 50%;
-    transform: translateX(-50%) translateY(-100px);
-    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
-    color: white;
-    padding: 1rem 1.5rem;
-    border-radius: var(--radius-lg);
-    box-shadow: 0 10px 40px rgba(0, 212, 255, 0.5);
-    z-index: 300;
-    opacity: 0;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    max-width: 90%;
-    text-align: center;
-}
-
-.toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
-
-.toast.error {
-    background: linear-gradient(135deg, #ff006e 0%, #cc0057 100%);
-    box-shadow: 0 10px 40px rgba(255, 0, 110, 0.5);
-}
-
-/* Estilos mínimos para las demás pantallas */
-.app-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.5rem;
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fd 100%);
-    border-bottom: 2px solid rgba(102, 126, 234, 0.1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-}
-
-.header-logo {
-    font-size: 1.5rem;
-    font-weight: 900;
-    font-style: italic;
-    background: linear-gradient(135deg, #00d4ff 0%, #ff006e 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* Botón de cancelar en onboarding */
-.cancel-onboarding {
-    background: none;
-    border: none;
-    color: var(--secondary);
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 1.5rem;
-    display: block;
-    width: 100%;
-    text-align: center;
-    font-size: 0.9rem;
-    transition: var(--transition);
-}
-
-.cancel-onboarding:hover {
-    color: var(--secondary-dark);
-    text-decoration: underline;
-}
-
-/* Estilos para el loader */
-.loader {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: white;
-    animation: spin 1s linear infinite;
-    margin-right: 10px;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-.btn.loading {
-    position: relative;
-    color: transparent;
-}
-
-.btn.loading::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 24px;
-    height: 24px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: white;
-    animation: spin 1s linear infinite;
-}
-
-#register-screen .btn.loading::after {
-    border-top-color: #667eea;
-}
-
-/* ================================================
-   MODALES PERSONALIZADOS - ESTILO WINDOWS MODERNO
-   ================================================ */
-
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    pointer-events: all;
-}
-
-.modal {
-    background: white;
-    border-radius: var(--radius-lg);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    max-width: 90%;
-    width: 400px;
-    position: relative;
-    transform: translateY(-20px);
-    opacity: 0;
-    transition: all 0.3s ease;
-}
-
-.modal-overlay.active .modal {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-.modal-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 1.5rem;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.modal-icon {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.5rem;
-}
-
-.modal-title {
-    color: white;
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin: 0;
-}
-
-.modal-close {
-    position: absolute;
-    right: 1.5rem;
-    top: 1.5rem;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-}
-
-.modal-close:hover {
-    opacity: 1;
-}
-
-.modal-body {
-    padding: 2rem;
-    text-align: center;
-}
-
-.modal-message {
-    font-size: 1.1rem;
-    color: var(--text-dark);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-
-.modal-input {
-    width: 100%;
-    padding: 1rem;
-    border: 2px solid #e5e7eb;
-    border-radius: var(--radius-md);
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-    transition: border-color 0.3s;
-}
-
-.modal-input:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
-}
-
-.modal-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-}
-
-.modal-btn {
-    padding: 0.8rem 2rem;
-    border: none;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-    font-size: 0.95rem;
-}
-
-.modal-btn-primary {
-    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
-    color: white;
-}
-
-.modal-btn-secondary {
-    background: #e5e7eb;
-    color: var(--text-dark);
-}
-
-.modal-btn-danger {
-    background: linear-gradient(135deg, #ff006e 0%, #cc0057 100%);
-    color: white;
-}
-
-.modal-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Botón de registro más visible */
-#register-screen .btn-success {
-    background: linear-gradient(135deg, #ff006e 0%, #cc0057 100%);
-    color: white;
-    box-shadow: 0 10px 40px rgba(255, 0, 110, 0.4);
-}
-
-#register-screen .btn-success:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 50px rgba(255, 0, 110, 0.6);
-}
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="app" class="app-container">
-        
+
         <!-- ============================================ -->
-        <!-- PANTALLA DE LOGIN (Pantalla Principal) -->
+        <!-- PANTALLA DE LOGIN                            -->
         <!-- ============================================ -->
         <div id="login-screen" class="screen active">
             <div class="login-container">
                 <div class="logo-section">
                     <div class="app-logo">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
                         </svg>
                     </div>
                     <h1 class="app-title">LionMatch</h1>
@@ -1080,10 +37,15 @@ body {
                         <label for="login-password">Contraseña</label>
                         <div class="password-input-wrapper">
                             <input type="password" id="login-password" required placeholder="••••••••">
-                            <button type="button" class="toggle-password" data-target="login-password">
-                                <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
+                            <button type="button" class="toggle-password" data-target="login-password" aria-label="Mostrar contraseña">
+                                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                                <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                                    <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                                    <line x1="1" y1="1" x2="23" y2="23"/>
                                 </svg>
                             </button>
                         </div>
@@ -1097,20 +59,18 @@ body {
                     </div>
 
                     <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-                    
-                    <div class="divider">
-                        <span>o</span>
-                    </div>
+
+                    <div class="divider"><span>o</span></div>
 
                     <button type="button" class="btn btn-secondary" id="go-to-register">Crear cuenta nueva</button>
-                    
+
                     <a href="#" class="forgot-password" id="forgot-password-link">¿Olvidaste tu contraseña?</a>
                 </form>
             </div>
         </div>
 
         <!-- ============================================ -->
-        <!-- PANTALLA DE REGISTRO -->
+        <!-- PANTALLA DE REGISTRO                         -->
         <!-- ============================================ -->
         <div id="register-screen" class="screen">
             <div class="register-container">
@@ -1133,10 +93,15 @@ body {
                         <label for="register-password">Contraseña</label>
                         <div class="password-input-wrapper">
                             <input type="password" id="register-password" required placeholder="••••••••" minlength="6">
-                            <button type="button" class="toggle-password" data-target="register-password">
-                                <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
+                            <button type="button" class="toggle-password" data-target="register-password" aria-label="Mostrar contraseña">
+                                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                                <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                                    <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                                    <line x1="1" y1="1" x2="23" y2="23"/>
                                 </svg>
                             </button>
                         </div>
@@ -1146,15 +111,20 @@ body {
                         <label for="register-password-confirm">Confirmar contraseña</label>
                         <div class="password-input-wrapper">
                             <input type="password" id="register-password-confirm" required placeholder="••••••••" minlength="6">
-                            <button type="button" class="toggle-password" data-target="register-password-confirm">
-                                <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
+                            <button type="button" class="toggle-password" data-target="register-password-confirm" aria-label="Mostrar contraseña">
+                                <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                                <svg class="eye-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                                    <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                                    <line x1="1" y1="1" x2="23" y2="23"/>
                                 </svg>
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="form-group checkbox-group">
                         <label class="checkbox-label">
                             <input type="checkbox" id="register-age-confirmation" required>
@@ -1162,28 +132,44 @@ body {
                         </label>
                     </div>
 
+                    <!-- Botones en la misma línea: verde traslúcido / rojo traslúcido -->
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-success">Crear Cuenta</button>
-                        <button type="button" class="btn btn-danger" id="cancel-register">Cancelar</button>
+                        <button type="submit" class="btn btn-register-accept">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;flex-shrink:0;">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Crear Cuenta
+                        </button>
+                        <button type="button" class="btn btn-register-cancel" id="cancel-register">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:18px;height:18px;flex-shrink:0;">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                            Cancelar
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- Pantalla simple de onboarding -->
+        <!-- ============================================ -->
+        <!-- PANTALLA DE ONBOARDING                       -->
+        <!-- ============================================ -->
         <div id="onboarding-screen" class="screen">
             <div class="onboarding-container">
-                <button class="back-button" id="cancel-onboarding">
+                <button class="back-button" id="back-from-onboarding">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M19 12H5M12 19l-7-7 7-7"/>
                     </svg>
                 </button>
-                
+
                 <div class="progress-bar">
                     <div class="progress-fill" id="onboarding-progress"></div>
                 </div>
+
                 <h2 class="screen-title">Completa tu Perfil</h2>
                 <p class="screen-subtitle">Cuéntanos sobre ti</p>
+
                 <form id="onboarding-form" class="auth-form">
                     <div class="form-step active" data-step="1">
                         <div class="form-group">
@@ -1204,6 +190,7 @@ body {
                             </select>
                         </div>
                     </div>
+
                     <div class="form-step" data-step="2">
                         <div class="form-group">
                             <label>¿Qué buscas?</label>
@@ -1218,14 +205,15 @@ body {
                             <label>Ubicación</label>
                             <div class="location-input-locked">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                                 </svg>
                                 <input type="text" value="León, Guanajuato" disabled>
                             </div>
                             <p class="help-text">Tu ubicación está bloqueada en León, Gto para conectar con personas locales</p>
                         </div>
                     </div>
+
                     <div class="form-step" data-step="3">
                         <div class="form-group">
                             <label for="profile-bio">Biografía</label>
@@ -1237,748 +225,458 @@ body {
                             <input type="text" id="profile-interests" placeholder="Ej: Fotografía, Deportes, Música">
                         </div>
                     </div>
+
                     <div class="form-navigation">
-                        <button type="button" class="btn btn-secondary" id="prev-step" style="display: none;">Anterior</button>
+                        <button type="button" class="btn btn-secondary" id="prev-step" style="display:none;">Anterior</button>
                         <button type="button" class="btn btn-primary" id="next-step">Siguiente</button>
-                        <button type="submit" class="btn btn-success" id="complete-profile" style="display: none;">Completar</button>
+                        <button type="submit" class="btn btn-success" id="complete-profile" style="display:none;">Completar</button>
                     </div>
                 </form>
-                <button type="button" class="cancel-onboarding" id="cancel-onboarding-full">Cancelar registro</button>
             </div>
         </div>
 
-        <!-- Pantalla placeholder de descubrimiento -->
+        <!-- ============================================ -->
+        <!-- PANTALLA DE DESCUBRIMIENTO                   -->
+        <!-- ============================================ -->
         <div id="discovery-screen" class="screen">
             <header class="app-header">
-                <h1 class="header-logo">LionMatch</h1>
-                <button class="btn btn-danger" id="logout-button" style="width: auto; padding: 0.5rem 1rem; font-size: 0.9rem;">Cerrar Sesión</button>
+                <button class="menu-btn" id="open-menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                </button>
+                <span class="header-logo">LionMatch</span>
+                <div class="header-location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
             </header>
-            <div style="padding: 2rem; text-align: center;">
-                <div style="margin-bottom: 2rem;">
-                    <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #00d4ff, #ff006e); border-radius: 50%; margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center;">
-                        <span style="font-size: 3rem; font-weight: bold; color: white;">🎉</span>
-                    </div>
-                    <h2 style="font-size: 2rem; margin-bottom: 1rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">¡Bienvenido a LionMatch!</h2>
-                    <p style="color: var(--text-light); margin-bottom: 1.5rem;">Tu perfil ha sido completado exitosamente. Pronto podrás descubrir personas en León, Gto.</p>
-                    <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)); border-radius: var(--radius-md); padding: 1.5rem; margin-top: 1.5rem;">
-                        <p style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text-dark);">Próximamente:</p>
-                        <ul style="text-align: left; padding-left: 1.5rem; color: var(--text-light);">
-                            <li>Descubre perfiles cerca de ti</li>
-                            <li>Conecta con personas que comparten tus intereses</li>
-                            <li>Chatea en tiempo real</li>
-                            <li>Eventos locales en León, Gto</li>
-                        </ul>
+
+            <div class="discovery-container">
+                <div class="cards-stack" id="cards-stack">
+                    <div class="no-more-cards" id="no-more-cards" style="display:none;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                        <h3>No hay más perfiles</h3>
+                        <p>¡Vuelve más tarde!</p>
                     </div>
                 </div>
-                <button class="btn btn-primary" id="edit-profile-button" style="max-width: 300px; margin: 0 auto;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
-                        <path d="M12 20h9"></path>
-                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+
+                <div class="action-buttons">
+                    <button class="action-btn dislike-btn" id="dislike-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                    <button class="action-btn like-btn" id="like-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PANTALLA DE MENSAJES                         -->
+        <!-- ============================================ -->
+        <div id="messages-screen" class="screen">
+            <header class="app-header">
+                <button class="menu-btn" id="messages-menu-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
                     </svg>
-                    Editar mi perfil
+                </button>
+                <span class="header-title">Mensajes</span>
+                <div style="width:40px;"></div>
+            </header>
+
+            <div class="messages-container">
+                <div class="matches-carousel" id="matches-carousel"></div>
+                <div class="conversations-list" id="conversations-list">
+                    <div class="empty-state" id="empty-messages">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        <h3>Sin mensajes aún</h3>
+                        <p>Tus conversaciones aparecerán aquí</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PANTALLA DE CHAT                             -->
+        <!-- ============================================ -->
+        <div id="chat-screen" class="screen">
+            <div class="chat-header">
+                <button class="back-button" id="back-from-chat" style="margin:0;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <div class="chat-user-info">
+                    <img src="" alt="avatar" class="chat-avatar" id="chat-user-avatar">
+                    <div>
+                        <h3 id="chat-user-name">Usuario</h3>
+                        <span class="online-status">En línea</span>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input-container">
+                <input type="text" id="chat-input" placeholder="Escribe un mensaje...">
+                <button class="send-btn" id="send-message-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
                 </button>
             </div>
         </div>
 
-        <!-- Toast de notificaciones -->
+        <!-- ============================================ -->
+        <!-- PANTALLA DE PERFIL                           -->
+        <!-- ============================================ -->
+        <div id="profile-screen" class="screen">
+            <header class="app-header">
+                <button class="menu-btn" id="profile-menu-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                </button>
+                <span class="header-title">Mi Perfil</span>
+                <div style="width:40px;"></div>
+            </header>
+            <div class="profile-container">
+                <div class="profile-card">
+                    <div class="profile-photo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <h2 id="profile-display-name">Nombre</h2>
+                    <p class="profile-age" id="profile-display-age">Edad</p>
+                </div>
+                <div class="profile-info">
+                    <div class="info-section">
+                        <h3>Sobre mí</h3>
+                        <p id="profile-display-bio">Sin biografía</p>
+                    </div>
+                    <div class="info-section">
+                        <h3>Intereses</h3>
+                        <p id="profile-display-interests">Sin intereses</p>
+                    </div>
+                    <div class="info-section">
+                        <h3>Busco</h3>
+                        <p id="profile-display-seeking">No especificado</p>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button class="btn btn-primary" id="edit-profile-btn">Editar perfil</button>
+                    <button class="btn btn-danger" id="delete-account-btn">Eliminar cuenta</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- PANTALLA EDITAR PERFIL                       -->
+        <!-- ============================================ -->
+        <div id="edit-profile-screen" class="screen">
+            <div class="edit-profile-container">
+                <button class="back-button" id="back-from-edit">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                </button>
+                <h2 class="screen-title">Editar Perfil</h2>
+                <p class="screen-subtitle">Actualiza tu información</p>
+
+                <form id="edit-profile-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="edit-name">Nombre</label>
+                        <input type="text" id="edit-name" required placeholder="Tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-bio">Biografía</label>
+                        <textarea id="edit-bio" rows="4" placeholder="Cuéntanos sobre ti..." maxlength="300"></textarea>
+                        <span class="char-count"><span id="edit-bio-count">0</span>/300</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-interests">Intereses</label>
+                        <input type="text" id="edit-interests" placeholder="Ej: Fotografía, Deportes, Música">
+                    </div>
+                    <div class="form-group">
+                        <label>¿Qué buscas?</label>
+                        <div class="button-group">
+                            <button type="button" class="choice-btn" data-value="Hombres">Hombres</button>
+                            <button type="button" class="choice-btn" data-value="Mujeres">Mujeres</button>
+                            <button type="button" class="choice-btn" data-value="Todos">Todos</button>
+                        </div>
+                        <input type="hidden" id="edit-seeking">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Guardar cambios</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-edit">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- SIDEBAR                                      -->
+        <!-- ============================================ -->
+        <div id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h2>LionMatch</h2>
+                <p>León, Guanajuato</p>
+                <button class="close-sidebar" id="close-sidebar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-screen="discovery">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                    Descubrir
+                </a>
+                <a href="#" class="nav-item" data-screen="messages">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    Mensajes
+                </a>
+                <a href="#" class="nav-item" data-screen="profile">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    Mi Perfil
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="logout-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                        <polyline points="16 17 21 12 16 7"/>
+                        <line x1="21" y1="12" x2="9" y2="12"/>
+                    </svg>
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+        <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+        <!-- ============================================ -->
+        <!-- TOAST                                        -->
+        <!-- ============================================ -->
         <div id="toast" class="toast"></div>
 
-        <!-- Modal de recuperación de contraseña -->
-        <div id="password-modal" class="modal-overlay">
-            <div class="modal">
-                <div class="modal-header">
-                    <div class="modal-icon">📧</div>
-                    <h3 class="modal-title">Recuperar Contraseña</h3>
-                    <button class="modal-close" id="close-password-modal">&times;</button>
+        <!-- ============================================ -->
+        <!-- MODAL ELIMINAR CUENTA (existente)            -->
+        <!-- ============================================ -->
+        <div id="delete-modal" class="win10-modal-overlay">
+            <div class="win10-modal">
+                <div class="win10-titlebar titlebar-error">
+                    <svg class="win10-titlebar-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6l-1 14H6L5 6"/>
+                        <path d="M10 11v6M14 11v6"/>
+                        <path d="M9 6V4h6v2"/>
+                    </svg>
+                    <span class="win10-titlebar-text">Eliminar cuenta</span>
+                    <button class="win10-close-btn" data-close-modal="delete-modal">
+                        <svg viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5">
+                            <line x1="1" y1="1" x2="9" y2="9"/>
+                            <line x1="9" y1="1" x2="1" y2="9"/>
+                        </svg>
+                    </button>
                 </div>
-                <div class="modal-body">
-                    <p class="modal-message">Ingresa tu correo electrónico y te enviaremos instrucciones para restablecer tu contraseña</p>
-                    <input type="email" class="modal-input" id="modal-email" placeholder="tucorreo@ejemplo.com">
-                    <div class="modal-buttons">
-                        <button class="modal-btn modal-btn-secondary" id="cancel-password-modal">Cancelar</button>
-                        <button class="modal-btn modal-btn-primary" id="send-password-modal">Enviar</button>
+                <div class="win10-modal-body">
+                    <div class="win10-modal-icon-wrap icon-error">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="15" y1="9" x2="9" y2="15"/>
+                            <line x1="9" y1="9" x2="15" y2="15"/>
+                        </svg>
                     </div>
+                    <div class="win10-modal-content">
+                        <p class="win10-modal-title">¿Eliminar tu cuenta?</p>
+                        <p class="win10-modal-message">Esta acción es permanente y no se puede deshacer. Se eliminarán todos tus datos, matches y mensajes.</p>
+                    </div>
+                </div>
+                <div class="win10-modal-footer">
+                    <button class="win10-btn" data-close-modal="delete-modal" id="cancel-delete">Cancelar</button>
+                    <button class="win10-btn win10-btn-danger" id="confirm-delete">Eliminar</button>
                 </div>
             </div>
         </div>
 
-        <!-- Modal de confirmación -->
-        <div id="confirm-modal" class="modal-overlay">
-            <div class="modal">
-                <div class="modal-header">
-                    <div class="modal-icon">✅</div>
-                    <h3 class="modal-title">Registro Exitoso</h3>
-                    <button class="modal-close" id="close-confirm-modal">&times;</button>
+        <!-- ============================================ -->
+        <!-- MODAL WIN10 - ERROR                          -->
+        <!-- ============================================ -->
+        <div id="win10-error-modal" class="win10-modal-overlay">
+            <div class="win10-modal">
+                <div class="win10-titlebar titlebar-error">
+                    <svg class="win10-titlebar-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="15" y1="9" x2="9" y2="15"/>
+                        <line x1="9" y1="9" x2="15" y2="15"/>
+                    </svg>
+                    <span class="win10-titlebar-text" id="win10-error-title">Error</span>
+                    <button class="win10-close-btn" data-close-modal="win10-error-modal">
+                        <svg viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5">
+                            <line x1="1" y1="1" x2="9" y2="9"/>
+                            <line x1="9" y1="1" x2="1" y2="9"/>
+                        </svg>
+                    </button>
                 </div>
-                <div class="modal-body">
-                    <p class="modal-message">¡Excelente! Tu cuenta ha sido creada. Revisa tu correo electrónico para confirmar tu cuenta y activar tu perfil.</p>
-                    <div class="modal-buttons">
-                        <button class="modal-btn modal-btn-primary" id="ok-confirm-modal">Entendido</button>
+                <div class="win10-modal-body">
+                    <div class="win10-modal-icon-wrap icon-error">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
                     </div>
+                    <div class="win10-modal-content">
+                        <p class="win10-modal-title" id="win10-error-title-inner">Ha ocurrido un error</p>
+                        <p class="win10-modal-message" id="win10-error-message">Mensaje de error aquí.</p>
+                    </div>
+                </div>
+                <div class="win10-modal-footer">
+                    <button class="win10-btn win10-btn-danger" data-close-modal="win10-error-modal">Aceptar</button>
                 </div>
             </div>
         </div>
 
-        <!-- Modal de error -->
-        <div id="error-modal" class="modal-overlay">
-            <div class="modal">
-                <div class="modal-header">
-                    <div class="modal-icon">❌</div>
-                    <h3 class="modal-title">Error</h3>
-                    <button class="modal-close" id="close-error-modal">&times;</button>
+        <!-- ============================================ -->
+        <!-- MODAL WIN10 - ÉXITO / REGISTRO               -->
+        <!-- ============================================ -->
+        <div id="win10-success-modal" class="win10-modal-overlay">
+            <div class="win10-modal">
+                <div class="win10-titlebar titlebar-success">
+                    <svg class="win10-titlebar-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                    <span class="win10-titlebar-text" id="win10-success-title">Operación exitosa</span>
+                    <button class="win10-close-btn" data-close-modal="win10-success-modal">
+                        <svg viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5">
+                            <line x1="1" y1="1" x2="9" y2="9"/>
+                            <line x1="9" y1="1" x2="1" y2="9"/>
+                        </svg>
+                    </button>
                 </div>
-                <div class="modal-body">
-                    <p class="modal-message" id="error-message">Ha ocurrido un error.</p>
-                    <div class="modal-buttons">
-                        <button class="modal-btn modal-btn-danger" id="ok-error-modal">Cerrar</button>
+                <div class="win10-modal-body">
+                    <div class="win10-modal-icon-wrap icon-success">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
                     </div>
+                    <div class="win10-modal-content">
+                        <p class="win10-modal-title" id="win10-success-title-inner">¡Éxito!</p>
+                        <p class="win10-modal-message" id="win10-success-message">La operación fue exitosa.</p>
+                    </div>
+                </div>
+                <div class="win10-modal-footer">
+                    <button class="win10-btn win10-btn-primary" id="win10-success-ok-btn" data-close-modal="win10-success-modal">Aceptar</button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Script de Supabase -->
+        <!-- ============================================ -->
+        <!-- MODAL WIN10 - RECUPERAR CONTRASEÑA           -->
+        <!-- ============================================ -->
+        <div id="win10-recovery-modal" class="win10-modal-overlay">
+            <div class="win10-modal">
+                <div class="win10-titlebar titlebar-info">
+                    <svg class="win10-titlebar-icon" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    <span class="win10-titlebar-text">Recuperar contraseña</span>
+                    <button class="win10-close-btn" data-close-modal="win10-recovery-modal">
+                        <svg viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5">
+                            <line x1="1" y1="1" x2="9" y2="9"/>
+                            <line x1="9" y1="1" x2="1" y2="9"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="win10-modal-body">
+                    <div class="win10-modal-icon-wrap icon-info">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    </div>
+                    <div class="win10-modal-content">
+                        <p class="win10-modal-title">Restablecer contraseña</p>
+                        <p class="win10-modal-message">Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña.</p>
+                    </div>
+                </div>
+                <div class="win10-modal-input-wrap">
+                    <input type="email" class="win10-modal-input" id="win10-recovery-email" placeholder="tucorreo@ejemplo.com">
+                </div>
+                <div class="win10-modal-footer">
+                    <button class="win10-btn" data-close-modal="win10-recovery-modal">Cancelar</button>
+                    <button class="win10-btn win10-btn-primary" id="send-recovery-btn">Enviar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- MODAL MATCH                                  -->
+        <!-- ============================================ -->
+        <div id="match-modal" class="win10-modal-overlay">
+            <div class="win10-modal">
+                <div class="win10-titlebar titlebar-success">
+                    <svg class="win10-titlebar-icon" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                    <span class="win10-titlebar-text">¡Es un Match!</span>
+                    <button class="win10-close-btn" id="close-match-modal" data-close-modal="match-modal">
+                        <svg viewBox="0 0 10 10" fill="none" stroke="white" stroke-width="1.5">
+                            <line x1="1" y1="1" x2="9" y2="9"/>
+                            <line x1="9" y1="1" x2="1" y2="9"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="win10-modal-body" style="flex-direction:column; align-items:center; text-align:center; gap:12px;">
+                    <img id="match-user-photo" src="" alt="Match"
+                        style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #10b981;margin-top:8px;">
+                    <div class="win10-modal-content" style="text-align:center;">
+                        <p class="win10-modal-title" style="font-size:18px;">¡Han hecho Match! 🎉</p>
+                        <p class="win10-modal-message">Los dos se gustaron. ¡Empieza la conversación ahora!</p>
+                    </div>
+                </div>
+                <div class="win10-modal-footer">
+                    <button class="win10-btn" data-close-modal="match-modal" id="close-match-modal-btn">Después</button>
+                    <button class="win10-btn win10-btn-primary" id="send-match-message">Enviar mensaje</button>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /#app -->
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <!-- JavaScript de la aplicación -->
-    <script>
-// ================================================
-// LIONMATCH - APLICACIÓN JAVASCRIPT V2
-// ================================================
-
-// Configuración de Supabase - ¡CORREGIDO! Eliminados espacios en blanco
-const SUPABASE_URL = 'https://fjevgfyqqsfankvledpl.supabase.co'.trim();
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqZXZnZnlxcXNmYW5rdmxlZHBsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA2Nzk0NjIsImV4cCI6MjA4NjI1NTQ2Mn0.AmysLsRq_KBXYculm0Nyw3a0abWLQ8zTt-2OSo-6PSA'.trim();
-
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-// Variables globales
-let currentUser = null;
-let onboardingStep = 1;
-let toastTimeout = null;
-
-// ================================================
-// INICIALIZACIÓN
-// ================================================
-document.addEventListener('DOMContentLoaded', async () => {
-    // Limpiar cualquier sesión anterior al cargar
-    const { data: { session } } = await supabaseClient.auth.getSession();
-    
-    if (session) {
-        currentUser = session.user;
-        const { data: profile, error: profileError } = await supabaseClient
-            .from('profiles')
-            .select('*')
-            .eq('user_id', currentUser.id)
-            .single();
-        
-        if (profileError && profileError.code !== 'PGRST116') {
-            console.error('Error fetching profile:', profileError);
-        }
-        
-        // Verificar si el perfil está completo (tiene nombre)
-        if (profile && profile.name) {
-            showScreen('discovery');
-        } else {
-            showScreen('onboarding');
-        }
-    } else {
-        showScreen('login');
-    }
-    
-    initializeEventListeners();
-    
-    // Inicializar el contador de biografía
-    const bioInput = document.getElementById('profile-bio');
-    const bioCount = document.getElementById('bio-count');
-    if (bioInput && bioCount) {
-        bioInput.addEventListener('input', () => {
-            bioCount.textContent = bioInput.value.length;
-        });
-        bioCount.textContent = bioInput.value.length;
-    }
-});
-
-// ================================================
-// EVENT LISTENERS
-// ================================================
-function initializeEventListeners() {
-    // Login
-    document.getElementById('login-form')?.addEventListener('submit', handleLogin);
-    document.getElementById('go-to-register')?.addEventListener('click', () => showScreen('register'));
-    document.getElementById('forgot-password-link')?.addEventListener('click', () => showModal('password-modal'));
-    
-    // Registro
-    document.getElementById('register-form')?.addEventListener('submit', handleRegister);
-    document.getElementById('back-to-login')?.addEventListener('click', () => showScreen('login'));
-    document.getElementById('cancel-register')?.addEventListener('click', () => showScreen('login'));
-    
-    // Toggle password
-    document.querySelectorAll('.toggle-password').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const targetId = this.getAttribute('data-target');
-            const input = document.getElementById(targetId);
-            
-            if (input.type === 'password') {
-                input.type = 'text';
-                this.classList.add('active');
-            } else {
-                input.type = 'password';
-                this.classList.remove('active');
-            }
-        });
-    });
-    
-    // Onboarding
-    document.getElementById('onboarding-form')?.addEventListener('submit', handleCompleteProfile);
-    document.getElementById('next-step')?.addEventListener('click', nextOnboardingStep);
-    document.getElementById('prev-step')?.addEventListener('click', prevOnboardingStep);
-    document.getElementById('cancel-onboarding')?.addEventListener('click', cancelOnboarding);
-    document.getElementById('cancel-onboarding-full')?.addEventListener('click', cancelOnboarding);
-    
-    // Discovery
-    document.getElementById('logout-button')?.addEventListener('click', handleLogout);
-    document.getElementById('edit-profile-button')?.addEventListener('click', () => showScreen('onboarding'));
-    
-    // Choice buttons
-    document.querySelectorAll('.choice-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const group = this.parentElement;
-            const hiddenInput = document.getElementById('profile-seeking');
-            
-            // Remover clase activa de todos los botones en el grupo
-            group.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('active'));
-            
-            // Agregar clase activa al botón seleccionado
-            this.classList.add('active');
-            
-            // Establecer el valor en el input oculto
-            hiddenInput.value = this.getAttribute('data-value');
-        });
-    });
-    
-    // Modales
-    document.getElementById('close-password-modal')?.addEventListener('click', () => hideModal('password-modal'));
-    document.getElementById('cancel-password-modal')?.addEventListener('click', () => hideModal('password-modal'));
-    document.getElementById('send-password-modal')?.addEventListener('click', handlePasswordRecovery);
-    
-    document.getElementById('close-confirm-modal')?.addEventListener('click', () => hideModal('confirm-modal'));
-    document.getElementById('ok-confirm-modal')?.addEventListener('click', () => hideModal('confirm-modal'));
-    
-    document.getElementById('close-error-modal')?.addEventListener('click', () => hideModal('error-modal'));
-    document.getElementById('ok-error-modal')?.addEventListener('click', () => hideModal('error-modal'));
-}
-
-// ================================================
-// AUTENTICACIÓN
-// ================================================
-async function handleLogin(e) {
-    e.preventDefault();
-    
-    const email = document.getElementById('login-email').value.trim();
-    const password = document.getElementById('login-password').value;
-    const ageConfirmation = document.getElementById('age-confirmation').checked;
-    
-    if (!ageConfirmation) {
-        showErrorModal('Debes confirmar que eres mayor de 18 años');
-        return;
-    }
-    
-    if (!email || !password) {
-        showErrorModal('Completa todos los campos');
-        return;
-    }
-    
-    // Mostrar estado de carga
-    const loginBtn = document.querySelector('#login-form .btn-primary');
-    loginBtn.classList.add('loading');
-    loginBtn.disabled = true;
-    
-    try {
-        const { data, error } = await supabaseClient.auth.signInWithPassword({
-            email,
-            password
-        });
-        
-        if (error) throw error;
-        
-        currentUser = data.user;
-        showToast('¡Bienvenido de nuevo!', 'success');
-        showScreen('discovery');
-    } catch (error) {
-        console.error('Error en login:', error);
-        showErrorModal(error.message || 'Email o contraseña incorrectos');
-    } finally {
-        // Restaurar botón
-        loginBtn.classList.remove('loading');
-        loginBtn.disabled = false;
-    }
-}
-
-async function handleRegister(e) {
-    e.preventDefault();
-    
-    const email = document.getElementById('register-email').value.trim();
-    const password = document.getElementById('register-password').value;
-    const passwordConfirm = document.getElementById('register-password-confirm').value;
-    const ageConfirmation = document.getElementById('register-age-confirmation').checked;
-    
-    // Validaciones
-    if (!ageConfirmation) {
-        showErrorModal('Debes confirmar que eres mayor de 18 años');
-        return;
-    }
-    
-    if (password !== passwordConfirm) {
-        showErrorModal('Las contraseñas no coinciden');
-        return;
-    }
-    
-    if (password.length < 6) {
-        showErrorModal('La contraseña debe tener al menos 6 caracteres');
-        return;
-    }
-    
-    if (!email || !password) {
-        showErrorModal('Completa todos los campos');
-        return;
-    }
-    
-    // Validar que el correo no exista
-    try {
-        const { data: existingUser } = await supabaseClient
-            .from('profiles')
-            .select('user_id')
-            .eq('email', email)
-            .single();
-        
-        if (existingUser) {
-            showErrorModal('Este correo ya está registrado');
-            return;
-        }
-    } catch (error) {
-        // Error PGRST116 significa que no se encontró ningún registro (lo cual es bueno)
-        if (error.code !== 'PGRST116') {
-            console.error('Error checking email:', error);
-        }
-    }
-    
-    // Mostrar estado de carga
-    const registerBtn = document.querySelector('#register-form .btn-success');
-    registerBtn.classList.add('loading');
-    registerBtn.disabled = true;
-    
-    try {
-        // Intentar crear la cuenta
-        const { data, error } = await supabaseClient.auth.signUp({
-            email,
-            password,
-            options: {
-                 {
-                    email
-                },
-                // 👇 REDIRECCIÓN FORZADA A TU PÁGINA 👇
-                emailRedirectTo: 'https://flavioalejandrov24-lang.github.io/Citasyparejasleongto/'
-            }
-        });
-        
-        if (error) {
-            // Manejar errores específicos de Supabase
-            if (error.message.includes('already registered')) {
-                showErrorModal('Este correo ya está registrado');
-            } else {
-                showErrorModal(error.message || 'Error al crear la cuenta');
-            }
-            return;
-        }
-        
-        currentUser = data.user;
-        
-        // Crear perfil vacío en la base de datos
-        const { error: profileError } = await supabaseClient.from('profiles').insert({
-            user_id: currentUser.id,
-            email: email,
-            created_at: new Date().toISOString()
-        });
-        
-        if (profileError) {
-            console.error('Error creating profile:', profileError);
-            // No detenemos el proceso, solo registramos el error
-        }
-        
-        // Mostrar modal de confirmación
-        showModal('confirm-modal');
-    } catch (error) {
-        console.error('Error en registro:', error);
-        showErrorModal('Error al crear la cuenta. Intenta nuevamente.');
-    } finally {
-        // Restaurar botón
-        registerBtn.classList.remove('loading');
-        registerBtn.disabled = false;
-    }
-}
-
-async function handlePasswordRecovery() {
-    const email = document.getElementById('modal-email').value.trim();
-    
-    if (!email || !email.includes('@')) {
-        showErrorModal('Por favor ingresa un correo electrónico válido');
-        return;
-    }
-    
-    try {
-        const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
-            redirectTo: 'https://flavioalejandrov24-lang.github.io/Citasyparejasleongto/'
-        });
-        
-        if (error) throw error;
-        
-        hideModal('password-modal');
-        showToast('Te enviamos un email para restablecer tu contraseña', 'success');
-    } catch (error) {
-        console.error('Error en recuperación de contraseña:', error);
-        showErrorModal('Error al enviar el email. Verifica tu correo e intenta nuevamente.');
-    }
-}
-
-async function handleLogout() {
-    try {
-        await supabaseClient.auth.signOut();
-        currentUser = null;
-        showToast('Sesión cerrada correctamente', 'success');
-        showScreen('login');
-        
-        // Limpiar campos del formulario de login
-        document.getElementById('login-email').value = '';
-        document.getElementById('login-password').value = '';
-        document.getElementById('age-confirmation').checked = false;
-    } catch (error) {
-        console.error('Error al cerrar sesión:', error);
-        showErrorModal('Error al cerrar sesión');
-    }
-}
-
-// ================================================
-// ONBOARDING
-// ================================================
-async function cancelOnboarding() {
-    if (!currentUser) {
-        showScreen('login');
-        return;
-    }
-    
-    if (confirm('¿Estás seguro que deseas cancelar el registro? Se cerrará tu sesión.')) {
-        try {
-            await supabaseClient.auth.signOut();
-            currentUser = null;
-            
-            // Limpiar campos del onboarding
-            document.getElementById('profile-name').value = '';
-            document.getElementById('profile-birthdate').value = '';
-            document.getElementById('profile-gender').value = '';
-            document.getElementById('profile-seeking').value = '';
-            document.querySelectorAll('.choice-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById('profile-bio').value = '';
-            document.getElementById('profile-interests').value = '';
-            document.getElementById('bio-count').textContent = '0';
-            
-            showToast('Registro cancelado', 'success');
-            showScreen('login');
-        } catch (error) {
-            console.error('Error al cancelar onboarding:', error);
-            showErrorModal('Error al cancelar el registro');
-        }
-    }
-}
-
-function nextOnboardingStep() {
-    const currentStepElement = document.querySelector(`.form-step[data-step="${onboardingStep}"]`);
-    let isValid = true;
-    
-    // Validar campos requeridos en el paso actual
-    if (onboardingStep === 1) {
-        const name = document.getElementById('profile-name').value.trim();
-        const birthdate = document.getElementById('profile-birthdate').value;
-        const gender = document.getElementById('profile-gender').value;
-        
-        if (!name || name.length < 2) {
-            isValid = false;
-            markFieldError('profile-name', 'El nombre es requerido');
-        } else {
-            clearFieldError('profile-name');
-        }
-        
-        if (!birthdate) {
-            isValid = false;
-            markFieldError('profile-birthdate', 'La fecha de nacimiento es requerida');
-        } else {
-            // Verificar que sea mayor de 18 años
-            const age = calculateAge(birthdate);
-            if (age < 18) {
-                isValid = false;
-                markFieldError('profile-birthdate', 'Debes ser mayor de 18 años');
-            } else {
-                clearFieldError('profile-birthdate');
-            }
-        }
-        
-        if (!gender) {
-            isValid = false;
-            markFieldError('profile-gender', 'Selecciona un género');
-        } else {
-            clearFieldError('profile-gender');
-        }
-    } 
-    else if (onboardingStep === 2) {
-        const seeking = document.getElementById('profile-seeking').value;
-        
-        if (!seeking) {
-            isValid = false;
-            showErrorModal('Selecciona qué tipo de personas buscas');
-        }
-    }
-    
-    if (!isValid) {
-        return;
-    }
-    
-    if (onboardingStep < 3) {
-        onboardingStep++;
-        updateOnboardingUI();
-    }
-}
-
-function prevOnboardingStep() {
-    if (onboardingStep > 1) {
-        // Limpiar errores del paso anterior al retroceder
-        clearAllFieldErrors();
-        onboardingStep--;
-        updateOnboardingUI();
-    }
-}
-
-function updateOnboardingUI() {
-    // Ocultar todos los pasos
-    document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
-    
-    // Mostrar el paso actual
-    document.querySelector(`.form-step[data-step="${onboardingStep}"]`).classList.add('active');
-    
-    // Actualizar barra de progreso
-    const progress = (onboardingStep / 3) * 100;
-    document.getElementById('onboarding-progress').style.width = `${progress}%`;
-    
-    // Actualizar botones de navegación
-    const prevBtn = document.getElementById('prev-step');
-    const nextBtn = document.getElementById('next-step');
-    const completeBtn = document.getElementById('complete-profile');
-    
-    if (onboardingStep === 1) {
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'block';
-        completeBtn.style.display = 'none';
-        nextBtn.textContent = 'Siguiente';
-    } else if (onboardingStep === 2) {
-        prevBtn.style.display = 'block';
-        nextBtn.style.display = 'block';
-        completeBtn.style.display = 'none';
-        nextBtn.textContent = 'Siguiente';
-    } else if (onboardingStep === 3) {
-        prevBtn.style.display = 'block';
-        nextBtn.style.display = 'none';
-        completeBtn.style.display = 'block';
-    }
-}
-
-async function handleCompleteProfile(e) {
-    e.preventDefault();
-    
-    // Obtener valores del formulario
-    const name = document.getElementById('profile-name').value.trim();
-    const birthdate = document.getElementById('profile-birthdate').value;
-    const gender = document.getElementById('profile-gender').value;
-    const seeking = document.getElementById('profile-seeking').value;
-    const bio = document.getElementById('profile-bio').value.trim() || '';
-    const interests = document.getElementById('profile-interests').value.trim() || '';
-    
-    // Validaciones finales
-    if (!name || name.length < 2) {
-        showErrorModal('El nombre es requerido');
-        return;
-    }
-    
-    if (!birthdate) {
-        showErrorModal('La fecha de nacimiento es requerida');
-        return;
-    }
-    
-    const age = calculateAge(birthdate);
-    if (age < 18) {
-        showErrorModal('Debes ser mayor de 18 años para usar esta aplicación');
-        return;
-    }
-    
-    if (!gender) {
-        showErrorModal('Selecciona tu género');
-        return;
-    }
-    
-    if (!seeking) {
-        showErrorModal('Selecciona qué tipo de personas buscas');
-        return;
-    }
-    
-    // Mostrar estado de carga
-    const completeBtn = document.getElementById('complete-profile');
-    completeBtn.classList.add('loading');
-    completeBtn.disabled = true;
-    
-    try {
-        // Actualizar perfil en la base de datos
-        const { error } = await supabaseClient
-            .from('profiles')
-            .update({
-                name, 
-                birthdate, 
-                age, 
-                gender, 
-                seeking, 
-                bio, 
-                interests,
-                location: 'León, Guanajuato',
-                updated_at: new Date().toISOString(),
-                completed: true
-            })
-            .eq('user_id', currentUser.id);
-        
-        if (error) throw error;
-        
-        showToast('¡Perfil completado exitosamente!', 'success');
-        showScreen('discovery');
-    } catch (error) {
-        console.error('Error al completar el perfil:', error);
-        showErrorModal('Error al guardar el perfil. Intenta nuevamente.');
-    } finally {
-        // Restaurar botón
-        completeBtn.classList.remove('loading');
-        completeBtn.disabled = false;
-    }
-}
-
-// ================================================
-// MODALES PERSONALIZADOS
-// ================================================
-function showModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.add('active');
-        // Limpiar campos si es el modal de contraseña
-        if (modalId === 'password-modal') {
-            document.getElementById('modal-email').value = '';
-        }
-    }
-}
-
-function hideModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.remove('active');
-    }
-}
-
-function showErrorModal(message) {
-    const errorMessage = document.getElementById('error-message');
-    if (errorMessage) {
-        errorMessage.textContent = message;
-    }
-    showModal('error-modal');
-}
-
-// ================================================
-// UTILIDADES
-// ================================================
-function showScreen(screenId) {
-    // Ocultar todas las pantallas
-    document.querySelectorAll('.screen').forEach(screen => {
-        screen.classList.remove('active');
-    });
-    
-    // Mostrar la pantalla solicitada
-    const targetScreen = document.getElementById(`${screenId}-screen`);
-    if (targetScreen) {
-        targetScreen.classList.add('active');
-        
-        // Acciones específicas por pantalla
-        if (screenId === 'onboarding') {
-            // Reiniciar el onboarding si es necesario
-            onboardingStep = 1;
-            updateOnboardingUI();
-            clearAllFieldErrors();
-        }
-    } else {
-        console.error(`Screen not found: ${screenId}-screen`);
-    }
-}
-
-function showToast(message, type = 'success') {
-    const toast = document.getElementById('toast');
-    
-    // Limpiar timeout anterior si existe
-    if (toastTimeout) {
-        clearTimeout(toastTimeout);
-    }
-    
-    // Configurar mensaje y tipo
-    toast.textContent = message;
-    toast.className = `toast ${type}`;
-    
-    // Mostrar toast
-    toast.classList.add('show');
-    
-    // Ocultar después de 3 segundos
-    toastTimeout = setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
-}
-
-function calculateAge(birthdate) {
-    const today = new Date();
-    const birth = new Date(birthdate);
-    let age = today.getFullYear() - birth.getFullYear();
-    const monthDiff = today.getMonth() - birth.getMonth();
-    
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-        age--;
-    }
-    
-    return age;
-}
-
-function markFieldError(fieldId, message) {
-    const field = document.getElementById(fieldId);
-    if (field) {
-        field.style.borderColor = '#ff006e';
-        field.style.boxShadow = '0 0 0 3px rgba(255, 0, 110, 0.2)';
-        
-        // Mostrar mensaje de error temporalmente
-        showErrorModal(message);
-    }
-}
-
-function clearFieldError(fieldId) {
-    const field = document.getElementById(fieldId);
-    if (field) {
-        field.style.borderColor = '';
-        field.style.boxShadow = '';
-    }
-}
-
-function clearAllFieldErrors() {
-    document.querySelectorAll('.form-group input, .form-group select').forEach(field => {
-        field.style.borderColor = '';
-        field.style.boxShadow = '';
-    });
-}
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
