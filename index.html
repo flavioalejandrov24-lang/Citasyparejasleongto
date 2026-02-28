@@ -1375,8 +1375,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if(session){
     user = session.user;
     await loadProfile();
-    const { data: p } = await sb.from('profiles').select('*').eq('user_id', user.id).single();
-    if(p && p.name){ showScreen('discovery'); loadProfiles(); }
+    if(user.profile && user.profile.name){ showScreen('discovery'); loadProfiles(); }
     else showScreen('onboarding');
   } else showScreen('login');
 });
@@ -1562,11 +1561,19 @@ async function handleLogin(e){
   try {
     const { data, error } = await sb.auth.signInWithPassword({ email, password:pw });
     if(error) throw error;
-    user = data.user; await loadProfile();
-    const { data: p } = await sb.from('profiles').select('*').eq('user_id', user.id).single();
+    user = data.user;
+    await loadProfile();
     toast('¡Bienvenido de nuevo!','ok');
-    if(p && p.name){ showScreen('discovery'); loadProfiles(); } else showScreen('onboarding');
-  } catch { showError('Correo o contraseña incorrectos.','Acceso denegado'); }
+    // user.profile se setea en loadProfile(); si tiene name → discovery, si no → onboarding
+    if(user.profile && user.profile.name){
+      showScreen('discovery'); loadProfiles();
+    } else {
+      showScreen('onboarding');
+    }
+  } catch(err) {
+    console.error('Login error:', err);
+    showError('Correo o contraseña incorrectos.','Acceso denegado');
+  }
   finally { btn.classList.remove('loading'); }
 }
 
@@ -1615,9 +1622,19 @@ async function handleRecovery(){
 
 /* ── PROFILE ── */
 async function loadProfile(){
-  const { data } = await sb.from('profiles').select('*').eq('user_id', user.id).single();
-  if(data) user.profile = data;
+  try {
+    const { data, error } = await sb.from('profiles').select('*').eq('user_id', user.id).maybeSingle();
+    if(error){ console.error('loadProfile error:', error); user.profile = null; return; }
+    user.profile = data || null;
+    console.log('Profile loaded:', user.profile);
+  } catch(err){
+    console.error('loadProfile exception:', err);
+    user.profile = null;
+  }
 }
+
+
+
 
 function renderProfile(){
   const p = user.profile || {};
@@ -1744,15 +1761,16 @@ async function handleCompleteProfile(e){
   try {
     let photo_url = null;
     if(photoDataURL){ photo_url = await uploadPhoto(photoDataURL); }
-    const { error } = await sb.from('profiles').update({
+    const { data: updData, error } = await sb.from('profiles').update({
       name, birthdate:birth, age, gender, seeking, bio, interests, photo_url,
       location:'León, Guanajuato', updated_at:new Date().toISOString()
-    }).eq('user_id', user.id);
-    if(error) throw error;
+    }).eq('user_id', user.id).select();
+    if(error){ console.error('Profile update error:', JSON.stringify(error)); throw error; }
+    console.log('Profile updated:', updData);
     await loadProfile(); photoDataURL=null;
     toast('¡Perfil completado!','ok');
     showScreen('discovery'); loadProfiles();
-  } catch { toast('Error al guardar','err'); }
+  } catch(err){ console.error('handleCompleteProfile catch:', err); toast('Error al guardar: '+err.message,'err'); }
   finally { btn.classList.remove('loading'); }
 }
 
