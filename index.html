@@ -66,8 +66,16 @@ body {
     opacity:0; pointer-events:none;
     transform: translateX(100%);
     transition: transform .4s cubic-bezier(.4,0,.2,1), opacity .4s ease;
+    /* Pantallas inactivas van al fondo del stack */
+    z-index: 0;
+    /* visibility:hidden asegura que NO reciben eventos aunque haya bugs de z-index */
+    visibility: hidden;
 }
-.screen.active { opacity:1; pointer-events:all; transform:translateX(0); }
+.screen.active {
+    opacity:1; pointer-events:all; transform:translateX(0);
+    z-index: 1;
+    visibility: visible;
+}
 
 /* ================================================
    LOGIN
@@ -165,19 +173,25 @@ body {
 .password-input-wrapper { position:relative; }
 .password-input-wrapper input { padding-right:3.5rem; }
 
+.password-input-wrapper {
+    position: relative;
+    /* El wrapper necesita su propio contexto de apilamiento */
+    isolation: isolate;
+}
+
 .toggle-password {
     position:absolute; right:.85rem; top:50%;
     transform:translateY(-50%);
     background:none; border:none; cursor:pointer;
-    padding:.4rem; line-height:0;
-    color:rgba(255,255,255,.45);
-    transition: color .2s, transform .2s;
+    padding:.5rem; line-height:0;
+    color:rgba(255,255,255,.55);
+    transition: color .2s;
     display:flex; align-items:center; justify-content:center;
-    /* MUY IMPORTANTE: asegura que el botón sea siempre clickeable */
-    z-index: 10;
-    pointer-events: all !important;
+    z-index: 99;
+    /* Sin pointer-events: all !important porque eso no penetra la herencia del padre .screen */
 }
-.toggle-password:hover { color: var(--primary-light); transform:translateY(-50%) scale(1.15); }
+.toggle-password:hover { color: var(--primary-light); }
+/* Los SVG hijos NO deben capturar eventos - el click debe llegar al button */
 .toggle-password svg { width:21px; height:21px; display:block; pointer-events:none; }
 
 /* ── Checkbox ──────────────────────────────────── */
@@ -1262,11 +1276,11 @@ body {
 <script>
 // ================================================
 // LIONMATCH - LÓGICA PRINCIPAL
-// Correcciones:
-//  1. Ojito: listener delegado en document (funciona en cualquier pantalla)
-//  2. Botón "Crear cuenta nueva": listener directo con verificación de existencia
-//  3. Fondo blanco eliminado, todo usa paleta oscura
+// Envuelto en IIFE para evitar colisión de variables
+// con cualquier otro script cargado (app.js cacheado, etc.)
 // ================================================
+(function() {
+'use strict';
 
 const SUPABASE_URL      = 'https://fjevgfyqqsfankvledpl.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqZXZnZnlxcXNmYW5rdmxlZHBsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA2Nzk0NjIsImV4cCI6MjA4NjI1NTQ2Mn0.AmysLsRq_KBXYculm0Nyw3a0abWLQ8zTt-2OSo-6PSA';
@@ -1284,13 +1298,17 @@ let conversations       = [];
 document.addEventListener('DOMContentLoaded', initializeApp);
 
 async function initializeApp() {
-    // ── FIX OJITO: delegación en document ──────
-    // Esto garantiza que funcione sin importar en qué pantalla esté el botón
-    document.addEventListener('click', function(e) {
+    // ════════════════════════════════════════════
+    // FIX REAL #1 — OJITO (toggle password)
+    // Usamos 'mousedown' en vez de 'click':
+    // se ejecuta ANTES de que el form procese
+    // el evento, evitando el submit accidental.
+    // Delegado en document para todas las pantallas.
+    // ════════════════════════════════════════════
+    document.addEventListener('mousedown', function(e) {
         const btn = e.target.closest('.toggle-password');
         if (!btn) return;
         e.preventDefault();
-        e.stopPropagation();
 
         const targetId  = btn.getAttribute('data-target');
         const input     = document.getElementById(targetId);
@@ -1301,14 +1319,33 @@ async function initializeApp() {
 
         if (input.type === 'password') {
             input.type = 'text';
-            if (eyeOpen)   eyeOpen.style.display   = 'none';
-            if (eyeClosed) eyeClosed.style.display = 'block';
+            eyeOpen   && (eyeOpen.style.display   = 'none');
+            eyeClosed && (eyeClosed.style.display = 'block');
             btn.setAttribute('aria-label', 'Ocultar contraseña');
         } else {
             input.type = 'password';
-            if (eyeOpen)   eyeOpen.style.display   = 'block';
-            if (eyeClosed) eyeClosed.style.display = 'none';
+            eyeOpen   && (eyeOpen.style.display   = 'block');
+            eyeClosed && (eyeClosed.style.display = 'none');
             btn.setAttribute('aria-label', 'Mostrar contraseña');
+        }
+    });
+
+    // ════════════════════════════════════════════
+    // FIX REAL #2 — BOTÓN "Crear cuenta nueva"
+    // Las pantallas usan position:absolute y aunque
+    // las inactivas tienen pointer-events:none, en
+    // algunos navegadores el stacking context las
+    // pone "encima" visualmente y bloquea clicks.
+    // Delegamos en document para saltarlo.
+    // ════════════════════════════════════════════
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('#go-to-register')) {
+            e.preventDefault();
+            showScreen('register');
+        }
+        if (e.target.closest('#back-to-login') || e.target.closest('#cancel-register')) {
+            e.preventDefault();
+            showScreen('login');
         }
     });
 
@@ -1333,22 +1370,12 @@ function initializeEventListeners() {
 
     // LOGIN
     document.getElementById('login-form')?.addEventListener('submit', handleLogin);
-
-    // ── FIX BOTÓN REGISTRO ──
-    // Se busca cada vez que se va a usar, no en el primer render
-    const goToRegisterBtn = document.getElementById('go-to-register');
-    if (goToRegisterBtn) {
-        goToRegisterBtn.addEventListener('click', () => {
-            showScreen('register');
-        });
-    }
-
+    // Nota: #go-to-register y #back-to-login y #cancel-register
+    // ya están manejados por delegación en initializeApp()
     document.getElementById('forgot-password-link')?.addEventListener('click', handleForgotPassword);
 
     // REGISTRO
     document.getElementById('register-form')?.addEventListener('submit', handleRegister);
-    document.getElementById('back-to-login')?.addEventListener('click', () => showScreen('login'));
-    document.getElementById('cancel-register')?.addEventListener('click', () => showScreen('login'));
 
     // Bio counters
     const bioInput = document.getElementById('profile-bio');
@@ -1903,6 +1930,8 @@ function formatTime(ts) {
     if (d < 7)  return `${d}d`;
     return date.toLocaleDateString('es-MX', { day:'numeric', month:'short' });
 }
+
+})(); // fin IIFE - evita colisión con variables globales de otros scripts
 </script>
 </body>
 </html>
