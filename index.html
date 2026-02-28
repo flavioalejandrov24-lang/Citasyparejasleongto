@@ -202,6 +202,11 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .empty-state h3{font-family:var(--font-h);font-size:1.2rem;margin-bottom:.4rem}
 .empty-state p{color:var(--c-muted);font-size:.88rem}
 
+/* ─── REALTIME badge ─── */
+.rt-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--c-green);margin-left:.4rem;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.unread-badge{position:absolute;top:-3px;right:-3px;min-width:18px;height:18px;border-radius:9px;background:var(--c-accent1);color:#fff;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px;border:2px solid var(--c-bg)}
+
 /* ─── CHAT ─── */
 #chat-screen{display:flex;flex-direction:column}
 .chat-hdr{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:rgba(8,6,15,.95);border-bottom:1px solid var(--c-border);position:sticky;top:0;z-index:20;backdrop-filter:blur(16px)}
@@ -225,38 +230,15 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .send-btn:hover{transform:scale(1.07)}
 .send-btn svg{width:18px;height:18px}
 
-/* ─── PROFILE — más vivo ─── */
-.profile-hero{
-  position:relative;overflow:hidden;
-  padding:2.5rem 1.5rem 2rem;
-  text-align:center;
-  margin-bottom:1.25rem;
-  background:linear-gradient(160deg,#16122a 0%,#1e1a35 100%);
-  border-bottom:1px solid var(--c-border);
-}
-/* animated background blobs */
-.profile-hero::before{
-  content:'';position:absolute;top:-80px;right:-40px;
-  width:220px;height:220px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,91,110,.18) 0%,transparent 70%);
-  animation:blobMove 6s ease-in-out infinite;
-  pointer-events:none;
-}
-.profile-hero::after{
-  content:'';position:absolute;bottom:-60px;left:-30px;
-  width:200px;height:200px;border-radius:50%;
-  background:radial-gradient(circle,rgba(192,132,252,.12) 0%,transparent 70%);
-  animation:blobMove 8s ease-in-out infinite reverse;
-  pointer-events:none;
-}
+/* ─── PROFILE ─── */
+.profile-hero{position:relative;overflow:hidden;padding:2.5rem 1.5rem 2rem;text-align:center;margin-bottom:1.25rem;background:linear-gradient(160deg,#16122a 0%,#1e1a35 100%);border-bottom:1px solid var(--c-border)}
+.profile-hero::before{content:'';position:absolute;top:-80px;right:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,91,110,.18) 0%,transparent 70%);animation:blobMove 6s ease-in-out infinite;pointer-events:none}
+.profile-hero::after{content:'';position:absolute;bottom:-60px;left:-30px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(192,132,252,.12) 0%,transparent 70%);animation:blobMove 8s ease-in-out infinite reverse;pointer-events:none}
 @keyframes blobMove{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-15px) scale(1.1)}}
-.profile-avatar-wrap{
-  position:relative;display:inline-block;margin-bottom:1.25rem;z-index:1;
-}
-.profile-avatar{width:110px;height:110px;border-radius:50%;border:3px solid transparent;background-image:var(--grad),url();background-origin:border-box;background-clip:content-box,border-box;margin:0 auto;object-fit:cover;box-shadow:0 8px 32px rgba(255,91,110,.3),0 0 0 6px rgba(255,91,110,.1);display:block}
+.profile-avatar-wrap{position:relative;display:inline-block;margin-bottom:1.25rem;z-index:1}
+.profile-avatar{width:110px;height:110px;border-radius:50%;border:3px solid var(--c-accent1);margin:0 auto;object-fit:cover;box-shadow:0 8px 32px rgba(255,91,110,.3),0 0 0 6px rgba(255,91,110,.1);display:block}
 .profile-avatar-ph{width:110px;height:110px;border-radius:50%;border:3px solid var(--c-accent1);margin:0 auto;background:var(--c-panel);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(255,91,110,.3),0 0 0 6px rgba(255,91,110,.1)}
 .profile-avatar-ph svg{width:50px;height:50px;color:var(--c-muted)}
-/* stat pills */
 .profile-stats{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;z-index:1;position:relative}
 .stat-pill{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .85rem;border-radius:50px;font-size:.82rem;font-weight:600;border:1px solid rgba(255,255,255,.1)}
 .stat-pill.age-pill{background:rgba(255,91,110,.12);color:var(--c-accent1);border-color:rgba(255,91,110,.2)}
@@ -264,11 +246,9 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .stat-pill.loc-pill{background:rgba(255,255,255,.05);color:var(--c-muted)}
 .stat-pill svg{width:13px;height:13px}
 .profile-hero-name{font-family:var(--font-h);font-size:2rem;font-weight:900;color:var(--c-text);letter-spacing:-.03em;line-height:1.1;position:relative;z-index:1;margin-bottom:.75rem}
-/* extra photos in hero */
 .profile-photos-row{display:flex;gap:.5rem;justify-content:center;margin-bottom:1rem;z-index:1;position:relative;flex-wrap:wrap}
 .profile-photo-mini{width:74px;height:74px;border-radius:var(--r2);object-fit:cover;border:1.5px solid rgba(255,255,255,.12);transition:transform .2s;cursor:pointer}
 .profile-photo-mini:hover{transform:scale(1.05)}
-/* info cards */
 .info-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r3);padding:1.5rem;margin-bottom:1rem}
 .info-card h3{font-size:.72rem;font-weight:700;color:var(--c-accent1);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem}
 .info-card p{color:var(--c-muted);font-size:.92rem;line-height:1.6}
@@ -406,7 +386,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
     <div class="page-title">Tu Perfil</div>
     <p class="page-sub">Cuéntanos un poco sobre ti</p>
     <form id="ob-form">
-
       <!-- STEP 1 -->
       <div class="step active" data-step="1">
         <div class="fg" style="text-align:center">
@@ -423,7 +402,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
           <select id="ob-gender"><option value="">Selecciona</option><option value="Hombre">Hombre</option><option value="Mujer">Mujer</option><option value="Otro">Otro</option></select>
         </div>
       </div>
-
       <!-- STEP 2 -->
       <div class="step" data-step="2">
         <div class="fg">
@@ -458,7 +436,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
           <div class="loc-lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>León, Guanajuato</div>
         </div>
       </div>
-
       <!-- STEP 3 -->
       <div class="step" data-step="3">
         <div class="fg">
@@ -481,7 +458,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
           </div>
         </div>
       </div>
-
       <div class="step-nav">
         <button type="button" class="btn btn-ghost" id="ob-prev" style="display:none">Anterior</button>
         <button type="button" class="btn btn-primary" id="ob-next">Siguiente</button>
@@ -517,7 +493,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 <div id="messages-screen" class="screen">
   <header class="app-header">
     <button class="menu-btn" id="msg-menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-    <span style="font-family:var(--font-h);font-size:1.15rem;font-weight:800;color:var(--c-text)">Mensajes</span>
+    <span style="font-family:var(--font-h);font-size:1.15rem;font-weight:800;color:var(--c-text)">Mensajes<span class="rt-dot" title="Tiempo real activo"></span></span>
     <div style="width:40px"></div>
   </header>
   <div class="msg-wrap">
@@ -570,14 +546,13 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   </div>
 </div>
 
-<!-- ══ EDITAR PERFIL (todos los campos) ══ -->
+<!-- ══ EDITAR PERFIL ══ -->
 <div id="edit-screen" class="screen">
   <div class="page-wrap">
     <button class="back-btn" id="back-edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
     <div class="page-title">Editar Perfil</div>
     <p class="page-sub">Actualiza tu información</p>
     <form id="edit-form">
-      <!-- Foto principal -->
       <div class="fg" style="text-align:center">
         <label style="display:block;margin-bottom:.75rem">Foto de perfil <span class="req-star">*</span></label>
         <div class="photo-upload-zone" id="photo-zone-edit">
@@ -586,7 +561,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
           <input type="file" id="photo-input-edit" accept="image/*">
         </div>
       </div>
-      <!-- Fotos extra -->
       <div class="fg">
         <span class="extra-photos-label">Fotos adicionales <span class="optional-badge">(opcional)</span></span>
         <div class="extra-photos-grid">
@@ -595,7 +569,6 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
           <div class="mini-photo-zone" id="mini-zone-edit-4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="mini-label">Foto 4</span><div class="mini-overlay"><button type="button" class="mini-delete-btn" data-slot="4" data-ctx="edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><input type="file" accept="image/*" id="photo-input-edit-4"></div>
         </div>
       </div>
-      <!-- Todos los campos del onboarding -->
       <div class="fg"><label>Nombre <span class="req-star">*</span></label><input type="text" id="edit-name" required></div>
       <div class="fg"><label>Fecha de nacimiento <span class="optional-badge">(opcional)</span></label><input type="date" id="edit-birth"></div>
       <div class="fg"><label>Género <span class="optional-badge">(opcional)</span></label>
@@ -666,14 +639,10 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
 <!-- MODALES -->
 <div class="modal-overlay" id="m-error"><div class="modal-box"><div class="modal-stripe err"></div><div class="modal-body"><div class="modal-icon err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div><div class="modal-txt"><h4 id="m-error-title">Error</h4><p id="m-error-msg"></p></div></div><div class="modal-foot"><button class="btn btn-danger btn-sm" id="m-error-ok">Aceptar</button></div></div></div>
-
 <div class="modal-overlay" id="m-success"><div class="modal-box"><div class="modal-stripe ok"></div><div class="modal-body"><div class="modal-icon ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="modal-txt"><h4 id="m-success-title">¡Éxito!</h4><p id="m-success-msg"></p></div></div><div class="modal-foot"><button class="btn btn-success btn-sm" id="m-success-ok">Aceptar</button></div></div></div>
-
 <div class="modal-overlay" id="m-recovery"><div class="modal-box"><div class="modal-stripe"></div><div class="modal-body"><div class="modal-icon info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="modal-txt"><h4>Recuperar contraseña</h4><p>Ingresa tu correo y te enviamos el enlace</p></div></div><div class="modal-input-wrap"><input type="email" id="rec-email" placeholder="tucorreo@ejemplo.com"></div><div class="modal-foot"><button class="btn btn-ghost btn-sm" id="rec-cancel">Cancelar</button><button class="btn btn-primary btn-sm" id="rec-send">Enviar</button></div></div></div>
-
-<div class="modal-overlay" id="m-delete"><div class="modal-box"><div class="modal-stripe err"></div><div class="modal-body"><div class="modal-icon err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></div><div class="modal-txt"><h4>¿Eliminar cuenta?</h4><p>Esta acción es permanente. Se borrarán todos tus datos, matches y mensajes.</p></div></div><div class="modal-foot"><button class="btn btn-ghost btn-sm" id="del-cancel">Cancelar</button><button class="btn btn-danger btn-sm" id="del-confirm">Eliminar</button></div></div></div>
-
-<div class="modal-overlay" id="m-match"><div class="modal-box"><div class="modal-stripe"></div><div class="match-modal-body"><div id="match-av-wrap" class="match-av-big-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>¡Es un Match! 🎉</h3><p id="match-name-txt">¡Los dos se gustaron! Chat desbloqueado.</p></div><div class="modal-foot"><button class="btn btn-ghost btn-sm" id="match-later">Después</button><button class="btn btn-primary btn-sm" id="match-chat-btn">Ir al chat</button></div></div></div>
+<div class="modal-overlay" id="m-delete"><div class="modal-box"><div class="modal-stripe err"></div><div class="modal-body"><div class="modal-icon err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></div><div class="modal-txt"><h4>¿Eliminar cuenta?</h4><p>Esta acción es permanente. Se borrarán todos tus datos.</p></div></div><div class="modal-foot"><button class="btn btn-ghost btn-sm" id="del-cancel">Cancelar</button><button class="btn btn-danger btn-sm" id="del-confirm">Eliminar</button></div></div></div>
+<div class="modal-overlay" id="m-match"><div class="modal-box"><div class="modal-stripe"></div><div class="match-modal-body"><div id="match-av-wrap" class="match-av-big-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>¡Es un Match! 🎉</h3><p id="match-name-txt">¡Los dos se gustaron!</p></div><div class="modal-foot"><button class="btn btn-ghost btn-sm" id="match-later">Después</button><button class="btn btn-primary btn-sm" id="match-chat-btn">Ir al chat</button></div></div></div>
 
 <div class="toast" id="toast"></div>
 
@@ -696,14 +665,22 @@ const INTERESTS_LIST = [
   {emoji:'🤝',label:'Voluntariado'},{emoji:'🧳',label:'Aventura'},
 ];
 
-let user=null, profiles=[], pIdx=0, matches=[], convos=[];
-let obStep=1;
-let photoDataURL=null, photoDataURL2=null, photoDataURL3=null, photoDataURL4=null;
-let deletedSlots={}; // {2:true, 3:true, 4:true} para edición
-let selectedInterests=[];
-let currentChatUserId=null, currentChatIsActive=false;
+let user = null, profiles = [], pIdx = 0, matches = [], convos = [];
+let obStep = 1;
+let photoDataURL = null, photoDataURL2 = null, photoDataURL3 = null, photoDataURL4 = null;
+let deletedSlots = {};
+let selectedInterests = [];
+let currentChatUserId = null, currentChatIsActive = false;
+let realtimeChannel = null; // ← canal de mensajes en tiempo real
+let chatRealtimeChannel = null; // ← canal del chat activo
 
-/* ─── INIT ─── */
+// ════════════════════════════════════════════
+// INIT — FIX DEL LOOP INFINITO
+// La clave: usamos una bandera `initialized` para
+// que onAuthStateChange y getSession no colisionen
+// ════════════════════════════════════════════
+let initialized = false;
+
 document.addEventListener('DOMContentLoaded', async () => {
   buildInterestChips();
   initTogglePw();
@@ -715,26 +692,127 @@ document.addEventListener('DOMContentLoaded', async () => {
   initForms();
   initBioCounters();
 
-  // Listen for Supabase auth changes (covers email confirmation redirect)
-  sb.auth.onAuthStateChange(async (event, session) => {
-    if(event === 'SIGNED_IN' && session && !user){
-      user = session.user;
-      await loadProfile();
-      if(user.profile && user.profile.name){ showScreen('discovery'); loadProfiles(); }
-      else showScreen('onboarding');
-    }
-  });
-
+  // PASO 1: Intentar con sesión existente primero
   const { data:{ session } } = await sb.auth.getSession();
-  if(session){
+  if (session) {
+    initialized = true;
     user = session.user;
     await loadProfile();
-    if(user.profile && user.profile.name){ showScreen('discovery'); loadProfiles(); }
-    else showScreen('onboarding');
+    goHome();
   } else {
     showScreen('login');
   }
+
+  // PASO 2: Escuchar cambios SOLO para eventos futuros (confirmación email, etc.)
+  // La bandera `initialized` evita que se ejecute dos veces si ya había sesión
+  sb.auth.onAuthStateChange(async (event, session) => {
+    if (initialized) return; // ya manejamos la sesión en getSession()
+
+    if (event === 'SIGNED_IN' && session) {
+      initialized = true;
+      user = session.user;
+      await loadProfile();
+      goHome();
+    } else if (event === 'SIGNED_OUT') {
+      initialized = false;
+      user = null;
+      stopRealtime();
+      showScreen('login');
+    }
+  });
 });
+
+function goHome() {
+  if (user?.profile?.name) {
+    showScreen('discovery');
+    loadProfiles();
+    startRealtimeMessages(); // ← arrancar tiempo real al entrar
+  } else {
+    showScreen('onboarding');
+  }
+}
+
+// ════════════════════════════════════════════
+// REALTIME — MENSAJES EN TIEMPO REAL
+// Cómo activarlo en Supabase:
+//   Dashboard → Table Editor → messages → toggle "Realtime" ON
+//   También en: Database → Replication → messages → habilitar INSERT
+// ════════════════════════════════════════════
+function startRealtimeMessages() {
+  stopRealtime(); // limpiar canal anterior si existe
+
+  // Canal para la lista de conversaciones (mensajes-screen)
+  realtimeChannel = sb
+    .channel('messages-list')
+    .on('postgres_changes', {
+      event: 'INSERT',
+      schema: 'public',
+      table: 'messages',
+      // Solo mensajes donde el usuario es receiver
+      filter: `receiver_id=eq.${user.id}`
+    }, (payload) => {
+      // Nuevo mensaje recibido: recargar lista de conversaciones si estamos en esa pantalla
+      const screen = document.querySelector('.screen.active');
+      if (screen?.id === 'messages-screen') {
+        loadMatches();
+        loadConvos();
+      }
+      // Si estamos en el chat con esa persona, agregar el mensaje al instante
+      if (screen?.id === 'chat-screen' && payload.new.sender_id === currentChatUserId) {
+        appendMessage(payload.new);
+      }
+      // Toast con notificación
+      toast(`💬 Nuevo mensaje`, 'info');
+    })
+    .subscribe();
+}
+
+function startChatRealtime(otherUserId) {
+  // Limpiar canal de chat anterior
+  if (chatRealtimeChannel) {
+    sb.removeChannel(chatRealtimeChannel);
+    chatRealtimeChannel = null;
+  }
+
+  // Canal específico para el chat abierto — escucha mensajes de ambas direcciones
+  chatRealtimeChannel = sb
+    .channel(`chat-${user.id}-${otherUserId}`)
+    .on('postgres_changes', {
+      event: 'INSERT',
+      schema: 'public',
+      table: 'messages',
+      filter: `sender_id=eq.${otherUserId}`
+    }, (payload) => {
+      if (payload.new.receiver_id === user.id) {
+        appendMessage(payload.new);
+      }
+    })
+    .subscribe();
+}
+
+function stopRealtime() {
+  if (realtimeChannel) { sb.removeChannel(realtimeChannel); realtimeChannel = null; }
+  if (chatRealtimeChannel) { sb.removeChannel(chatRealtimeChannel); chatRealtimeChannel = null; }
+}
+
+// Agregar un solo mensaje al chat sin recargar todo
+function appendMessage(msg) {
+  const c = document.getElementById('chat-msgs');
+  if (!c) return;
+  // Eliminar el estado vacío si existe
+  const empty = c.querySelector('.empty-chat-state');
+  if (empty) empty.remove();
+
+  const d = document.createElement('div');
+  d.className = `msg-row ${msg.sender_id === user.id ? 'me' : 'them'}`;
+  d.innerHTML = `<div class="bubble">${escapeHtml(msg.content)}</div>`;
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
 
 /* ─── INTEREST CHIPS ─── */
 function buildInterestChips(){
@@ -749,10 +827,9 @@ function buildInterestChips(){
     });
   });
 }
+
 function toggleInterest(btn,cid){
   const val=btn.dataset.interest;
-  const ctxId=cid.replace('-interest-chips','');
-  // Determine which selectedInterests array — share one for simplicity
   if(btn.classList.contains('on')){
     btn.classList.remove('on');
     selectedInterests=selectedInterests.filter(i=>i!==val);
@@ -760,11 +837,13 @@ function toggleInterest(btn,cid){
     if(selectedInterests.length>=8){ toast('Máximo 8 intereses','err'); return; }
     btn.classList.add('on'); selectedInterests.push(val);
   }
+  const ctxId=cid.replace('-interest-chips','');
   const countEl=document.getElementById(ctxId+'-int-count');
   if(countEl) countEl.textContent=selectedInterests.length+' / 8 seleccionados';
   const hidEl=document.getElementById(ctxId+'-interests');
   if(hidEl) hidEl.value=selectedInterests.join(', ');
 }
+
 function loadInterestChipsFrom(str,cid){
   selectedInterests=str?str.split(',').map(s=>s.trim()).filter(Boolean):[];
   const c=document.getElementById(cid); if(!c) return;
@@ -798,7 +877,6 @@ function initChips(){
         this.classList.add('on');
         const hid=grp.nextElementSibling;
         if(hid&&hid.tagName==='INPUT') hid.value=this.dataset.v;
-        // Show age range
         const ageSection=document.getElementById('age-range-section')||document.getElementById('edit-age-range-section');
         if(ageSection) ageSection.classList.toggle('show',!!this.dataset.v);
       }
@@ -816,7 +894,6 @@ function initChips(){
       }
     });
   });
-  // Separate seeking chips with age range toggle
   document.getElementById('ob-seeking-chips')?.addEventListener('click',()=>{
     const v=document.getElementById('ob-seeking').value;
     document.getElementById('age-range-section').classList.toggle('show',!!v);
@@ -835,6 +912,7 @@ function initPhotoUploads(){
     document.getElementById(`photo-input-${ctx}-${n}`)?.addEventListener('change',e=>handleMiniPhoto(e,`mini-zone-${ctx}-${n}`,n,ctx));
   });
 }
+
 function handleMainPhoto(e,zoneId){
   const file=e.target.files[0]; if(!file) return;
   if(file.size>5*1024*1024){toast('Foto max 5 MB','err');return;}
@@ -851,6 +929,7 @@ function handleMainPhoto(e,zoneId){
   };
   reader.readAsDataURL(file);
 }
+
 function handleMiniPhoto(e,zoneId,num,ctx){
   const file=e.target.files[0]; if(!file) return;
   if(file.size>5*1024*1024){toast('Foto max 5 MB','err');return;}
@@ -866,6 +945,7 @@ function handleMiniPhoto(e,zoneId,num,ctx){
   };
   reader.readAsDataURL(file);
 }
+
 function setMiniPreview(zoneId,url){
   const zone=document.getElementById(zoneId); if(!zone) return;
   zone.querySelectorAll('img.mini-preview').forEach(i=>i.remove());
@@ -876,6 +956,7 @@ function setMiniPreview(zoneId,url){
   if(overlay) zone.insertBefore(img,overlay);
   else zone.insertBefore(img,zone.querySelector('input'));
 }
+
 function clearMiniZone(zoneId,num,ctx){
   const zone=document.getElementById(zoneId); if(!zone) return;
   zone.querySelectorAll('img.mini-preview').forEach(i=>i.remove());
@@ -887,6 +968,7 @@ function clearMiniZone(zoneId,num,ctx){
   const inp=zone.querySelector('input[type=file]'); if(inp) inp.value='';
   toast(`Foto ${num} eliminada`,'ok');
 }
+
 function initMiniDeleteBtns(){
   document.addEventListener('click',e=>{
     const btn=e.target.closest('.mini-delete-btn'); if(!btn) return;
@@ -952,7 +1034,11 @@ function initForms(){
   document.getElementById('like-btn').addEventListener('click',()=>swipe('like'));
   document.getElementById('dislike-btn').addEventListener('click',()=>swipe('dislike'));
   document.getElementById('super-btn').addEventListener('click',()=>swipe('super'));
-  document.getElementById('back-chat').addEventListener('click',()=>showScreen('messages'));
+  document.getElementById('back-chat').addEventListener('click',()=>{
+    // Limpiar canal de chat al salir
+    if(chatRealtimeChannel){ sb.removeChannel(chatRealtimeChannel); chatRealtimeChannel=null; }
+    showScreen('messages');
+  });
   document.getElementById('send-btn').addEventListener('click',sendMessage);
   document.getElementById('chat-input').addEventListener('keypress',e=>{if(e.key==='Enter')sendMessage();});
   document.getElementById('edit-prof-btn').addEventListener('click',()=>{fillEditForm();showScreen('edit');});
@@ -961,6 +1047,7 @@ function initForms(){
   document.getElementById('cancel-edit').addEventListener('click',()=>showScreen('profile'));
   document.getElementById('edit-form').addEventListener('submit',handleUpdate);
 }
+
 function initBioCounters(){
   const ob=document.getElementById('ob-bio');
   ob?.addEventListener('input',()=>document.getElementById('ob-bio-n').textContent=ob.value.length);
@@ -991,11 +1078,17 @@ async function handleLogin(e){
   try{
     const {data,error}=await sb.auth.signInWithPassword({email,password:pw});
     if(error) throw error;
-    user=data.user; await loadProfile();
+    // FIX: marcar como inicializado ANTES de llamar goHome
+    initialized = true;
+    user = data.user;
+    await loadProfile();
     toast('¡Bienvenido de nuevo!','ok');
-    if(user.profile&&user.profile.name){showScreen('discovery');loadProfiles();}
-    else showScreen('onboarding');
-  }catch{showError('Correo o contraseña incorrectos.','Acceso denegado');}
+    goHome();
+    startRealtimeMessages();
+  }catch{
+    initialized = false;
+    showError('Correo o contraseña incorrectos.','Acceso denegado');
+  }
   finally{btn.classList.remove('loading');}
 }
 
@@ -1020,22 +1113,26 @@ async function handleRegister(e){
       return;
     }
     if(data?.user?.identities?.length===0){showError(`"${email}" ya está registrado.`,'Ya existe');return;}
-    // Pre-create profile row
     if(data.user){
       await sb.from('profiles').upsert({user_id:data.user.id,email,created_at:new Date().toISOString()},{onConflict:'user_id'});
     }
-    // ← Go back to login, show instructions
     showScreen('login');
     showSuccess(
       `Te enviamos un correo a "${email}". Haz clic en el enlace para verificar tu cuenta y luego inicia sesión.`,
-      '📬 Revisa tu correo',
-      null
+      '📬 Revisa tu correo', null
     );
   }catch(err){showError(err.message||'Error inesperado.','Error');}
   finally{btn.classList.remove('loading');}
 }
 
-async function handleLogout(){await sb.auth.signOut();user=null;showScreen('login');toast('Sesión cerrada');}
+async function handleLogout(){
+  stopRealtime();
+  initialized = false;
+  await sb.auth.signOut();
+  user = null;
+  showScreen('login');
+  toast('Sesión cerrada');
+}
 
 async function handleRecovery(){
   const email=document.getElementById('rec-email').value.trim();
@@ -1059,22 +1156,33 @@ async function loadProfile(){
   }catch{user.profile=null;}
 }
 
+// FIX DEL AVATAR: en vez de outerHTML (que rompe referencias) usamos innerHTML del wrapper
 function renderProfile(){
   const p=user.profile||{};
   document.getElementById('prof-name').textContent=p.name||'—';
   document.getElementById('prof-bio').textContent=p.bio||'Sin biografía';
-  document.getElementById('prof-seeking').textContent=p.seeking||(p.relation?p.relation+' · —':'—');
+  document.getElementById('prof-seeking').textContent=p.seeking||(p.relation?p.relation:'—');
 
   // Stats pills
   const stats=document.getElementById('prof-stats'); stats.innerHTML='';
-  if(p.age){const pill=document.createElement('div');pill.className='stat-pill age-pill';pill.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${p.age} años`;stats.appendChild(pill);}
-  if(p.gender){const pill=document.createElement('div');pill.className='stat-pill gender-pill';const icon=p.gender==='Mujer'?'♀':'♂';pill.textContent=`${icon} ${p.gender}`;stats.appendChild(pill);}
-  const locPill=document.createElement('div');locPill.className='stat-pill loc-pill';locPill.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>León, Gto`;stats.appendChild(locPill);
+  if(p.age){
+    const pill=document.createElement('div');pill.className='stat-pill age-pill';
+    pill.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${p.age} años`;
+    stats.appendChild(pill);
+  }
+  if(p.gender){
+    const pill=document.createElement('div');pill.className='stat-pill gender-pill';
+    const icon=p.gender==='Mujer'?'♀':'♂';pill.textContent=`${icon} ${p.gender}`;stats.appendChild(pill);
+  }
+  const locPill=document.createElement('div');locPill.className='stat-pill loc-pill';
+  locPill.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>León, Gto`;
+  stats.appendChild(locPill);
 
-  // Avatar
-  const wrap=document.getElementById('prof-av-wrap');
-  if(p.photo_url&&wrap){
-    wrap.outerHTML=`<img src="${p.photo_url}" class="profile-avatar" id="prof-av-wrap" alt="Foto">`;
+  // FIX AVATAR: usamos el wrapper div y cambiamos su contenido sin outerHTML
+  const wrap = document.getElementById('prof-av-wrap');
+  if(wrap && p.photo_url){
+    wrap.className = 'profile-avatar-wrap';
+    wrap.innerHTML = `<img src="${p.photo_url}?t=${Date.now()}" class="profile-avatar" alt="Foto">`;
   }
 
   // Extra photos
@@ -1083,7 +1191,7 @@ function renderProfile(){
     if(url){const img=document.createElement('img');img.src=url;img.className='profile-photo-mini';row.appendChild(img);}
   });
 
-  // Interests as badges
+  // Interests
   const intWrap=document.getElementById('prof-interests'); intWrap.innerHTML='';
   if(p.interests){
     const d=document.createElement('div');d.className='interest-badges';
@@ -1098,8 +1206,7 @@ function renderProfile(){
 
 function fillEditForm(){
   const p=user.profile||{};
-  deletedSlots={};
-  photoDataURL=null; photoDataURL2=null; photoDataURL3=null; photoDataURL4=null;
+  deletedSlots={}; photoDataURL=null; photoDataURL2=null; photoDataURL3=null; photoDataURL4=null;
   document.getElementById('edit-name').value=p.name||'';
   document.getElementById('edit-birth').value=p.birthdate||'';
   document.getElementById('edit-gender').value=p.gender||'';
@@ -1109,19 +1216,12 @@ function fillEditForm(){
   document.getElementById('edit-age-min').value=p.age_min||'';
   document.getElementById('edit-age-max').value=p.age_max||'';
   document.getElementById('edit-relation').value=p.relation||'';
-
-  // Seeking chips
   document.querySelectorAll('#edit-seeking-chips .chip[data-v]').forEach(c=>c.classList.toggle('on',c.dataset.v===p.seeking));
   if(p.seeking) document.getElementById('edit-age-range-section').classList.add('show');
   else document.getElementById('edit-age-range-section').classList.remove('show');
-
-  // Relation chips
   document.querySelectorAll('#edit-relation-chips .chip[data-v3]').forEach(c=>c.classList.toggle('on',c.dataset.v3===p.relation));
-
-  // Interests
   loadInterestChipsFrom(p.interests||'','edit-interest-chips');
 
-  // Main photo
   const zone=document.getElementById('photo-zone-edit');
   zone.querySelectorAll('img.preview-img').forEach(i=>i.remove());
   zone.querySelector('.upload-hint').style.display='';
@@ -1131,12 +1231,10 @@ function fillEditForm(){
     zone.insertBefore(img,zone.querySelector('.upload-hint'));
     zone.querySelector('.upload-hint').style.display='none';
   }
-
-  // Extra photos
   ['mini-zone-edit-2','mini-zone-edit-3','mini-zone-edit-4'].forEach((zid,i)=>{
-    const zone2=document.getElementById(zid); if(!zone2) return;
-    zone2.querySelectorAll('img.mini-preview').forEach(im=>im.remove());
-    zone2.querySelectorAll('svg,span.mini-label').forEach(el=>el.style.display='');
+    const z=document.getElementById(zid); if(!z) return;
+    z.querySelectorAll('img.mini-preview').forEach(im=>im.remove());
+    z.querySelectorAll('svg,span.mini-label').forEach(el=>el.style.display='');
     const url=[p.photo2_url,p.photo3_url,p.photo4_url][i];
     if(url) setMiniPreview(zid,url);
   });
@@ -1148,7 +1246,6 @@ async function handleUpdate(e){
   if(!name){toast('El nombre es requerido','err');return;}
   const p=user.profile||{};
   if(!p.photo_url&&!photoDataURL){toast('Agrega una foto de perfil','err');return;}
-
   const birth=document.getElementById('edit-birth').value;
   const gender=document.getElementById('edit-gender').value;
   const bio=document.getElementById('edit-bio').value;
@@ -1158,19 +1255,16 @@ async function handleUpdate(e){
   const relation=document.getElementById('edit-relation').value;
   const interests=document.getElementById('edit-interests').value;
   const age=birth?calcAge(birth):p.age||null;
-
   const btn=e.target.querySelector('[type=submit]'); btn.classList.add('loading');
   try{
     let photo_url=p.photo_url||null;
     let photo2_url=deletedSlots[2]?null:(p.photo2_url||null);
     let photo3_url=deletedSlots[3]?null:(p.photo3_url||null);
     let photo4_url=deletedSlots[4]?null:(p.photo4_url||null);
-
     if(photoDataURL)  photo_url  = await uploadPhoto(photoDataURL,'');
     if(photoDataURL2) photo2_url = await uploadPhoto(photoDataURL2,'_2');
     if(photoDataURL3) photo3_url = await uploadPhoto(photoDataURL3,'_3');
     if(photoDataURL4) photo4_url = await uploadPhoto(photoDataURL4,'_4');
-
     const {error}=await sb.from('profiles').upsert({
       user_id:user.id,email:user.email,
       name,birthdate:birth||null,age,gender,bio,seeking,age_min,age_max,relation,interests,
@@ -1178,7 +1272,6 @@ async function handleUpdate(e){
       location:'León, Guanajuato',updated_at:new Date().toISOString()
     },{onConflict:'user_id'});
     if(error) throw error;
-
     await loadProfile();
     photoDataURL=null;photoDataURL2=null;photoDataURL3=null;photoDataURL4=null;deletedSlots={};
     toast('Perfil actualizado ✓','ok');
@@ -1189,11 +1282,13 @@ async function handleUpdate(e){
 
 async function handleDelete(){
   try{
+    stopRealtime();
     await sb.from('profiles').delete().eq('user_id',user.id);
     await sb.from('likes').delete().or(`user_id.eq.${user.id},liked_user_id.eq.${user.id}`);
     await sb.from('matches').delete().or(`user1_id.eq.${user.id},user2_id.eq.${user.id}`);
     await sb.from('messages').delete().or(`sender_id.eq.${user.id},receiver_id.eq.${user.id}`);
-    await sb.auth.signOut(); user=null;
+    await sb.auth.signOut();
+    initialized = false; user=null;
     closeModal('m-delete'); showScreen('login'); toast('Cuenta eliminada');
   }catch{toast('Error al eliminar','err');}
 }
@@ -1239,7 +1334,6 @@ async function handleCompleteProfile(e){
   const name=document.getElementById('ob-name').value.trim();
   if(!name){toast('El nombre es requerido','err');return;}
   if(!photoDataURL){toast('Por favor sube una foto de perfil','err');return;}
-
   const birth=document.getElementById('ob-birth').value;
   const gender=document.getElementById('ob-gender').value;
   const seeking=document.getElementById('ob-seeking').value;
@@ -1250,14 +1344,12 @@ async function handleCompleteProfile(e){
   const relation=document.getElementById('ob-relation').value||'';
   const age=birth?calcAge(birth):null;
   if(age&&age<18){toast('Debes ser mayor de 18 años','err');return;}
-
   const btn=document.getElementById('ob-finish'); btn.classList.add('loading');
   try{
     const photo_url=await uploadPhoto(photoDataURL,'');
     const photo2_url=photoDataURL2?await uploadPhoto(photoDataURL2,'_2'):null;
     const photo3_url=photoDataURL3?await uploadPhoto(photoDataURL3,'_3'):null;
     const photo4_url=photoDataURL4?await uploadPhoto(photoDataURL4,'_4'):null;
-
     const {error}=await sb.from('profiles').upsert({
       user_id:user.id,email:user.email,
       name,birthdate:birth||null,age,gender,seeking,bio,interests,relation,
@@ -1265,11 +1357,11 @@ async function handleCompleteProfile(e){
       location:'León, Guanajuato',updated_at:new Date().toISOString()
     },{onConflict:'user_id'});
     if(error) throw error;
-
     await loadProfile();
     photoDataURL=null;photoDataURL2=null;photoDataURL3=null;photoDataURL4=null;
     toast('¡Perfil completado!','ok');
     showScreen('discovery'); loadProfiles();
+    startRealtimeMessages();
   }catch(err){console.error(err);toast('Error al guardar: '+err.message,'err');}
   finally{btn.classList.remove('loading');}
 }
@@ -1279,17 +1371,24 @@ async function loadProfiles(){
   try{
     const myP=user.profile||{};
     const {data:liked}=await sb.from('likes').select('liked_user_id').eq('user_id',user.id);
-    const exc=(liked||[]).map(l=>l.liked_user_id); exc.push(user.id);
-    let q=sb.from('profiles').select('*').eq('location','León, Guanajuato')
-             .not('user_id','in',`(${exc.join(',')})`);
+    const exc=(liked||[]).map(l=>l.liked_user_id);
+    exc.push(user.id);
 
-    // Gender filter — only apply if we have both seeking AND the target has gender set
-    if(myP.seeking&&myP.seeking!=='Todos'){
-      const targetGender=myP.seeking==='Hombres'?'Hombre':'Mujer';
-      q=q.eq('gender',targetGender);
+    // FIX: el filtro .not('user_id','in') falla si el array queda vacío en algunos casos.
+    // Usamos una cadena segura y filtramos con neq si solo hay un elemento
+    let q = sb.from('profiles').select('*').eq('location','León, Guanajuato').neq('user_id', user.id);
+
+    // Excluir perfiles ya vistos
+    if(exc.length > 0){
+      q = q.not('user_id','in',`(${exc.join(',')})`);
     }
-    if(myP.age_min) q=q.gte('age',myP.age_min);
-    if(myP.age_max) q=q.lte('age',myP.age_max);
+
+    if(myP.seeking && myP.seeking !== 'Todos'){
+      const targetGender = myP.seeking === 'Hombres' ? 'Hombre' : 'Mujer';
+      q = q.eq('gender', targetGender);
+    }
+    if(myP.age_min) q = q.gte('age', myP.age_min);
+    if(myP.age_max) q = q.lte('age', myP.age_max);
 
     const {data,error}=await q.limit(20);
     if(error) throw error;
@@ -1304,13 +1403,11 @@ function renderCard(){
   document.getElementById('no-cards').style.display='none';
   const p=profiles[pIdx];
   const card=document.createElement('div'); card.className='swipe-card';
-
   if(p.photo_url){
     card.innerHTML=`<img src="${p.photo_url}" alt="${p.name}" draggable="false">`;
   } else {
     card.innerHTML=`<div class="no-photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>`;
   }
-
   const tags=p.interests?p.interests.split(',').slice(0,3).map(t=>`<span class="card-tag">${t.trim()}</span>`).join(''):'';
   const meta=[p.gender,p.age?`${p.age} años`:''].filter(Boolean).join(' · ');
   card.innerHTML+=`
@@ -1358,26 +1455,19 @@ async function swipe(action,cardEl=null){
   cardEl.style.transform=action!=='dislike'?'translateX(150%) rotate(25deg)':'translateX(-150%) rotate(-25deg)';
   cardEl.style.opacity='0';
   setTimeout(()=>{pIdx++;renderCard();},350);
-
   try{
     await sb.from('likes').upsert({user_id:user.id,liked_user_id:p.user_id,is_like:action!=='dislike',created_at:new Date().toISOString()},{onConflict:'user_id,liked_user_id'});
-
     if(action!=='dislike'){
-      // Send pending message immediately
-      const pendingMsg='Hola, te vi en Parejas León 👋 espero que hagamos Match 😊';
+      const pendingMsg='Hola, te vi en LionMatch 👋 espero que hagamos Match 😊';
       await sb.from('messages').insert({
         sender_id:user.id,receiver_id:p.user_id,
         content:pendingMsg,status:'pending',
         created_at:new Date().toISOString()
       });
-
-      // Check if they already liked back → it's a match
       const {data:rec}=await sb.from('likes').select('*')
         .eq('user_id',p.user_id).eq('liked_user_id',user.id).eq('is_like',true).maybeSingle();
       if(rec){
-        // Match! activate messages
         await sb.from('matches').upsert({user1_id:user.id,user2_id:p.user_id,created_at:new Date().toISOString()},{onConflict:'user1_id,user2_id'});
-        // Activate pending messages between both
         await sb.from('messages').update({status:'active'})
           .eq('receiver_id',user.id).eq('sender_id',p.user_id).eq('status','pending');
         await sb.from('messages').update({status:'active'})
@@ -1390,7 +1480,9 @@ async function swipe(action,cardEl=null){
 
 function showMatchModal(p){
   const wrap=document.getElementById('match-av-wrap');
-  if(p.photo_url) wrap.outerHTML=`<img src="${p.photo_url}" class="match-av-big" id="match-av-wrap" alt="${p.name}">`;
+  if(p.photo_url){
+    wrap.outerHTML=`<img src="${p.photo_url}" class="match-av-big" id="match-av-wrap" alt="${p.name}">`;
+  }
   document.getElementById('match-name-txt').textContent=`¡Tú y ${p.name} se gustaron! El chat está desbloqueado.`;
   openModal('m-match');
 }
@@ -1402,9 +1494,12 @@ async function loadMatches(){
   ).or(`user1_id.eq.${user.id},user2_id.eq.${user.id}`).order('created_at',{ascending:false});
   matches=data||[]; renderMatches();
 }
+
 function renderMatches(){
   const row=document.getElementById('matches-row'); row.innerHTML='';
-  if(!matches.length){row.innerHTML=`<p style="color:var(--c-muted);font-size:.85rem;padding:.5rem 0">Sin matches aún</p>`;return;}
+  if(!matches.length){
+    row.innerHTML=`<p style="color:var(--c-muted);font-size:.85rem;padding:.5rem 0">Sin matches aún</p>`;return;
+  }
   matches.forEach(m=>{
     const u=m.user1_id===user.id?m.u2:m.u1;
     const div=document.createElement('div'); div.className='match-bubble';
@@ -1416,7 +1511,6 @@ function renderMatches(){
 }
 
 async function loadConvos(){
-  // Load ALL messages sent or received, grouped by conversation partner
   const {data}=await sb.from('messages').select(
     '*,sender:profiles!messages_sender_id_fkey(*),receiver:profiles!messages_receiver_id_fkey(*)'
   ).or(`sender_id.eq.${user.id},receiver_id.eq.${user.id}`).order('created_at',{ascending:false}).limit(100);
@@ -1433,7 +1527,6 @@ async function loadConvos(){
     if(msg.status==='active') conv.hasActive=true;
     else if(msg.status==='pending'&&msg.sender_id===user.id) conv.hasPending=true;
   });
-
   convos=Array.from(map.values()); renderConvos();
 }
 
@@ -1443,18 +1536,15 @@ function renderConvos(){
     list.innerHTML=`<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><h3>Sin conversaciones</h3><p>Cuando hagas match aparecerán aquí</p></div>`;
     return;
   }
-
-  // Separate: active chats vs pending outgoing
   const activeConvs=convos.filter(cv=>cv.hasActive);
   const pendingConvs=convos.filter(cv=>!cv.hasActive&&cv.hasPending);
-
   if(activeConvs.length){
-    const label=document.createElement('div'); label.className='section-label'; label.style.marginTop='0'; label.textContent='Chats activos';
+    const label=document.createElement('div');label.className='section-label';label.style.marginTop='0';label.textContent='Chats activos';
     list.appendChild(label);
     activeConvs.forEach(cv=>list.appendChild(buildConvItem(cv,false)));
   }
   if(pendingConvs.length){
-    const label=document.createElement('div'); label.className='section-label'; label.style.marginTop='1rem'; label.textContent='⏳ Esperando match';
+    const label=document.createElement('div');label.className='section-label';label.style.marginTop='1rem';label.textContent='⏳ Esperando match';
     list.appendChild(label);
     pendingConvs.forEach(cv=>list.appendChild(buildConvItem(cv,true)));
   }
@@ -1482,14 +1572,25 @@ function openChat(u,isActive){
   currentChatIsActive=isActive;
   document.getElementById('chat-user-name').textContent=u.name;
   document.getElementById('chat-user-status').textContent='En línea';
+
+  // FIX AVATAR CHAT: sin outerHTML
   const wrap=document.getElementById('chat-av-wrap');
-  if(u.photo_url) wrap.outerHTML=`<img src="${u.photo_url}" class="chat-av" id="chat-av-wrap" alt="${u.name}">`;
+  if(u.photo_url){
+    wrap.innerHTML='';
+    wrap.className='chat-av-ph';
+    const img=document.createElement('img');
+    img.src=u.photo_url; img.className='chat-av'; img.alt=u.name;
+    wrap.appendChild(img);
+  }
+
   loadChatMsgs(u.user_id);
-  // Enable/disable input based on match status
   const inp=document.getElementById('chat-input');
   const sendBtn=document.getElementById('send-btn');
   inp.disabled=!isActive; sendBtn.disabled=!isActive;
   inp.placeholder=isActive?'Escribe un mensaje…':'Chat bloqueado hasta el Match ⏳';
+
+  // Arrancar Realtime para este chat específico
+  if(isActive) startChatRealtime(u.user_id);
 }
 
 async function loadChatMsgs(oid){
@@ -1499,12 +1600,12 @@ async function loadChatMsgs(oid){
     .order('created_at',{ascending:true});
   const c=document.getElementById('chat-msgs'); c.innerHTML='';
   if(!data||!data.length){
-    c.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;gap:.75rem;text-align:center;padding:1rem"><p style="font-size:1.5rem">🎉</p><p style="font-weight:700;color:var(--c-text)">¡Match desbloqueado!</p><p style="color:var(--c-muted);font-size:.88rem">Digan hola y comiencen a conocerse</p></div>`;
+    c.innerHTML=`<div class="empty-chat-state" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;gap:.75rem;text-align:center;padding:1rem"><p style="font-size:1.5rem">🎉</p><p style="font-weight:700;color:var(--c-text)">¡Match desbloqueado!</p><p style="color:var(--c-muted);font-size:.88rem">Digan hola y comiencen a conocerse</p></div>`;
   } else {
     data.forEach(msg=>{
       const d=document.createElement('div');
       d.className=`msg-row ${msg.sender_id===user.id?'me':'them'}`;
-      d.innerHTML=`<div class="bubble">${msg.content}</div>`;
+      d.innerHTML=`<div class="bubble">${escapeHtml(msg.content)}</div>`;
       c.appendChild(d);
     });
   }
@@ -1515,10 +1616,17 @@ async function sendMessage(){
   if(!currentChatIsActive){toast('Primero necesitas hacer Match 💫','info');return;}
   const inp=document.getElementById('chat-input'),txt=inp.value.trim(); if(!txt) return;
   if(!currentChatUserId) return;
+  inp.value=''; // limpiar inmediatamente para mejor UX
   try{
-    await sb.from('messages').insert({sender_id:user.id,receiver_id:currentChatUserId,content:txt,status:'active',created_at:new Date().toISOString()});
-    inp.value=''; loadChatMsgs(currentChatUserId);
-  }catch{toast('Error al enviar','err');}
+    const {data,error}=await sb.from('messages').insert({
+      sender_id:user.id,receiver_id:currentChatUserId,
+      content:txt,status:'active',
+      created_at:new Date().toISOString()
+    }).select().single();
+    if(error) throw error;
+    // Agregar mensaje propio sin esperar Realtime
+    appendMessage(data);
+  }catch{toast('Error al enviar','err');inp.value=txt;} // restaurar si falla
 }
 
 /* ─── UTILS ─── */
