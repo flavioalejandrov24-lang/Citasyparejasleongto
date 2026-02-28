@@ -6,15 +6,17 @@
 <title>LionMatch – León, Gto</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
   --c-bg:#08060f;--c-surface:#110e1e;--c-card:#16122a;--c-panel:#1e1a35;
-  --c-border:rgba(255,255,255,.08);--c-accent1:#ff5b6e;--c-accent2:#ff9057;
-  --c-accent3:#c084fc;--c-gold:#f5c842;--c-green:#22d68a;--c-red:#ff4554;
-  --c-text:#f0ecff;--c-muted:rgba(240,236,255,.45);--c-dim:rgba(240,236,255,.2);
+  --c-border:rgba(255,255,255,.08);
+  --c-accent1:#ff5b6e;--c-accent2:#ff9057;--c-accent3:#c084fc;
+  --c-gold:#f5c842;--c-green:#22d68a;--c-red:#ff4554;
+  --c-text:#f0ecff;--c-muted:rgba(240,236,255,.45);--c-dim:rgba(240,236,255,.18);
   --grad:linear-gradient(135deg,var(--c-accent1) 0%,var(--c-accent2) 100%);
+  --grad-cool:linear-gradient(135deg,#c084fc 0%,#ff5b6e 100%);
   --glow:0 0 40px rgba(255,91,110,.3);
   --r1:.6rem;--r2:1rem;--r3:1.5rem;--r4:2rem;
   --font-h:'Syne',sans-serif;--font-b:'DM Sans',sans-serif;
@@ -25,9 +27,10 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .app{max-width:430px;margin:0 auto;min-height:100vh;min-height:100dvh;position:relative;overflow:hidden;background:var(--c-bg)}
 .screen{position:absolute;inset:0;width:100%;min-height:100vh;min-height:100dvh;background:var(--c-bg);opacity:0;pointer-events:none;visibility:hidden;transform:translateX(60px);transition:transform .35s var(--ease-spring),opacity .3s ease;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .screen.active{opacity:1;pointer-events:all;visibility:visible;transform:translateX(0);z-index:10}
+.screen.slide-left{transform:translateX(-60px)}
 
-/* LOGIN */
-#login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;min-height:100dvh;padding:2rem 1.75rem;background:radial-gradient(ellipse 80% 60% at 20% -10%,rgba(255,91,110,.18) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 90% 110%,rgba(255,144,87,.14) 0%,transparent 55%),var(--c-bg)}
+/* ─── LOGIN ─── */
+#login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100dvh;padding:2rem 1.5rem;background:radial-gradient(ellipse 80% 60% at 20% -10%,rgba(255,91,110,.18) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 90% 110%,rgba(255,144,87,.14) 0%,transparent 55%),var(--c-bg)}
 .logo-wrap{text-align:center;margin-bottom:2.5rem}
 .logo-icon{width:80px;height:80px;margin:0 auto 1rem;background:var(--grad);border-radius:var(--r3);display:flex;align-items:center;justify-content:center;box-shadow:var(--glow);animation:float 4s ease-in-out infinite}
 .logo-icon svg{width:38px;height:38px;fill:#fff}
@@ -36,7 +39,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .app-sub{color:var(--c-muted);font-size:.95rem;font-weight:500}
 .glass-card{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--c-border);border-radius:var(--r3);padding:2rem;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
 
-/* FORM */
+/* ─── FORM ─── */
 .fg{margin-bottom:1.25rem}
 .fg label{display:block;margin-bottom:.5rem;font-size:.82rem;font-weight:600;color:rgba(240,236,255,.7);letter-spacing:.04em;text-transform:uppercase}
 .fg input,.fg select,.fg textarea{width:100%;padding:.9rem 1.1rem;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:var(--r2);color:var(--c-text);font-size:.95rem;font-family:var(--font-b);transition:border-color .2s,box-shadow .2s,background .2s;-webkit-appearance:none;appearance:none}
@@ -44,14 +47,13 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .fg select option{background:var(--c-panel);color:var(--c-text)}
 .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--c-accent1);background:rgba(255,91,110,.06);box-shadow:0 0 0 3px rgba(255,91,110,.12)}
 .fg input::placeholder,.fg textarea::placeholder{color:var(--c-dim)}
-.fg textarea{resize:vertical;min-height:100px}
+.fg textarea{resize:vertical;min-height:90px}
 .pw-wrap{position:relative}
 .pw-wrap input{padding-right:3rem}
-.toggle-pw{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;padding:.4rem;color:var(--c-muted);line-height:0;transition:color .2s;z-index:5}
-.toggle-pw:hover{color:var(--c-accent1)}
+.toggle-pw{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;padding:.4rem;color:var(--c-muted);line-height:0;z-index:5}
 .toggle-pw svg{width:18px;height:18px;pointer-events:none}
 
-/* BUTTONS */
+/* ─── BUTTONS ─── */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;width:100%;padding:.95rem 1.5rem;border:none;border-radius:var(--r2);font-size:.95rem;font-weight:700;font-family:var(--font-b);letter-spacing:.02em;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
 .btn-primary{background:var(--grad);color:#fff;box-shadow:0 6px 24px rgba(255,91,110,.35)}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,91,110,.45)}
@@ -74,9 +76,9 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .check-row input[type=checkbox]{width:18px;height:18px;accent-color:var(--c-accent1);cursor:pointer;flex-shrink:0}
 .check-row span{font-size:.88rem;color:var(--c-muted)}
 
-/* PAGE WRAP */
+/* ─── PAGE WRAP ─── */
 .page-wrap{padding:env(safe-area-inset-top,0) 1.5rem 6rem;padding-top:calc(env(safe-area-inset-top,0) + 1.5rem)}
-.back-btn{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid var(--c-border);display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:1.5rem;transition:all .2s}
+.back-btn{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid var(--c-border);display:flex;align-items:center;justify-content:center;cursor:pointer;margin-bottom:1.5rem;transition:all .2s;flex-shrink:0}
 .back-btn:hover{background:rgba(255,91,110,.15);border-color:var(--c-accent1)}
 .back-btn svg{width:18px;height:18px;color:var(--c-text)}
 .page-title{font-family:var(--font-h);font-size:2rem;font-weight:800;color:var(--c-text);margin-bottom:.3rem;letter-spacing:-.03em}
@@ -86,33 +88,29 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .step{display:none}
 .step.active{display:block;animation:fadeIn .3s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.optional-badge{font-size:.72rem;font-weight:500;color:var(--c-dim);margin-left:.4rem;text-transform:none;letter-spacing:0}
+.req-star{color:var(--c-accent1)}
 
-/* CHIPS single-select */
+/* ─── CHIPS ─── */
 .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
 .chip{padding:.55rem 1.1rem;border:1.5px solid rgba(255,255,255,.12);border-radius:50px;font-size:.88rem;font-weight:600;color:var(--c-muted);background:rgba(255,255,255,.04);cursor:pointer;transition:all .2s;font-family:var(--font-b)}
 .chip:hover{border-color:var(--c-accent1);color:var(--c-accent1)}
 .chip.on{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(255,91,110,.3)}
-
-/* INTEREST CHIPS multi-select */
 .interest-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
 .int-chip{padding:.5rem 1rem;border:1.5px solid rgba(255,255,255,.12);border-radius:50px;font-size:.85rem;font-weight:600;color:var(--c-muted);background:rgba(255,255,255,.04);cursor:pointer;transition:all .2s;font-family:var(--font-b)}
 .int-chip:hover{border-color:var(--c-accent1);color:var(--c-accent1)}
 .int-chip.on{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 4px 14px rgba(255,91,110,.3)}
 .int-count{font-size:.78rem;color:var(--c-accent3);margin-top:.5rem;font-weight:600}
-
-/* AGE RANGE */
+.step-nav{display:flex;gap:.75rem;margin-top:1.5rem}
+.step-nav .btn{flex:1}
 .age-range-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-.age-range-section{margin-top:1.25rem;display:none}
+.age-range-section{display:none;margin-top:1rem}
 .age-range-section.show{display:block}
-
-/* LOCATION LOCK */
 .loc-lock{display:flex;align-items:center;gap:.75rem;padding:.9rem 1.1rem;background:rgba(255,91,110,.07);border:1.5px solid rgba(255,91,110,.2);border-radius:var(--r2);color:var(--c-accent1);font-size:.9rem;font-weight:600}
 .loc-lock svg{width:18px;height:18px;flex-shrink:0}
 .char-count{text-align:right;font-size:.78rem;color:var(--c-dim);margin-top:.3rem}
-.step-nav{display:flex;gap:.75rem;margin-top:1.5rem}
-.step-nav .btn{flex:1}
 
-/* PHOTO UPLOADS */
+/* ─── PHOTO UPLOADS ─── */
 .photo-upload-zone{width:140px;height:140px;border-radius:50%;margin:0 auto 1rem;background:rgba(255,255,255,.05);border:2px dashed rgba(255,255,255,.2);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;transition:border-color .2s,background .2s}
 .photo-upload-zone:hover{border-color:var(--c-accent1);background:rgba(255,91,110,.07)}
 .photo-upload-zone .upload-hint{text-align:center;padding:.5rem;z-index:1;pointer-events:none}
@@ -122,28 +120,26 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .photo-edit-overlay{position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
 .photo-upload-zone:hover .photo-edit-overlay{opacity:1}
 .photo-edit-overlay svg{width:28px;height:28px;color:#fff}
-
-/* EXTRA PHOTOS GRID */
 .extra-photos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:.75rem}
 .mini-photo-zone{aspect-ratio:1;border-radius:var(--r2);background:rgba(255,255,255,.04);border:1.5px dashed rgba(255,255,255,.15);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;transition:all .2s}
 .mini-photo-zone:hover{border-color:var(--c-accent1);background:rgba(255,91,110,.06)}
-.mini-photo-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
-.mini-photo-zone svg{width:22px;height:22px;color:var(--c-dim);margin-bottom:.25rem}
-.mini-photo-zone span{font-size:.72rem;color:var(--c-muted);font-weight:500;pointer-events:none}
-.mini-photo-zone .mini-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
+.mini-photo-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;z-index:2}
+.mini-photo-zone svg{width:22px;height:22px;color:var(--c-dim);margin-bottom:.25rem;pointer-events:none}
+.mini-photo-zone .mini-label{font-size:.72rem;color:var(--c-muted);font-weight:500;pointer-events:none}
+.mini-photo-zone .mini-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;gap:.5rem;opacity:0;transition:opacity .2s;z-index:3}
 .mini-photo-zone:hover .mini-overlay{opacity:1}
-.mini-photo-zone .mini-overlay svg{width:20px;height:20px;color:#fff;margin:0}
+.mini-delete-btn{width:32px;height:32px;border-radius:50%;background:rgba(255,69,84,.85);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;z-index:4}
+.mini-delete-btn svg{width:16px;height:16px;color:#fff;pointer-events:none}
 .extra-photos-label{font-size:.82rem;font-weight:600;color:rgba(240,236,255,.7);letter-spacing:.04em;text-transform:uppercase;margin-bottom:.4rem;display:block}
-.extra-optional{font-size:.75rem;color:var(--c-muted);margin-top:.35rem}
 
-/* HEADER */
+/* ─── HEADER ─── */
 .app-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;background:rgba(8,6,15,.9);border-bottom:1px solid var(--c-border);position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 .menu-btn,.icon-btn{width:40px;height:40px;border-radius:var(--r1);background:rgba(255,255,255,.05);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s}
 .menu-btn:hover,.icon-btn:hover{background:rgba(255,91,110,.15)}
 .menu-btn svg,.icon-btn svg{width:22px;height:22px;color:var(--c-text)}
 .h-title{font-family:var(--font-h);font-size:1.4rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-/* DISCOVERY */
+/* ─── DISCOVERY ─── */
 .discovery-wrap{padding:1.25rem 1.25rem 8rem}
 .card-stack{position:relative;width:100%;height:calc(100vw * 1.15);max-height:500px;margin-bottom:1.75rem}
 .swipe-card{position:absolute;inset:0;border-radius:var(--r4);overflow:hidden;cursor:grab;box-shadow:0 16px 48px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.06);will-change:transform}
@@ -152,7 +148,8 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .swipe-card .no-photo{width:100%;height:100%;background:linear-gradient(135deg,var(--c-panel),var(--c-card));display:flex;align-items:center;justify-content:center}
 .swipe-card .no-photo svg{width:80px;height:80px;color:var(--c-dim)}
 .card-info{position:absolute;bottom:0;left:0;right:0;padding:1.75rem;background:linear-gradient(to top,rgba(5,3,12,.95) 0%,rgba(5,3,12,.6) 60%,transparent 100%)}
-.card-info h3{font-family:var(--font-h);font-size:1.7rem;font-weight:800;color:#fff;margin-bottom:.25rem;letter-spacing:-.03em}
+.card-info h3{font-family:var(--font-h);font-size:1.7rem;font-weight:800;color:#fff;margin-bottom:.2rem;letter-spacing:-.03em}
+.card-info .card-meta{font-size:.82rem;color:rgba(255,255,255,.6);margin-bottom:.3rem}
 .card-info p{font-size:.88rem;color:rgba(255,255,255,.75);line-height:1.5}
 .card-tag{display:inline-block;padding:.25rem .7rem;background:rgba(255,255,255,.12);border-radius:50px;font-size:.75rem;font-weight:600;color:rgba(255,255,255,.9);margin-top:.5rem;margin-right:.25rem}
 .hint{position:absolute;top:1.5rem;padding:.6rem 1.25rem;border-radius:var(--r1);font-family:var(--font-h);font-size:1.1rem;font-weight:800;letter-spacing:.06em;opacity:0;pointer-events:none;transition:opacity .2s;border:3px solid}
@@ -168,11 +165,11 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .act-btn:hover{transform:scale(1.08)}
 .act-btn:active{transform:scale(.94)}
 .act-btn.pass svg{width:26px;height:26px;color:var(--c-red);stroke-width:2.5}
-.act-btn.like{width:80px;height:80px;background:var(--grad);box-shadow:0 6px 28px rgba(255,91,110,.45),0 0 0 1px rgba(255,255,255,.1)}
+.act-btn.like{width:80px;height:80px;background:var(--grad);box-shadow:0 6px 28px rgba(255,91,110,.45)}
 .act-btn.like svg{width:32px;height:32px;color:#fff}
 .act-btn.super svg{width:24px;height:24px;color:var(--c-gold);stroke-width:2.5}
 
-/* MESSAGES */
+/* ─── MESSAGES ─── */
 .msg-wrap{padding:1rem 1.25rem 6rem}
 .section-label{font-size:.75rem;font-weight:700;color:var(--c-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem}
 .matches-row{display:flex;gap:.75rem;overflow-x:auto;padding-bottom:.75rem;margin-bottom:1.5rem;scrollbar-width:none}
@@ -183,26 +180,31 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .match-bubble span{display:block;font-size:.75rem;font-weight:600;color:var(--c-muted);max-width:62px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .match-av-placeholder{width:62px;height:62px;border-radius:50%;border:2.5px solid var(--c-accent1);background:var(--c-panel);display:flex;align-items:center;justify-content:center;margin-bottom:.4rem;transition:transform .2s}
 .match-av-placeholder svg{width:28px;height:28px;color:var(--c-muted)}
+.match-bubble:hover .match-av-placeholder{transform:scale(1.07)}
 .conv-item{display:flex;align-items:center;gap:1rem;padding:.9rem .75rem;border-radius:var(--r2);cursor:pointer;transition:background .2s;margin-bottom:.25rem}
 .conv-item:hover{background:rgba(255,255,255,.05)}
+.conv-item.pending-conv{opacity:.7;cursor:default}
+.conv-item.pending-conv:hover{background:none}
 .av-wrap{position:relative;flex-shrink:0}
 .conv-av{width:56px;height:56px;border-radius:50%;object-fit:cover}
 .conv-av-ph{width:56px;height:56px;border-radius:50%;background:var(--c-panel);display:flex;align-items:center;justify-content:center}
 .conv-av-ph svg{width:26px;height:26px;color:var(--c-muted)}
 .online-dot{position:absolute;bottom:2px;right:2px;width:13px;height:13px;background:var(--c-green);border:2px solid var(--c-bg);border-radius:50%}
+.pending-dot{position:absolute;bottom:2px;right:2px;width:13px;height:13px;background:var(--c-gold);border:2px solid var(--c-bg);border-radius:50%}
 .conv-info{flex:1;min-width:0}
 .conv-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.2rem}
 .conv-name{font-weight:700;color:var(--c-text);font-size:.95rem}
 .conv-time{font-size:.75rem;color:var(--c-muted)}
 .conv-last{font-size:.85rem;color:var(--c-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.conv-last.pending-tag{color:var(--c-gold);font-style:italic}
 .empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 2rem;text-align:center}
 .empty-state svg{width:56px;height:56px;color:var(--c-dim);stroke-width:1.5;margin-bottom:1rem}
 .empty-state h3{font-family:var(--font-h);font-size:1.2rem;margin-bottom:.4rem}
 .empty-state p{color:var(--c-muted);font-size:.88rem}
 
-/* CHAT */
+/* ─── CHAT ─── */
 #chat-screen{display:flex;flex-direction:column}
-.chat-hdr{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:rgba(8,6,15,.95);border-bottom:1px solid var(--c-border);position:sticky;top:0;z-index:20;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.chat-hdr{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:rgba(8,6,15,.95);border-bottom:1px solid var(--c-border);position:sticky;top:0;z-index:20;backdrop-filter:blur(16px)}
 .chat-user{display:flex;align-items:center;gap:.75rem;flex:1}
 .chat-av{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--c-accent1)}
 .chat-av-ph{width:42px;height:42px;border-radius:50%;background:var(--c-panel);display:flex;align-items:center;justify-content:center;border:2px solid var(--c-accent1)}
@@ -215,7 +217,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .bubble{max-width:72%;padding:.7rem 1rem;border-radius:var(--r2);font-size:.9rem;line-height:1.5}
 .msg-row.them .bubble{background:var(--c-panel);color:var(--c-text);border-bottom-left-radius:4px}
 .msg-row.me .bubble{background:var(--grad);color:#fff;border-bottom-right-radius:4px;box-shadow:0 4px 12px rgba(255,91,110,.25)}
-.chat-input-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;display:flex;gap:.75rem;padding:1rem 1.25rem;padding-bottom:calc(1rem + env(safe-area-inset-bottom,0));background:rgba(8,6,15,.95);border-top:1px solid var(--c-border);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:20}
+.chat-input-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;display:flex;gap:.75rem;padding:1rem 1.25rem;padding-bottom:calc(1rem + env(safe-area-inset-bottom,0));background:rgba(8,6,15,.95);border-top:1px solid var(--c-border);backdrop-filter:blur(16px);z-index:20}
 .chat-input-bar input{flex:1;padding:.75rem 1rem;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:50px;color:var(--c-text);font-size:.9rem;font-family:var(--font-b);transition:border-color .2s}
 .chat-input-bar input:focus{outline:none;border-color:var(--c-accent1)}
 .chat-input-bar input::placeholder{color:var(--c-dim)}
@@ -223,59 +225,91 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .send-btn:hover{transform:scale(1.07)}
 .send-btn svg{width:18px;height:18px}
 
-/* PROFILE */
-.profile-hero{background:linear-gradient(160deg,var(--c-surface),var(--c-card));border-radius:0 0 var(--r4) var(--r4);padding:2rem 1.5rem;text-align:center;margin-bottom:1.25rem;border-bottom:1px solid var(--c-border);position:relative;overflow:hidden}
-.profile-hero::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(255,91,110,.12) 0%,transparent 70%);pointer-events:none}
-.profile-avatar{width:110px;height:110px;border-radius:50%;border:3px solid var(--c-accent1);margin:0 auto 1.25rem;object-fit:cover;box-shadow:0 0 0 6px rgba(255,91,110,.15);position:relative;z-index:1}
-.profile-avatar-ph{width:110px;height:110px;border-radius:50%;border:3px solid var(--c-accent1);margin:0 auto 1.25rem;background:var(--c-panel);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 6px rgba(255,91,110,.15);position:relative;z-index:1}
+/* ─── PROFILE — más vivo ─── */
+.profile-hero{
+  position:relative;overflow:hidden;
+  padding:2.5rem 1.5rem 2rem;
+  text-align:center;
+  margin-bottom:1.25rem;
+  background:linear-gradient(160deg,#16122a 0%,#1e1a35 100%);
+  border-bottom:1px solid var(--c-border);
+}
+/* animated background blobs */
+.profile-hero::before{
+  content:'';position:absolute;top:-80px;right:-40px;
+  width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,91,110,.18) 0%,transparent 70%);
+  animation:blobMove 6s ease-in-out infinite;
+  pointer-events:none;
+}
+.profile-hero::after{
+  content:'';position:absolute;bottom:-60px;left:-30px;
+  width:200px;height:200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(192,132,252,.12) 0%,transparent 70%);
+  animation:blobMove 8s ease-in-out infinite reverse;
+  pointer-events:none;
+}
+@keyframes blobMove{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-15px) scale(1.1)}}
+.profile-avatar-wrap{
+  position:relative;display:inline-block;margin-bottom:1.25rem;z-index:1;
+}
+.profile-avatar{width:110px;height:110px;border-radius:50%;border:3px solid transparent;background-image:var(--grad),url();background-origin:border-box;background-clip:content-box,border-box;margin:0 auto;object-fit:cover;box-shadow:0 8px 32px rgba(255,91,110,.3),0 0 0 6px rgba(255,91,110,.1);display:block}
+.profile-avatar-ph{width:110px;height:110px;border-radius:50%;border:3px solid var(--c-accent1);margin:0 auto;background:var(--c-panel);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(255,91,110,.3),0 0 0 6px rgba(255,91,110,.1)}
 .profile-avatar-ph svg{width:50px;height:50px;color:var(--c-muted)}
-.profile-hero h2{font-family:var(--font-h);font-size:1.8rem;font-weight:800;color:var(--c-text);margin-bottom:.2rem;letter-spacing:-.03em}
-.profile-hero .age{color:var(--c-muted);font-size:.95rem}
-/* Extra photos in profile */
-.profile-photos-row{display:flex;gap:.5rem;justify-content:center;margin-top:.75rem;flex-wrap:wrap}
-.profile-photo-mini{width:80px;height:80px;border-radius:var(--r2);object-fit:cover;border:1.5px solid var(--c-border)}
+/* stat pills */
+.profile-stats{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;z-index:1;position:relative}
+.stat-pill{display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .85rem;border-radius:50px;font-size:.82rem;font-weight:600;border:1px solid rgba(255,255,255,.1)}
+.stat-pill.age-pill{background:rgba(255,91,110,.12);color:var(--c-accent1);border-color:rgba(255,91,110,.2)}
+.stat-pill.gender-pill{background:rgba(192,132,252,.12);color:var(--c-accent3);border-color:rgba(192,132,252,.2)}
+.stat-pill.loc-pill{background:rgba(255,255,255,.05);color:var(--c-muted)}
+.stat-pill svg{width:13px;height:13px}
+.profile-hero-name{font-family:var(--font-h);font-size:2rem;font-weight:900;color:var(--c-text);letter-spacing:-.03em;line-height:1.1;position:relative;z-index:1;margin-bottom:.75rem}
+/* extra photos in hero */
+.profile-photos-row{display:flex;gap:.5rem;justify-content:center;margin-bottom:1rem;z-index:1;position:relative;flex-wrap:wrap}
+.profile-photo-mini{width:74px;height:74px;border-radius:var(--r2);object-fit:cover;border:1.5px solid rgba(255,255,255,.12);transition:transform .2s;cursor:pointer}
+.profile-photo-mini:hover{transform:scale(1.05)}
+/* info cards */
 .info-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r3);padding:1.5rem;margin-bottom:1rem}
 .info-card h3{font-size:.72rem;font-weight:700;color:var(--c-accent1);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem}
 .info-card p{color:var(--c-muted);font-size:.92rem;line-height:1.6}
+.interest-badges{display:flex;flex-wrap:wrap;gap:.4rem}
+.interest-badge{padding:.3rem .75rem;background:rgba(255,91,110,.1);border:1px solid rgba(255,91,110,.2);border-radius:50px;font-size:.8rem;color:var(--c-accent1);font-weight:600}
 .profile-btns{display:flex;flex-direction:column;gap:.75rem}
 
-/* SIDEBAR */
+/* ─── SIDEBAR ─── */
 .sidebar{position:fixed;top:0;left:0;height:100%;width:min(300px,80vw);background:var(--c-surface);border-right:1px solid var(--c-border);box-shadow:8px 0 40px rgba(0,0,0,.5);z-index:200;transform:translateX(-100%);transition:transform .3s ease;display:flex;flex-direction:column;overflow:hidden}
 .sidebar.open{transform:translateX(0)}
-.sidebar-head{padding:2rem 1.5rem;background:linear-gradient(135deg,rgba(255,91,110,.15),rgba(255,144,87,.08));border-bottom:1px solid var(--c-border)}
+.sidebar-head{padding:2rem 1.5rem;background:linear-gradient(135deg,rgba(255,91,110,.15),rgba(255,144,87,.08));border-bottom:1px solid var(--c-border);position:relative}
 .sidebar-head .sl{font-family:var(--font-h);font-size:1.6rem;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .sidebar-head p{color:var(--c-muted);font-size:.82rem;margin-top:.2rem}
 .close-sb{position:absolute;top:1.1rem;right:1rem;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.08);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
 .close-sb:hover{background:rgba(255,91,110,.25)}
 .close-sb svg{width:16px;height:16px;color:var(--c-text)}
 .sb-nav{flex:1;padding:1.25rem;overflow-y:auto}
-.nav-item{display:flex;align-items:center;gap:.875rem;padding:.85rem 1rem;border-radius:var(--r2);color:var(--c-muted);font-weight:600;font-size:.92rem;text-decoration:none;cursor:pointer;transition:all .2s;margin-bottom:.25rem;border:none;background:none;width:100%}
+.nav-item{display:flex;align-items:center;gap:.875rem;padding:.85rem 1rem;border-radius:var(--r2);color:var(--c-muted);font-weight:600;font-size:.92rem;cursor:pointer;transition:all .2s;margin-bottom:.25rem;border:none;background:none;width:100%}
 .nav-item:hover{background:rgba(255,255,255,.06);color:var(--c-text)}
 .nav-item.active{background:rgba(255,91,110,.12);color:var(--c-accent1);border:1px solid rgba(255,91,110,.2)}
 .nav-item svg{width:20px;height:20px;flex-shrink:0}
 .sb-foot{padding:1.25rem;border-top:1px solid var(--c-border)}
-.logout-btn{display:flex;align-items:center;gap:.75rem;width:100%;padding:.85rem 1rem;border:none;background:rgba(255,69,84,.08);border-radius:var(--r2);color:#ff6b78;font-weight:600;font-size:.9rem;font-family:var(--font-b);cursor:pointer;transition:all .2s;border:1px solid rgba(255,69,84,.15)}
+.logout-btn{display:flex;align-items:center;gap:.75rem;width:100%;padding:.85rem 1rem;background:rgba(255,69,84,.08);border-radius:var(--r2);color:#ff6b78;font-weight:600;font-size:.9rem;font-family:var(--font-b);cursor:pointer;transition:all .2s;border:1px solid rgba(255,69,84,.15)}
 .logout-btn:hover{background:rgba(255,69,84,.18)}
 .logout-btn svg{width:18px;height:18px}
-.overlay{position:fixed;inset:0;background:rgba(5,3,12,.7);z-index:199;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.overlay{position:fixed;inset:0;background:rgba(5,3,12,.7);z-index:199;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px)}
 .overlay.on{opacity:1;pointer-events:all}
 
-/* MODALS */
-.modal-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:1.25rem;background:rgba(5,3,12,.75);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:500;opacity:0;pointer-events:none;transition:opacity .25s ease}
+/* ─── MODALS ─── */
+.modal-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:1.25rem;background:rgba(5,3,12,.75);backdrop-filter:blur(8px);z-index:500;opacity:0;pointer-events:none;transition:opacity .25s ease}
 .modal-overlay.on{opacity:1;pointer-events:all}
-.modal-box{width:100%;max-width:380px;background:var(--c-panel);border:1px solid rgba(255,255,255,.1);border-radius:var(--r3);overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04);transform:scale(.95) translateY(12px);transition:transform .28s var(--ease-spring),opacity .25s ease;opacity:0}
+.modal-box{width:100%;max-width:380px;background:var(--c-panel);border:1px solid rgba(255,255,255,.1);border-radius:var(--r3);overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.7);transform:scale(.95) translateY(12px);transition:transform .28s var(--ease-spring),opacity .25s ease;opacity:0}
 .modal-overlay.on .modal-box{transform:scale(1) translateY(0);opacity:1}
 .modal-stripe{height:4px;background:var(--grad)}
 .modal-stripe.err{background:linear-gradient(135deg,#ff4554,#c41b28)}
 .modal-stripe.ok{background:linear-gradient(135deg,#22d68a,#16a571)}
 .modal-body{padding:1.5rem 1.5rem 1rem;display:flex;gap:1rem;align-items:flex-start}
 .modal-icon{width:46px;height:46px;flex-shrink:0;border-radius:var(--r2);display:flex;align-items:center;justify-content:center}
-.modal-icon.err{background:rgba(255,69,84,.12)}
-.modal-icon.err svg{color:#ff4554;width:24px;height:24px}
-.modal-icon.ok{background:rgba(34,214,138,.12)}
-.modal-icon.ok svg{color:#22d68a;width:24px;height:24px}
-.modal-icon.info{background:rgba(192,132,252,.12)}
-.modal-icon.info svg{color:var(--c-accent3);width:24px;height:24px}
+.modal-icon.err{background:rgba(255,69,84,.12)}.modal-icon.err svg{color:#ff4554;width:24px;height:24px}
+.modal-icon.ok{background:rgba(34,214,138,.12)}.modal-icon.ok svg{color:#22d68a;width:24px;height:24px}
+.modal-icon.info{background:rgba(192,132,252,.12)}.modal-icon.info svg{color:var(--c-accent3);width:24px;height:24px}
 .modal-txt h4{font-weight:700;color:var(--c-text);font-size:1rem;margin-bottom:.35rem;line-height:1.3}
 .modal-txt p{font-size:.88rem;color:var(--c-muted);line-height:1.55;margin:0}
 .modal-input-wrap{padding:0 1.5rem .75rem}
@@ -291,41 +325,32 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .match-modal-body h3{font-family:var(--font-h);font-size:1.5rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .match-modal-body p{color:var(--c-muted);font-size:.9rem}
 
-/* TOAST */
+/* ─── TOAST ─── */
 .toast{position:fixed;top:max(1.25rem,env(safe-area-inset-top,1.25rem));left:50%;transform:translateX(-50%) translateY(-80px);background:var(--c-panel);color:var(--c-text);padding:.8rem 1.4rem;border-radius:50px;font-size:.88rem;font-weight:600;box-shadow:0 8px 32px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.08);z-index:600;opacity:0;transition:all .3s var(--ease-spring);white-space:nowrap;max-width:calc(100vw - 2rem);overflow:hidden;text-overflow:ellipsis}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .toast.ok{background:linear-gradient(135deg,#22d68a,#16a571);color:#fff}
 .toast.err{background:linear-gradient(135deg,#ff4554,#c41b28);color:#fff}
 .toast.info{background:var(--grad);color:#fff}
 
-/* HELPER */
-.optional-badge{font-size:.72rem;font-weight:500;color:var(--c-dim);margin-left:.4rem;text-transform:none;letter-spacing:0}
 @media(max-width:390px){.app-title{font-size:2.4rem}.page-title{font-size:1.7rem}.card-stack{height:calc(100vw * 1.25)}.act-btn{width:60px;height:60px}.act-btn.like{width:72px;height:72px}}
-*::-webkit-scrollbar{display:none}
-*{scrollbar-width:none}
+*::-webkit-scrollbar{display:none}*{scrollbar-width:none}
 </style>
 </head>
 <body>
 <div class="app" id="app">
 
-<!-- LOGIN -->
+<!-- ══ LOGIN ══ -->
 <div id="login-screen" class="screen active">
   <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100dvh;padding:2rem 1.5rem;background:radial-gradient(ellipse 70% 55% at 15% -5%,rgba(255,91,110,.16) 0%,transparent 55%),radial-gradient(ellipse 60% 50% at 92% 108%,rgba(255,144,87,.13) 0%,transparent 55%),var(--c-bg)">
     <div class="logo-wrap" style="margin-bottom:2.5rem">
-      <div class="logo-icon">
-        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      </div>
+      <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
       <div class="app-title">LionMatch</div>
       <p class="app-sub">Conecta en León, Guanajuato</p>
     </div>
     <div class="glass-card" style="max-width:400px">
       <form id="login-form">
-        <div class="fg">
-          <label>Correo electrónico</label>
-          <input type="email" id="login-email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required>
-        </div>
-        <div class="fg">
-          <label>Contraseña</label>
+        <div class="fg"><label>Correo electrónico</label><input type="email" id="login-email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required></div>
+        <div class="fg"><label>Contraseña</label>
           <div class="pw-wrap">
             <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required>
             <button type="button" class="toggle-pw" data-target="login-password">
@@ -334,10 +359,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
             </button>
           </div>
         </div>
-        <label class="check-row">
-          <input type="checkbox" id="age-confirm" required>
-          <span>Confirmo que soy mayor de 18 años</span>
-        </label>
+        <label class="check-row"><input type="checkbox" id="age-confirm" required><span>Confirmo que soy mayor de 18 años</span></label>
         <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
         <div class="divider">o</div>
         <button type="button" class="btn btn-ghost" id="go-register">Crear cuenta nueva</button>
@@ -347,43 +369,27 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   </div>
 </div>
 
-<!-- REGISTRO -->
+<!-- ══ REGISTRO ══ -->
 <div id="register-screen" class="screen">
   <div class="page-wrap">
-    <button class="back-btn" id="back-login">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    </button>
+    <button class="back-btn" id="back-login"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
     <div class="page-title">Crear Cuenta</div>
     <p class="page-sub">Únete a la comunidad leonesa</p>
     <form id="register-form">
-      <div class="fg">
-        <label>Correo electrónico</label>
-        <input type="email" id="reg-email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required>
-      </div>
-      <div class="fg">
-        <label>Contraseña</label>
+      <div class="fg"><label>Correo electrónico</label><input type="email" id="reg-email" placeholder="tucorreo@ejemplo.com" autocomplete="email" required></div>
+      <div class="fg"><label>Contraseña</label>
         <div class="pw-wrap">
           <input type="password" id="reg-pw" placeholder="••••••••" autocomplete="new-password" minlength="6" required>
-          <button type="button" class="toggle-pw" data-target="reg-pw">
-            <svg class="eye-o" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            <svg class="eye-c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-          </button>
+          <button type="button" class="toggle-pw" data-target="reg-pw"><svg class="eye-o" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><svg class="eye-c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg></button>
         </div>
       </div>
-      <div class="fg">
-        <label>Confirmar contraseña</label>
+      <div class="fg"><label>Confirmar contraseña</label>
         <div class="pw-wrap">
           <input type="password" id="reg-pw2" placeholder="••••••••" autocomplete="new-password" minlength="6" required>
-          <button type="button" class="toggle-pw" data-target="reg-pw2">
-            <svg class="eye-o" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            <svg class="eye-c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-          </button>
+          <button type="button" class="toggle-pw" data-target="reg-pw2"><svg class="eye-o" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><svg class="eye-c" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg></button>
         </div>
       </div>
-      <label class="check-row">
-        <input type="checkbox" id="reg-age" required>
-        <span>Confirmo que soy mayor de 18 años</span>
-      </label>
+      <label class="check-row"><input type="checkbox" id="reg-age" required><span>Confirmo que soy mayor de 18 años</span></label>
       <div class="btn-row">
         <button type="submit" class="btn btn-primary">Crear cuenta</button>
         <button type="button" class="btn btn-danger" id="cancel-reg">Cancelar</button>
@@ -392,55 +398,36 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   </div>
 </div>
 
-<!-- ONBOARDING -->
+<!-- ══ ONBOARDING ══ -->
 <div id="onboarding-screen" class="screen">
   <div class="page-wrap">
-    <button class="back-btn" id="back-ob">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    </button>
+    <button class="back-btn" id="back-ob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
     <div class="prog-bar"><div class="prog-fill" id="ob-prog"></div></div>
     <div class="page-title">Tu Perfil</div>
     <p class="page-sub">Cuéntanos un poco sobre ti</p>
-
     <form id="ob-form">
-      <!-- STEP 1: Foto + datos básicos -->
+
+      <!-- STEP 1 -->
       <div class="step active" data-step="1">
         <div class="fg" style="text-align:center">
-          <label style="display:block;margin-bottom:.75rem">Foto de perfil <span style="color:var(--c-accent1)">*</span></label>
+          <label style="display:block;margin-bottom:.75rem">Foto de perfil <span class="req-star">*</span></label>
           <div class="photo-upload-zone" id="photo-zone-ob">
-            <div class="upload-hint">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-              <span>Subir foto</span>
-            </div>
-            <div class="photo-edit-overlay">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            </div>
+            <div class="upload-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span>Subir foto</span></div>
+            <div class="photo-edit-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
             <input type="file" id="photo-input-ob" accept="image/*">
           </div>
         </div>
-        <div class="fg">
-          <label>Nombre <span style="color:var(--c-accent1)">*</span></label>
-          <input type="text" id="ob-name" placeholder="Tu nombre">
-        </div>
-        <div class="fg">
-          <label>Fecha de nacimiento <span class="optional-badge">(opcional)</span></label>
-          <input type="date" id="ob-birth">
-        </div>
-        <div class="fg">
-          <label>Género <span class="optional-badge">(opcional)</span></label>
-          <select id="ob-gender">
-            <option value="">Selecciona</option>
-            <option value="Hombre">Hombre</option>
-            <option value="Mujer">Mujer</option>
-            <option value="Otro">Otro</option>
-          </select>
+        <div class="fg"><label>Nombre <span class="req-star">*</span></label><input type="text" id="ob-name" placeholder="Tu nombre"></div>
+        <div class="fg"><label>Fecha de nacimiento <span class="optional-badge">(opcional)</span></label><input type="date" id="ob-birth"></div>
+        <div class="fg"><label>Género <span class="optional-badge">(opcional)</span></label>
+          <select id="ob-gender"><option value="">Selecciona</option><option value="Hombre">Hombre</option><option value="Mujer">Mujer</option><option value="Otro">Otro</option></select>
         </div>
       </div>
 
-      <!-- STEP 2: Preferencias -->
+      <!-- STEP 2 -->
       <div class="step" data-step="2">
         <div class="fg">
-          <label>¿Qué buscas? <span class="optional-badge">(opcional)</span></label>
+          <label>¿A quién buscas? <span class="optional-badge">(opcional)</span></label>
           <div class="chips" id="ob-seeking-chips">
             <button type="button" class="chip" data-v="Hombres">Hombres</button>
             <button type="button" class="chip" data-v="Mujeres">Mujeres</button>
@@ -448,23 +435,14 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
           </div>
           <input type="hidden" id="ob-seeking">
         </div>
-
-        <!-- Rango de edad — aparece cuando eligen una preferencia -->
         <div class="age-range-section" id="age-range-section">
-          <div class="fg">
-            <label>Rango de edad que buscas <span class="optional-badge">(opcional)</span></label>
+          <div class="fg"><label>Rango de edad <span class="optional-badge">(opcional)</span></label>
             <div class="age-range-row">
-              <div>
-                <input type="number" id="ob-age-min" placeholder="Desde" min="18" max="99" style="text-align:center">
-              </div>
-              <div>
-                <input type="number" id="ob-age-max" placeholder="Hasta" min="18" max="99" style="text-align:center">
-              </div>
+              <input type="number" id="ob-age-min" placeholder="Desde" min="18" max="99" style="text-align:center">
+              <input type="number" id="ob-age-max" placeholder="Hasta" min="18" max="99" style="text-align:center">
             </div>
-            <p style="font-size:.75rem;color:var(--c-muted);margin-top:.4rem">Filtra perfiles por rango de edad</p>
           </div>
         </div>
-
         <div class="fg" style="margin-top:1.25rem">
           <label>Tipo de relación <span class="optional-badge">(opcional)</span></label>
           <div class="chips">
@@ -477,58 +455,30 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
         </div>
         <div class="fg" style="margin-top:1.25rem">
           <label>Ubicación</label>
-          <div class="loc-lock">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            León, Guanajuato
-          </div>
-          <p style="font-size:.78rem;color:var(--c-muted);margin-top:.4rem">Solo conectamos con personas en León, Gto</p>
+          <div class="loc-lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>León, Guanajuato</div>
         </div>
       </div>
 
-      <!-- STEP 3: Bio, intereses y fotos extra -->
+      <!-- STEP 3 -->
       <div class="step" data-step="3">
         <div class="fg">
           <label>Sobre ti <span class="optional-badge">(opcional)</span></label>
           <textarea id="ob-bio" placeholder="Cuéntanos algo interesante sobre ti…" maxlength="300"></textarea>
           <div class="char-count"><span id="ob-bio-n">0</span>/300</div>
         </div>
-
         <div class="fg">
           <label>Intereses <span class="optional-badge">(elige hasta 8)</span></label>
           <div class="interest-chips" id="ob-interest-chips"></div>
           <div class="int-count" id="ob-int-count">0 / 8 seleccionados</div>
           <input type="hidden" id="ob-interests">
         </div>
-
         <div class="fg" style="margin-top:1.5rem">
           <span class="extra-photos-label">Más fotos tuyas <span class="optional-badge">(opcional)</span></span>
           <div class="extra-photos-grid">
-            <div>
-              <div class="mini-photo-zone" id="mini-zone-ob-2">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                <span>Foto 2</span>
-                <div class="mini-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
-                <input type="file" accept="image/*" id="photo-input-ob-2">
-              </div>
-            </div>
-            <div>
-              <div class="mini-photo-zone" id="mini-zone-ob-3">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                <span>Foto 3</span>
-                <div class="mini-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
-                <input type="file" accept="image/*" id="photo-input-ob-3">
-              </div>
-            </div>
-            <div>
-              <div class="mini-photo-zone" id="mini-zone-ob-4">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                <span>Foto 4</span>
-                <div class="mini-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
-                <input type="file" accept="image/*" id="photo-input-ob-4">
-              </div>
-            </div>
+            <div class="mini-photo-zone" id="mini-zone-ob-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="mini-label">Foto 2</span><div class="mini-overlay"><button type="button" class="mini-delete-btn" data-slot="2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><input type="file" accept="image/*" id="photo-input-ob-2"></div>
+            <div class="mini-photo-zone" id="mini-zone-ob-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="mini-label">Foto 3</span><div class="mini-overlay"><button type="button" class="mini-delete-btn" data-slot="3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><input type="file" accept="image/*" id="photo-input-ob-3"></div>
+            <div class="mini-photo-zone" id="mini-zone-ob-4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="mini-label">Foto 4</span><div class="mini-overlay"><button type="button" class="mini-delete-btn" data-slot="4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><input type="file" accept="image/*" id="photo-input-ob-4"></div>
           </div>
-          <p class="extra-optional">Ayuda a otros a conocerte mejor con más fotos</p>
         </div>
       </div>
 
@@ -541,182 +491,127 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
   </div>
 </div>
 
-<!-- DISCOVERY -->
+<!-- ══ DISCOVERY ══ -->
 <div id="discovery-screen" class="screen">
   <header class="app-header">
-    <button class="menu-btn" id="open-menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
+    <button class="menu-btn" id="open-menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
     <span class="h-title">LionMatch</span>
-    <button class="icon-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-    </button>
+    <button class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></button>
   </header>
   <div class="discovery-wrap">
     <div class="card-stack" id="card-stack">
       <div class="no-cards" id="no-cards" style="display:none">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        <h3>Ya los viste todos</h3>
-        <p>Vuelve pronto para nuevos perfiles</p>
+        <h3>Ya los viste todos</h3><p>Vuelve pronto para nuevos perfiles</p>
       </div>
     </div>
     <div class="actions">
-      <button class="act-btn pass" id="dislike-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-      <button class="act-btn like" id="like-btn">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      </button>
-      <button class="act-btn super" id="super-btn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      </button>
+      <button class="act-btn pass" id="dislike-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <button class="act-btn like" id="like-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      <button class="act-btn super" id="super-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
     </div>
   </div>
 </div>
 
-<!-- MENSAJES -->
+<!-- ══ MENSAJES ══ -->
 <div id="messages-screen" class="screen">
   <header class="app-header">
-    <button class="menu-btn" id="msg-menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
+    <button class="menu-btn" id="msg-menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
     <span style="font-family:var(--font-h);font-size:1.15rem;font-weight:800;color:var(--c-text)">Mensajes</span>
     <div style="width:40px"></div>
   </header>
   <div class="msg-wrap">
-    <div class="section-label">Matches nuevos</div>
+    <div class="section-label">Matches recientes</div>
     <div class="matches-row" id="matches-row"></div>
     <div class="section-label">Conversaciones</div>
-    <div id="conv-list">
-      <div class="empty-state" id="empty-conv">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <h3>Sin conversaciones</h3>
-        <p>Cuando hagas match aparecerán aquí</p>
-      </div>
-    </div>
+    <div id="conv-list"><div class="empty-state" id="empty-conv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><h3>Sin conversaciones</h3><p>Cuando hagas match aparecerán aquí</p></div></div>
   </div>
 </div>
 
-<!-- CHAT -->
+<!-- ══ CHAT ══ -->
 <div id="chat-screen" class="screen">
   <div class="chat-hdr">
-    <button class="back-btn" id="back-chat" style="margin:0;flex-shrink:0">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    </button>
+    <button class="back-btn" id="back-chat" style="margin:0;flex-shrink:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
     <div class="chat-user">
-      <div class="chat-av-ph" id="chat-av-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </div>
-      <div class="chat-user-info">
-        <h4 id="chat-user-name">Usuario</h4>
-        <span>En línea</span>
-      </div>
+      <div class="chat-av-ph" id="chat-av-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div class="chat-user-info"><h4 id="chat-user-name">Usuario</h4><span id="chat-user-status">En línea</span></div>
     </div>
   </div>
   <div class="chat-msgs" id="chat-msgs"></div>
   <div class="chat-input-bar">
     <input type="text" id="chat-input" placeholder="Escribe un mensaje…">
-    <button class="send-btn" id="send-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    </button>
+    <button class="send-btn" id="send-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
   </div>
 </div>
 
-<!-- PERFIL -->
+<!-- ══ MI PERFIL ══ -->
 <div id="profile-screen" class="screen">
   <header class="app-header">
-    <button class="menu-btn" id="prof-menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
+    <button class="menu-btn" id="prof-menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
     <span style="font-family:var(--font-h);font-weight:800;color:var(--c-text);font-size:1.15rem">Mi Perfil</span>
     <div style="width:40px"></div>
   </header>
   <div style="padding:1.25rem 1.25rem 5rem">
     <div class="profile-hero">
-      <div id="prof-av-wrap" class="profile-avatar-ph">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <div class="profile-avatar-wrap">
+        <div id="prof-av-wrap" class="profile-avatar-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
       </div>
       <div class="profile-photos-row" id="prof-extra-photos"></div>
-      <h2 id="prof-name">—</h2>
-      <p class="age" id="prof-age">—</p>
+      <div class="profile-hero-name" id="prof-name">—</div>
+      <div class="profile-stats" id="prof-stats"></div>
     </div>
     <div class="info-card"><h3>Sobre mí</h3><p id="prof-bio">Sin biografía</p></div>
-    <div class="info-card"><h3>Intereses</h3><p id="prof-interests">—</p></div>
+    <div class="info-card"><h3>Intereses</h3><div id="prof-interests"><p style="color:var(--c-muted);font-size:.92rem">—</p></div></div>
     <div class="info-card"><h3>Busco</h3><p id="prof-seeking">—</p></div>
     <div class="profile-btns">
-      <button class="btn btn-primary" id="edit-prof-btn">Editar perfil</button>
+      <button class="btn btn-primary" id="edit-prof-btn">✏️ Editar perfil</button>
       <button class="btn btn-danger" id="del-acc-btn">Eliminar cuenta</button>
     </div>
   </div>
 </div>
 
-<!-- EDITAR PERFIL -->
+<!-- ══ EDITAR PERFIL (todos los campos) ══ -->
 <div id="edit-screen" class="screen">
   <div class="page-wrap">
-    <button class="back-btn" id="back-edit">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-    </button>
+    <button class="back-btn" id="back-edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
     <div class="page-title">Editar Perfil</div>
     <p class="page-sub">Actualiza tu información</p>
     <form id="edit-form">
+      <!-- Foto principal -->
       <div class="fg" style="text-align:center">
-        <label style="display:block;margin-bottom:.75rem">Foto de perfil <span style="color:var(--c-accent1)">*</span></label>
+        <label style="display:block;margin-bottom:.75rem">Foto de perfil <span class="req-star">*</span></label>
         <div class="photo-upload-zone" id="photo-zone-edit">
-          <div class="upload-hint">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            <span>Cambiar foto</span>
-          </div>
-          <div class="photo-edit-overlay">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          </div>
+          <div class="upload-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><span>Cambiar foto</span></div>
+          <div class="photo-edit-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
           <input type="file" id="photo-input-edit" accept="image/*">
         </div>
       </div>
-
+      <!-- Fotos extra -->
       <div class="fg">
         <span class="extra-photos-label">Fotos adicionales <span class="optional-badge">(opcional)</span></span>
         <div class="extra-photos-grid">
-          <div>
-            <div class="mini-photo-zone" id="mini-zone-edit-2">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span>Foto 2</span>
-              <div class="mini-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
-              <input type="file" accept="image/*" id="photo-input-edit-2">
-            </div>
-          </div>
-          <div>
-            <div class="mini-photo-zone" id="mini-zone-edit-3">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span>Foto 3</span>
-              <div class="mini-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
-              <input type="file" accept="image/*" id="photo-input-edit-3">
-            </div>
-          </div>
-          <div>
-            <div class="mini-photo-zone" id="mini-zone-edit-4">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span>Foto 4</span>
-              <div class="mini-overlay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
-              <input type="file" accept="image/*" id="photo-input-edit-4">
-            </div>
-          </div>
+          <div class="mini-photo-zone" id="mini-zone-edit-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="mini-label">Foto 2</span><div class="mini-overlay"><button type="button" class="mini-delete-btn" data-slot="2" data-ctx="edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><input type="file" accept="image/*" id="photo-input-edit-2"></div>
+          <div class="mini-photo-zone" id="mini-zone-edit-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="mini-label">Foto 3</span><div class="mini-overlay"><button type="button" class="mini-delete-btn" data-slot="3" data-ctx="edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><input type="file" accept="image/*" id="photo-input-edit-3"></div>
+          <div class="mini-photo-zone" id="mini-zone-edit-4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span class="mini-label">Foto 4</span><div class="mini-overlay"><button type="button" class="mini-delete-btn" data-slot="4" data-ctx="edit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><input type="file" accept="image/*" id="photo-input-edit-4"></div>
         </div>
       </div>
-
-      <div class="fg"><label>Nombre <span style="color:var(--c-accent1)">*</span></label><input type="text" id="edit-name" required></div>
+      <!-- Todos los campos del onboarding -->
+      <div class="fg"><label>Nombre <span class="req-star">*</span></label><input type="text" id="edit-name" required></div>
+      <div class="fg"><label>Fecha de nacimiento <span class="optional-badge">(opcional)</span></label><input type="date" id="edit-birth"></div>
+      <div class="fg"><label>Género <span class="optional-badge">(opcional)</span></label>
+        <select id="edit-gender"><option value="">Selecciona</option><option value="Hombre">Hombre</option><option value="Mujer">Mujer</option><option value="Otro">Otro</option></select>
+      </div>
       <div class="fg">
         <label>Sobre ti <span class="optional-badge">(opcional)</span></label>
         <textarea id="edit-bio" maxlength="300" placeholder="Cuéntanos algo sobre ti…"></textarea>
         <div class="char-count"><span id="edit-bio-n">0</span>/300</div>
       </div>
-
       <div class="fg">
         <label>Intereses <span class="optional-badge">(elige hasta 8)</span></label>
         <div class="interest-chips" id="edit-interest-chips"></div>
         <div class="int-count" id="edit-int-count">0 / 8 seleccionados</div>
         <input type="hidden" id="edit-interests">
       </div>
-
       <div class="fg">
         <label>Busco <span class="optional-badge">(opcional)</span></label>
         <div class="chips" id="edit-seeking-chips">
@@ -726,19 +621,25 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
         </div>
         <input type="hidden" id="edit-seeking">
       </div>
-
       <div class="age-range-section" id="edit-age-range-section">
-        <div class="fg">
-          <label>Rango de edad <span class="optional-badge">(opcional)</span></label>
+        <div class="fg"><label>Rango de edad <span class="optional-badge">(opcional)</span></label>
           <div class="age-range-row">
             <input type="number" id="edit-age-min" placeholder="Desde" min="18" max="99" style="text-align:center">
             <input type="number" id="edit-age-max" placeholder="Hasta" min="18" max="99" style="text-align:center">
           </div>
         </div>
       </div>
-
+      <div class="fg"><label>Tipo de relación <span class="optional-badge">(opcional)</span></label>
+        <div class="chips" id="edit-relation-chips">
+          <button type="button" class="chip" data-v3="Algo serio">Algo serio</button>
+          <button type="button" class="chip" data-v3="Casual">Casual</button>
+          <button type="button" class="chip" data-v3="Amistad">Amistad</button>
+          <button type="button" class="chip" data-v3="No sé aún">No sé aún</button>
+        </div>
+        <input type="hidden" id="edit-relation">
+      </div>
       <div class="btn-row">
-        <button type="submit" class="btn btn-success">Guardar</button>
+        <button type="submit" class="btn btn-success">Guardar cambios</button>
         <button type="button" class="btn btn-ghost" id="cancel-edit">Cancelar</button>
       </div>
     </form>
@@ -747,106 +648,32 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 
 <!-- SIDEBAR -->
 <div id="sidebar" class="sidebar">
-  <div class="sidebar-head" style="position:relative">
+  <div class="sidebar-head">
     <div class="sl">LionMatch</div>
     <p>León, Guanajuato</p>
-    <button class="close-sb" id="close-sb">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
+    <button class="close-sb" id="close-sb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
   <nav class="sb-nav">
-    <button class="nav-item active" data-s="discovery">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      Descubrir
-    </button>
-    <button class="nav-item" data-s="messages">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      Mensajes
-    </button>
-    <button class="nav-item" data-s="profile">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      Mi Perfil
-    </button>
+    <button class="nav-item active" data-s="discovery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Descubrir</button>
+    <button class="nav-item" data-s="messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Mensajes</button>
+    <button class="nav-item" data-s="profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Mi Perfil</button>
   </nav>
   <div class="sb-foot">
-    <button class="logout-btn" id="logout-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      Cerrar sesión
-    </button>
+    <button class="logout-btn" id="logout-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Cerrar sesión</button>
   </div>
 </div>
 <div class="overlay" id="overlay"></div>
 
 <!-- MODALES -->
-<div class="modal-overlay" id="m-error">
-  <div class="modal-box">
-    <div class="modal-stripe err"></div>
-    <div class="modal-body">
-      <div class="modal-icon err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
-      <div class="modal-txt"><h4 id="m-error-title">Error</h4><p id="m-error-msg"></p></div>
-    </div>
-    <div class="modal-foot"><button class="btn btn-danger btn-sm" id="m-error-ok">Aceptar</button></div>
-  </div>
-</div>
+<div class="modal-overlay" id="m-error"><div class="modal-box"><div class="modal-stripe err"></div><div class="modal-body"><div class="modal-icon err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div><div class="modal-txt"><h4 id="m-error-title">Error</h4><p id="m-error-msg"></p></div></div><div class="modal-foot"><button class="btn btn-danger btn-sm" id="m-error-ok">Aceptar</button></div></div></div>
 
-<div class="modal-overlay" id="m-success">
-  <div class="modal-box">
-    <div class="modal-stripe ok"></div>
-    <div class="modal-body">
-      <div class="modal-icon ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-      <div class="modal-txt"><h4 id="m-success-title">¡Éxito!</h4><p id="m-success-msg"></p></div>
-    </div>
-    <div class="modal-foot"><button class="btn btn-success btn-sm" id="m-success-ok">Aceptar</button></div>
-  </div>
-</div>
+<div class="modal-overlay" id="m-success"><div class="modal-box"><div class="modal-stripe ok"></div><div class="modal-body"><div class="modal-icon ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="modal-txt"><h4 id="m-success-title">¡Éxito!</h4><p id="m-success-msg"></p></div></div><div class="modal-foot"><button class="btn btn-success btn-sm" id="m-success-ok">Aceptar</button></div></div></div>
 
-<div class="modal-overlay" id="m-recovery">
-  <div class="modal-box">
-    <div class="modal-stripe"></div>
-    <div class="modal-body">
-      <div class="modal-icon info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-      <div class="modal-txt"><h4>Recuperar contraseña</h4><p>Ingresa tu correo y te enviamos el enlace</p></div>
-    </div>
-    <div class="modal-input-wrap">
-      <input type="email" id="rec-email" placeholder="tucorreo@ejemplo.com">
-    </div>
-    <div class="modal-foot">
-      <button class="btn btn-ghost btn-sm" id="rec-cancel">Cancelar</button>
-      <button class="btn btn-primary btn-sm" id="rec-send">Enviar</button>
-    </div>
-  </div>
-</div>
+<div class="modal-overlay" id="m-recovery"><div class="modal-box"><div class="modal-stripe"></div><div class="modal-body"><div class="modal-icon info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div class="modal-txt"><h4>Recuperar contraseña</h4><p>Ingresa tu correo y te enviamos el enlace</p></div></div><div class="modal-input-wrap"><input type="email" id="rec-email" placeholder="tucorreo@ejemplo.com"></div><div class="modal-foot"><button class="btn btn-ghost btn-sm" id="rec-cancel">Cancelar</button><button class="btn btn-primary btn-sm" id="rec-send">Enviar</button></div></div></div>
 
-<div class="modal-overlay" id="m-delete">
-  <div class="modal-box">
-    <div class="modal-stripe err"></div>
-    <div class="modal-body">
-      <div class="modal-icon err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></div>
-      <div class="modal-txt"><h4>¿Eliminar cuenta?</h4><p>Esta acción es permanente. Se borrarán todos tus datos, matches y mensajes.</p></div>
-    </div>
-    <div class="modal-foot">
-      <button class="btn btn-ghost btn-sm" id="del-cancel">Cancelar</button>
-      <button class="btn btn-danger btn-sm" id="del-confirm">Eliminar</button>
-    </div>
-  </div>
-</div>
+<div class="modal-overlay" id="m-delete"><div class="modal-box"><div class="modal-stripe err"></div><div class="modal-body"><div class="modal-icon err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg></div><div class="modal-txt"><h4>¿Eliminar cuenta?</h4><p>Esta acción es permanente. Se borrarán todos tus datos, matches y mensajes.</p></div></div><div class="modal-foot"><button class="btn btn-ghost btn-sm" id="del-cancel">Cancelar</button><button class="btn btn-danger btn-sm" id="del-confirm">Eliminar</button></div></div></div>
 
-<div class="modal-overlay" id="m-match">
-  <div class="modal-box">
-    <div class="modal-stripe"></div>
-    <div class="match-modal-body">
-      <div id="match-av-wrap" class="match-av-big-ph">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </div>
-      <h3>¡Es un Match! 🎉</h3>
-      <p id="match-name-txt">¡Los dos se gustaron! Empieza la conversación.</p>
-    </div>
-    <div class="modal-foot">
-      <button class="btn btn-ghost btn-sm" id="match-later">Después</button>
-      <button class="btn btn-primary btn-sm" id="match-chat">Enviar mensaje</button>
-    </div>
-  </div>
-</div>
+<div class="modal-overlay" id="m-match"><div class="modal-box"><div class="modal-stripe"></div><div class="match-modal-body"><div id="match-av-wrap" class="match-av-big-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>¡Es un Match! 🎉</h3><p id="match-name-txt">¡Los dos se gustaron! Chat desbloqueado.</p></div><div class="modal-foot"><button class="btn btn-ghost btn-sm" id="match-later">Después</button><button class="btn btn-primary btn-sm" id="match-chat-btn">Ir al chat</button></div></div></div>
 
 <div class="toast" id="toast"></div>
 
@@ -855,339 +682,321 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 (function(){
 'use strict';
 
-/* ── CONFIG ── */
 const SB_URL = 'https://fjevgfyqqsfankvledpl.supabase.co';
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqZXZnZnlxcXNmYW5rdmxlZHBsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA2Nzk0NjIsImV4cCI6MjA4NjI1NTQ2Mn0.AmysLsRq_KBXYculm0Nyw3a0abWLQ8zTt-2OSo-6PSA';
 const sb = window.supabase.createClient(SB_URL, SB_KEY);
 
-/* ── INTERESTS CATALOG ── */
 const INTERESTS_LIST = [
-  {emoji:'🎵', label:'Música'},
-  {emoji:'⚽', label:'Deportes'},
-  {emoji:'✈️', label:'Viajes'},
-  {emoji:'🍕', label:'Gastronomía'},
-  {emoji:'🎬', label:'Cine & Series'},
-  {emoji:'📚', label:'Lectura'},
-  {emoji:'🎮', label:'Videojuegos'},
-  {emoji:'💪', label:'Fitness'},
-  {emoji:'🎨', label:'Arte'},
-  {emoji:'🌿', label:'Naturaleza'},
-  {emoji:'🐾', label:'Mascotas'},
-  {emoji:'💃', label:'Bailar'},
-  {emoji:'📸', label:'Fotografía'},
-  {emoji:'🧘', label:'Bienestar'},
-  {emoji:'🍻', label:'Vida nocturna'},
-  {emoji:'🎯', label:'Juegos de mesa'},
-  {emoji:'👨‍🍳', label:'Cocinar'},
-  {emoji:'🎸', label:'Conciertos'},
-  {emoji:'🤝', label:'Voluntariado'},
-  {emoji:'🧳', label:'Aventura'},
+  {emoji:'🎵',label:'Música'},{emoji:'⚽',label:'Deportes'},{emoji:'✈️',label:'Viajes'},
+  {emoji:'🍕',label:'Gastronomía'},{emoji:'🎬',label:'Cine & Series'},{emoji:'📚',label:'Lectura'},
+  {emoji:'🎮',label:'Videojuegos'},{emoji:'💪',label:'Fitness'},{emoji:'🎨',label:'Arte'},
+  {emoji:'🌿',label:'Naturaleza'},{emoji:'🐾',label:'Mascotas'},{emoji:'💃',label:'Bailar'},
+  {emoji:'📸',label:'Fotografía'},{emoji:'🧘',label:'Bienestar'},{emoji:'🍻',label:'Vida nocturna'},
+  {emoji:'🎯',label:'Juegos de mesa'},{emoji:'👨‍🍳',label:'Cocinar'},{emoji:'🎸',label:'Conciertos'},
+  {emoji:'🤝',label:'Voluntariado'},{emoji:'🧳',label:'Aventura'},
 ];
 
-/* ── STATE ── */
-let user = null, profiles = [], pIdx = 0, matches = [], convos = [];
-let obStep = 1;
-let photoDataURL  = null;
-let photoDataURL2 = null;
-let photoDataURL3 = null;
-let photoDataURL4 = null;
-let selectedInterests = [];
-let currentChatUserId = null;
+let user=null, profiles=[], pIdx=0, matches=[], convos=[];
+let obStep=1;
+let photoDataURL=null, photoDataURL2=null, photoDataURL3=null, photoDataURL4=null;
+let deletedSlots={}; // {2:true, 3:true, 4:true} para edición
+let selectedInterests=[];
+let currentChatUserId=null, currentChatIsActive=false;
 
-/* ── INIT ── */
+/* ─── INIT ─── */
 document.addEventListener('DOMContentLoaded', async () => {
   buildInterestChips();
   initTogglePw();
   initChips();
   initPhotoUploads();
+  initMiniDeleteBtns();
   initModals();
   initSidebar();
   initForms();
   initBioCounters();
-  initAgeRangeToggle();
 
-  const { data: { session } } = await sb.auth.getSession();
+  // Listen for Supabase auth changes (covers email confirmation redirect)
+  sb.auth.onAuthStateChange(async (event, session) => {
+    if(event === 'SIGNED_IN' && session && !user){
+      user = session.user;
+      await loadProfile();
+      if(user.profile && user.profile.name){ showScreen('discovery'); loadProfiles(); }
+      else showScreen('onboarding');
+    }
+  });
+
+  const { data:{ session } } = await sb.auth.getSession();
   if(session){
     user = session.user;
     await loadProfile();
     if(user.profile && user.profile.name){ showScreen('discovery'); loadProfiles(); }
     else showScreen('onboarding');
-  } else showScreen('login');
+  } else {
+    showScreen('login');
+  }
 });
 
-/* ── BUILD INTEREST CHIPS ── */
+/* ─── INTEREST CHIPS ─── */
 function buildInterestChips(){
-  ['ob-interest-chips','edit-interest-chips'].forEach(containerId => {
-    const container = document.getElementById(containerId);
-    if(!container) return;
+  ['ob-interest-chips','edit-interest-chips'].forEach(cid => {
+    const c = document.getElementById(cid); if(!c) return;
     INTERESTS_LIST.forEach(item => {
       const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'int-chip';
-      btn.dataset.interest = item.label;
-      btn.textContent = item.emoji + ' ' + item.label;
-      btn.addEventListener('click', () => toggleInterestChip(btn, containerId));
-      container.appendChild(btn);
+      btn.type='button'; btn.className='int-chip'; btn.dataset.interest=item.label;
+      btn.textContent=item.emoji+' '+item.label;
+      btn.addEventListener('click',()=>toggleInterest(btn,cid));
+      c.appendChild(btn);
     });
   });
 }
-
-function toggleInterestChip(btn, containerId){
-  const countId = containerId.replace('interest-chips','int-count');
-  const hiddenId = containerId.replace('interest-chips','interests');
-  const val = btn.dataset.interest;
+function toggleInterest(btn,cid){
+  const val=btn.dataset.interest;
+  const ctxId=cid.replace('-interest-chips','');
+  // Determine which selectedInterests array — share one for simplicity
   if(btn.classList.contains('on')){
     btn.classList.remove('on');
-    selectedInterests = selectedInterests.filter(i => i !== val);
+    selectedInterests=selectedInterests.filter(i=>i!==val);
   } else {
-    if(selectedInterests.length >= 8){ toast('Máximo 8 intereses','err'); return; }
-    btn.classList.add('on');
-    selectedInterests.push(val);
+    if(selectedInterests.length>=8){ toast('Máximo 8 intereses','err'); return; }
+    btn.classList.add('on'); selectedInterests.push(val);
   }
-  const countEl = document.getElementById(countId);
-  if(countEl) countEl.textContent = selectedInterests.length + ' / 8 seleccionados';
-  const hiddenEl = document.getElementById(hiddenId);
-  if(hiddenEl) hiddenEl.value = selectedInterests.join(', ');
+  const countEl=document.getElementById(ctxId+'-int-count');
+  if(countEl) countEl.textContent=selectedInterests.length+' / 8 seleccionados';
+  const hidEl=document.getElementById(ctxId+'-interests');
+  if(hidEl) hidEl.value=selectedInterests.join(', ');
+}
+function loadInterestChipsFrom(str,cid){
+  selectedInterests=str?str.split(',').map(s=>s.trim()).filter(Boolean):[];
+  const c=document.getElementById(cid); if(!c) return;
+  c.querySelectorAll('.int-chip').forEach(b=>b.classList.toggle('on',selectedInterests.includes(b.dataset.interest)));
+  const ctxId=cid.replace('-interest-chips','');
+  const countEl=document.getElementById(ctxId+'-int-count');
+  if(countEl) countEl.textContent=selectedInterests.length+' / 8 seleccionados';
+  const hidEl=document.getElementById(ctxId+'-interests');
+  if(hidEl) hidEl.value=str||'';
 }
 
-function loadInterestChipsFromString(str, containerId){
-  selectedInterests = str ? str.split(',').map(s=>s.trim()).filter(Boolean) : [];
-  const container = document.getElementById(containerId);
-  if(!container) return;
-  container.querySelectorAll('.int-chip').forEach(btn => {
-    btn.classList.toggle('on', selectedInterests.includes(btn.dataset.interest));
-  });
-  const countId = containerId.replace('interest-chips','int-count');
-  const countEl = document.getElementById(countId);
-  if(countEl) countEl.textContent = selectedInterests.length + ' / 8 seleccionados';
-  const hiddenId = containerId.replace('interest-chips','interests');
-  const hiddenEl = document.getElementById(hiddenId);
-  if(hiddenEl) hiddenEl.value = selectedInterests.join(', ');
-}
-
-/* ── AGE RANGE TOGGLE ── */
-function initAgeRangeToggle(){
-  // Show age range when seeking chips clicked in onboarding
-  document.getElementById('ob-seeking-chips').addEventListener('click', () => {
-    const seeking = document.getElementById('ob-seeking').value;
-    const section = document.getElementById('age-range-section');
-    section.classList.toggle('show', !!seeking);
-  });
-  // In edit screen
-  document.getElementById('edit-seeking-chips')?.addEventListener('click', () => {
-    const seeking = document.getElementById('edit-seeking').value;
-    const section = document.getElementById('edit-age-range-section');
-    section.classList.toggle('show', !!seeking);
-  });
-}
-
-/* ── TOGGLE PASSWORD ── */
+/* ─── TOGGLE PW ─── */
 function initTogglePw(){
-  document.addEventListener('mousedown', e => {
-    const btn = e.target.closest('.toggle-pw'); if(!btn) return;
+  document.addEventListener('mousedown', e=>{
+    const btn=e.target.closest('.toggle-pw'); if(!btn) return;
     e.preventDefault();
-    const inp = document.getElementById(btn.dataset.target); if(!inp) return;
-    const eo = btn.querySelector('.eye-o'), ec = btn.querySelector('.eye-c');
-    if(inp.type==='password'){ inp.type='text'; eo.style.display='none'; ec.style.display=''; }
-    else { inp.type='password'; eo.style.display=''; ec.style.display='none'; }
+    const inp=document.getElementById(btn.dataset.target); if(!inp) return;
+    const eo=btn.querySelector('.eye-o'), ec=btn.querySelector('.eye-c');
+    if(inp.type==='password'){inp.type='text';eo.style.display='none';ec.style.display='';}
+    else{inp.type='password';eo.style.display='';ec.style.display='none';}
   });
 }
 
-/* ── SINGLE-SELECT CHIPS ── */
+/* ─── CHIPS ─── */
 function initChips(){
-  document.querySelectorAll('.chip').forEach(chip => {
-    chip.addEventListener('click', function(){
-      const grp = this.closest('.chips');
-      if(this.dataset.v !== undefined){
+  document.querySelectorAll('.chip').forEach(chip=>{
+    chip.addEventListener('click',function(){
+      const grp=this.closest('.chips');
+      if(this.dataset.v!==undefined){
         grp.querySelectorAll('.chip[data-v]').forEach(c=>c.classList.remove('on'));
         this.classList.add('on');
-        const hid = grp.nextElementSibling;
-        if(hid && hid.tagName==='INPUT') hid.value = this.dataset.v;
+        const hid=grp.nextElementSibling;
+        if(hid&&hid.tagName==='INPUT') hid.value=this.dataset.v;
+        // Show age range
+        const ageSection=document.getElementById('age-range-section')||document.getElementById('edit-age-range-section');
+        if(ageSection) ageSection.classList.toggle('show',!!this.dataset.v);
       }
-      if(this.dataset.v2 !== undefined){
+      if(this.dataset.v2!==undefined){
         grp.querySelectorAll('.chip[data-v2]').forEach(c=>c.classList.remove('on'));
         this.classList.add('on');
-        const hid = grp.nextElementSibling;
-        if(hid && hid.tagName==='INPUT') hid.value = this.dataset.v2;
+        const hid=grp.nextElementSibling;
+        if(hid&&hid.tagName==='INPUT') hid.value=this.dataset.v2;
+      }
+      if(this.dataset.v3!==undefined){
+        grp.querySelectorAll('.chip[data-v3]').forEach(c=>c.classList.remove('on'));
+        this.classList.add('on');
+        const hid=grp.nextElementSibling;
+        if(hid&&hid.tagName==='INPUT') hid.value=this.dataset.v3;
       }
     });
   });
+  // Separate seeking chips with age range toggle
+  document.getElementById('ob-seeking-chips')?.addEventListener('click',()=>{
+    const v=document.getElementById('ob-seeking').value;
+    document.getElementById('age-range-section').classList.toggle('show',!!v);
+  });
+  document.getElementById('edit-seeking-chips')?.addEventListener('click',()=>{
+    const v=document.getElementById('edit-seeking').value;
+    document.getElementById('edit-age-range-section').classList.toggle('show',!!v);
+  });
 }
 
-/* ── PHOTO UPLOADS ── */
+/* ─── PHOTOS ─── */
 function initPhotoUploads(){
-  // Main photos
-  document.getElementById('photo-input-ob')?.addEventListener('change', e => handleMainPhoto(e, 'photo-zone-ob', 'main'));
-  document.getElementById('photo-input-edit')?.addEventListener('change', e => handleMainPhoto(e, 'photo-zone-edit', 'main'));
-  // Extra photos onboarding
-  document.getElementById('photo-input-ob-2')?.addEventListener('change', e => handleMiniPhoto(e, 'mini-zone-ob-2', 2));
-  document.getElementById('photo-input-ob-3')?.addEventListener('change', e => handleMiniPhoto(e, 'mini-zone-ob-3', 3));
-  document.getElementById('photo-input-ob-4')?.addEventListener('change', e => handleMiniPhoto(e, 'mini-zone-ob-4', 4));
-  // Extra photos edit
-  document.getElementById('photo-input-edit-2')?.addEventListener('change', e => handleMiniPhoto(e, 'mini-zone-edit-2', 2));
-  document.getElementById('photo-input-edit-3')?.addEventListener('change', e => handleMiniPhoto(e, 'mini-zone-edit-3', 3));
-  document.getElementById('photo-input-edit-4')?.addEventListener('change', e => handleMiniPhoto(e, 'mini-zone-edit-4', 4));
+  document.getElementById('photo-input-ob')?.addEventListener('change',e=>handleMainPhoto(e,'photo-zone-ob'));
+  document.getElementById('photo-input-edit')?.addEventListener('change',e=>handleMainPhoto(e,'photo-zone-edit'));
+  [[2,'ob'],[3,'ob'],[4,'ob'],[2,'edit'],[3,'edit'],[4,'edit']].forEach(([n,ctx])=>{
+    document.getElementById(`photo-input-${ctx}-${n}`)?.addEventListener('change',e=>handleMiniPhoto(e,`mini-zone-${ctx}-${n}`,n,ctx));
+  });
 }
-
-function handleMainPhoto(e, zoneId){
-  const file = e.target.files[0]; if(!file) return;
-  if(file.size > 5*1024*1024){ toast('La foto no debe superar 5 MB','err'); return; }
-  const reader = new FileReader();
-  reader.onload = ev => {
-    photoDataURL = ev.target.result;
-    const zone = document.getElementById(zoneId);
+function handleMainPhoto(e,zoneId){
+  const file=e.target.files[0]; if(!file) return;
+  if(file.size>5*1024*1024){toast('Foto max 5 MB','err');return;}
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    photoDataURL=ev.target.result;
+    const zone=document.getElementById(zoneId);
     zone.querySelectorAll('img.preview-img').forEach(i=>i.remove());
-    const img = document.createElement('img');
-    img.src = photoDataURL; img.className='preview-img';
+    const img=document.createElement('img'); img.src=photoDataURL; img.className='preview-img';
     img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;';
-    zone.insertBefore(img, zone.querySelector('.upload-hint'));
+    zone.insertBefore(img,zone.querySelector('.upload-hint'));
     zone.querySelector('.upload-hint').style.display='none';
-    toast('Foto cargada ✓','ok');
+    toast('Foto principal cargada ✓','ok');
   };
   reader.readAsDataURL(file);
 }
-
-function handleMiniPhoto(e, zoneId, num){
-  const file = e.target.files[0]; if(!file) return;
-  if(file.size > 5*1024*1024){ toast('La foto no debe superar 5 MB','err'); return; }
-  const reader = new FileReader();
-  reader.onload = ev => {
-    const dataURL = ev.target.result;
-    if(num===2) photoDataURL2 = dataURL;
-    else if(num===3) photoDataURL3 = dataURL;
-    else if(num===4) photoDataURL4 = dataURL;
-
-    const zone = document.getElementById(zoneId);
-    zone.querySelectorAll('img.mini-preview').forEach(i=>i.remove());
-    const img = document.createElement('img');
-    img.src = dataURL; img.className='mini-preview';
-    img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;';
-    zone.querySelectorAll('svg,span').forEach(el=>el.style.display='none');
-    zone.insertBefore(img, zone.querySelector('.mini-overlay'));
-    toast('Foto '+ num +' cargada ✓','ok');
+function handleMiniPhoto(e,zoneId,num,ctx){
+  const file=e.target.files[0]; if(!file) return;
+  if(file.size>5*1024*1024){toast('Foto max 5 MB','err');return;}
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    const dataURL=ev.target.result;
+    if(num===2) photoDataURL2=dataURL;
+    else if(num===3) photoDataURL3=dataURL;
+    else if(num===4) photoDataURL4=dataURL;
+    if(ctx==='edit') delete deletedSlots[num];
+    setMiniPreview(zoneId,dataURL);
+    toast(`Foto ${num} cargada ✓`,'ok');
   };
   reader.readAsDataURL(file);
 }
-
-function setMiniZonePreview(zoneId, url){
-  if(!url) return;
-  const zone = document.getElementById(zoneId); if(!zone) return;
+function setMiniPreview(zoneId,url){
+  const zone=document.getElementById(zoneId); if(!zone) return;
   zone.querySelectorAll('img.mini-preview').forEach(i=>i.remove());
-  const img = document.createElement('img');
-  img.src = url; img.className='mini-preview';
-  img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;';
-  zone.querySelectorAll('svg,span').forEach(el=>el.style.display='none');
-  zone.insertBefore(img, zone.querySelector('.mini-overlay'));
+  const img=document.createElement('img'); img.src=url; img.className='mini-preview';
+  img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;z-index:1;';
+  zone.querySelectorAll('svg,span.mini-label').forEach(el=>el.style.display='none');
+  const overlay=zone.querySelector('.mini-overlay');
+  if(overlay) zone.insertBefore(img,overlay);
+  else zone.insertBefore(img,zone.querySelector('input'));
+}
+function clearMiniZone(zoneId,num,ctx){
+  const zone=document.getElementById(zoneId); if(!zone) return;
+  zone.querySelectorAll('img.mini-preview').forEach(i=>i.remove());
+  zone.querySelectorAll('svg,span.mini-label').forEach(el=>el.style.display='');
+  if(num===2) photoDataURL2=null;
+  else if(num===3) photoDataURL3=null;
+  else if(num===4) photoDataURL4=null;
+  if(ctx==='edit') deletedSlots[num]=true;
+  const inp=zone.querySelector('input[type=file]'); if(inp) inp.value='';
+  toast(`Foto ${num} eliminada`,'ok');
+}
+function initMiniDeleteBtns(){
+  document.addEventListener('click',e=>{
+    const btn=e.target.closest('.mini-delete-btn'); if(!btn) return;
+    e.preventDefault(); e.stopPropagation();
+    const slot=parseInt(btn.dataset.slot);
+    const ctx=btn.dataset.ctx||'ob';
+    const prefix=ctx==='edit'?'edit':'ob';
+    clearMiniZone(`mini-zone-${prefix}-${slot}`,slot,ctx);
+  });
 }
 
-/* ── MODALS ── */
+/* ─── MODALS ─── */
 function initModals(){
-  document.querySelectorAll('.modal-overlay').forEach(ov=>{
-    ov.addEventListener('click', e=>{ if(e.target===ov) closeModal(ov.id); });
-  });
-  document.getElementById('m-error-ok').addEventListener('click', ()=>closeModal('m-error'));
-  document.getElementById('m-success-ok').addEventListener('click', ()=>{
-    closeModal('m-success');
-    if(_successCb){ _successCb(); _successCb=null; }
-  });
-  document.getElementById('rec-cancel').addEventListener('click', ()=>closeModal('m-recovery'));
-  document.getElementById('rec-send').addEventListener('click', handleRecovery);
-  document.getElementById('del-cancel').addEventListener('click', ()=>closeModal('m-delete'));
-  document.getElementById('del-confirm').addEventListener('click', handleDelete);
-  document.getElementById('match-later').addEventListener('click', ()=>closeModal('m-match'));
-  document.getElementById('match-chat').addEventListener('click', ()=>{ closeModal('m-match'); showScreen('chat'); });
+  document.querySelectorAll('.modal-overlay').forEach(ov=>{ov.addEventListener('click',e=>{if(e.target===ov)closeModal(ov.id);});});
+  document.getElementById('m-error-ok').addEventListener('click',()=>closeModal('m-error'));
+  document.getElementById('m-success-ok').addEventListener('click',()=>{closeModal('m-success');if(_successCb){_successCb();_successCb=null;}});
+  document.getElementById('rec-cancel').addEventListener('click',()=>closeModal('m-recovery'));
+  document.getElementById('rec-send').addEventListener('click',handleRecovery);
+  document.getElementById('del-cancel').addEventListener('click',()=>closeModal('m-delete'));
+  document.getElementById('del-confirm').addEventListener('click',handleDelete);
+  document.getElementById('match-later').addEventListener('click',()=>closeModal('m-match'));
+  document.getElementById('match-chat-btn').addEventListener('click',()=>{closeModal('m-match');showScreen('messages');loadMatches();loadConvos();});
 }
-let _successCb = null;
-function openModal(id){ document.getElementById(id)?.classList.add('on'); }
-function closeModal(id){ document.getElementById(id)?.classList.remove('on'); }
-function showError(msg, title='Error'){ document.getElementById('m-error-title').textContent=title; document.getElementById('m-error-msg').textContent=msg; openModal('m-error'); }
-function showSuccess(msg, title='¡Listo!', cb=null){ document.getElementById('m-success-title').textContent=title; document.getElementById('m-success-msg').textContent=msg; _successCb=cb; openModal('m-success'); }
+let _successCb=null;
+function openModal(id){document.getElementById(id)?.classList.add('on');}
+function closeModal(id){document.getElementById(id)?.classList.remove('on');}
+function showError(msg,title='Error'){document.getElementById('m-error-title').textContent=title;document.getElementById('m-error-msg').textContent=msg;openModal('m-error');}
+function showSuccess(msg,title='¡Listo!',cb=null){document.getElementById('m-success-title').textContent=title;document.getElementById('m-success-msg').textContent=msg;_successCb=cb;openModal('m-success');}
 
-/* ── SIDEBAR ── */
+/* ─── SIDEBAR ─── */
 function initSidebar(){
-  const sb2 = document.getElementById('sidebar'), ov = document.getElementById('overlay');
-  const open = () => { sb2.classList.add('open'); ov.classList.add('on'); };
-  const close = () => { sb2.classList.remove('open'); ov.classList.remove('on'); };
-  document.querySelectorAll('#open-menu,#msg-menu,#prof-menu').forEach(b=>b.addEventListener('click', open));
-  document.getElementById('close-sb').addEventListener('click', close);
-  ov.addEventListener('click', close);
+  const sb2=document.getElementById('sidebar'),ov=document.getElementById('overlay');
+  const open=()=>{sb2.classList.add('open');ov.classList.add('on');};
+  const close=()=>{sb2.classList.remove('open');ov.classList.remove('on');};
+  document.querySelectorAll('#open-menu,#msg-menu,#prof-menu').forEach(b=>b.addEventListener('click',open));
+  document.getElementById('close-sb').addEventListener('click',close);
+  ov.addEventListener('click',close);
   document.querySelectorAll('.nav-item[data-s]').forEach(item=>{
-    item.addEventListener('click', ()=>{
-      const s = item.dataset.s; close();
-      showScreen(s);
+    item.addEventListener('click',()=>{
+      const s=item.dataset.s; close(); showScreen(s);
       if(s==='discovery') loadProfiles();
-      else if(s==='messages'){ loadMatches(); loadConvos(); }
+      else if(s==='messages'){loadMatches();loadConvos();}
       else if(s==='profile') renderProfile();
       document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
       item.classList.add('active');
     });
   });
-  document.getElementById('logout-btn').addEventListener('click', handleLogout);
+  document.getElementById('logout-btn').addEventListener('click',handleLogout);
 }
 
-/* ── FORMS ── */
+/* ─── FORMS ─── */
 function initForms(){
-  document.getElementById('login-form').addEventListener('submit', handleLogin);
-  document.getElementById('go-register').addEventListener('click', ()=>showScreen('register'));
-  document.getElementById('forgot-link').addEventListener('click', ()=>{ document.getElementById('rec-email').value=''; openModal('m-recovery'); });
-  document.getElementById('back-login').addEventListener('click', ()=>showScreen('login'));
-  document.getElementById('cancel-reg').addEventListener('click', ()=>showScreen('login'));
-  document.getElementById('register-form').addEventListener('submit', handleRegister);
-  document.getElementById('back-ob').addEventListener('click', handleLogout);
-  document.getElementById('ob-form').addEventListener('submit', handleCompleteProfile);
-  document.getElementById('ob-next').addEventListener('click', obNext);
-  document.getElementById('ob-prev').addEventListener('click', obPrev);
-  document.getElementById('like-btn').addEventListener('click', ()=>swipe('like'));
-  document.getElementById('dislike-btn').addEventListener('click', ()=>swipe('dislike'));
-  document.getElementById('super-btn').addEventListener('click', ()=>swipe('super'));
-  document.getElementById('back-chat').addEventListener('click', ()=>showScreen('messages'));
-  document.getElementById('send-btn').addEventListener('click', sendMessage);
-  document.getElementById('chat-input').addEventListener('keypress', e=>{ if(e.key==='Enter') sendMessage(); });
-  document.getElementById('edit-prof-btn').addEventListener('click', ()=>{ fillEditForm(); showScreen('edit'); });
-  document.getElementById('del-acc-btn').addEventListener('click', ()=>openModal('m-delete'));
-  document.getElementById('back-edit').addEventListener('click', ()=>showScreen('profile'));
-  document.getElementById('cancel-edit').addEventListener('click', ()=>showScreen('profile'));
-  document.getElementById('edit-form').addEventListener('submit', handleUpdate);
+  document.getElementById('login-form').addEventListener('submit',handleLogin);
+  document.getElementById('go-register').addEventListener('click',()=>showScreen('register'));
+  document.getElementById('forgot-link').addEventListener('click',()=>{document.getElementById('rec-email').value='';openModal('m-recovery');});
+  document.getElementById('back-login').addEventListener('click',()=>showScreen('login'));
+  document.getElementById('cancel-reg').addEventListener('click',()=>showScreen('login'));
+  document.getElementById('register-form').addEventListener('submit',handleRegister);
+  document.getElementById('back-ob').addEventListener('click',handleLogout);
+  document.getElementById('ob-form').addEventListener('submit',handleCompleteProfile);
+  document.getElementById('ob-next').addEventListener('click',obNext);
+  document.getElementById('ob-prev').addEventListener('click',obPrev);
+  document.getElementById('like-btn').addEventListener('click',()=>swipe('like'));
+  document.getElementById('dislike-btn').addEventListener('click',()=>swipe('dislike'));
+  document.getElementById('super-btn').addEventListener('click',()=>swipe('super'));
+  document.getElementById('back-chat').addEventListener('click',()=>showScreen('messages'));
+  document.getElementById('send-btn').addEventListener('click',sendMessage);
+  document.getElementById('chat-input').addEventListener('keypress',e=>{if(e.key==='Enter')sendMessage();});
+  document.getElementById('edit-prof-btn').addEventListener('click',()=>{fillEditForm();showScreen('edit');});
+  document.getElementById('del-acc-btn').addEventListener('click',()=>openModal('m-delete'));
+  document.getElementById('back-edit').addEventListener('click',()=>showScreen('profile'));
+  document.getElementById('cancel-edit').addEventListener('click',()=>showScreen('profile'));
+  document.getElementById('edit-form').addEventListener('submit',handleUpdate);
 }
-
 function initBioCounters(){
-  const obBio = document.getElementById('ob-bio');
-  obBio?.addEventListener('input', ()=>document.getElementById('ob-bio-n').textContent=obBio.value.length);
-  const edBio = document.getElementById('edit-bio');
-  edBio?.addEventListener('input', ()=>document.getElementById('edit-bio-n').textContent=edBio.value.length);
+  const ob=document.getElementById('ob-bio');
+  ob?.addEventListener('input',()=>document.getElementById('ob-bio-n').textContent=ob.value.length);
+  const ed=document.getElementById('edit-bio');
+  ed?.addEventListener('input',()=>document.getElementById('edit-bio-n').textContent=ed.value.length);
 }
 
-/* ── SCREEN ── */
+/* ─── SCREEN ─── */
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id+'-screen')?.classList.add('active');
 }
 
-/* ── TOAST ── */
-function toast(msg, type='ok'){
-  const t = document.getElementById('toast');
-  t.textContent=msg; t.className=`toast ${type}`;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 3000);
+/* ─── TOAST ─── */
+function toast(msg,type='ok'){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.className=`toast ${type}`; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
 }
 
-/* ── AUTH ── */
+/* ─── AUTH ─── */
 async function handleLogin(e){
   e.preventDefault();
-  const email = document.getElementById('login-email').value;
-  const pw = document.getElementById('login-password').value;
-  if(!document.getElementById('age-confirm').checked){ toast('Confirma que eres mayor de edad','err'); return; }
-  const btn = e.target.querySelector('[type=submit]'); btn.classList.add('loading');
-  try {
-    const { data, error } = await sb.auth.signInWithPassword({ email, password:pw });
+  if(!document.getElementById('age-confirm').checked){toast('Confirma que eres mayor de edad','err');return;}
+  const email=document.getElementById('login-email').value;
+  const pw=document.getElementById('login-password').value;
+  const btn=e.target.querySelector('[type=submit]'); btn.classList.add('loading');
+  try{
+    const {data,error}=await sb.auth.signInWithPassword({email,password:pw});
     if(error) throw error;
-    user = data.user;
-    await loadProfile();
+    user=data.user; await loadProfile();
     toast('¡Bienvenido de nuevo!','ok');
-    if(user.profile && user.profile.name){ showScreen('discovery'); loadProfiles(); }
+    if(user.profile&&user.profile.name){showScreen('discovery');loadProfiles();}
     else showScreen('onboarding');
-  } catch { showError('Correo o contraseña incorrectos.','Acceso denegado'); }
-  finally { btn.classList.remove('loading'); }
+  }catch{showError('Correo o contraseña incorrectos.','Acceso denegado');}
+  finally{btn.classList.remove('loading');}
 }
 
 async function handleRegister(e){
@@ -1195,272 +1004,306 @@ async function handleRegister(e){
   const email=document.getElementById('reg-email').value.trim();
   const pw=document.getElementById('reg-pw').value;
   const pw2=document.getElementById('reg-pw2').value;
-  const age=document.getElementById('reg-age').checked;
-  if(!age){ showError('Debes confirmar que eres mayor de 18 años.','Edad requerida'); return; }
-  if(!email.includes('@')){ showError('Correo inválido.','Correo'); return; }
-  if(pw.length<6){ showError('La contraseña debe tener mínimo 6 caracteres.','Contraseña corta'); return; }
-  if(pw!==pw2){ showError('Las contraseñas no coinciden.','Error'); return; }
-  const btn = e.target.querySelector('[type=submit]'); btn.classList.add('loading');
-  try {
-    const { data, error } = await sb.auth.signUp({ email, password:pw,
-      options:{ emailRedirectTo:'https://flavioalejandrov24-lang.github.io/Citasyparejasleongto/' }
+  if(!document.getElementById('reg-age').checked){showError('Debes confirmar que eres mayor de 18 años.','Edad requerida');return;}
+  if(!email.includes('@')){showError('Correo inválido.','Correo');return;}
+  if(pw.length<6){showError('La contraseña debe tener mínimo 6 caracteres.','Contraseña corta');return;}
+  if(pw!==pw2){showError('Las contraseñas no coinciden.','Error');return;}
+  const btn=e.target.querySelector('[type=submit]'); btn.classList.add('loading');
+  try{
+    const {data,error}=await sb.auth.signUp({email,password:pw,
+      options:{emailRedirectTo:'https://flavioalejandrov24-lang.github.io/Citasyparejasleongto/'}
     });
-    if(error){ const m=(error.message||'').toLowerCase();
+    if(error){
+      const m=(error.message||'').toLowerCase();
       if(m.includes('already')||m.includes('exists')) showError(`"${email}" ya tiene cuenta.`,'Ya registrado');
-      else showError(error.message,'Error'); return; }
-    if(data?.user?.identities?.length===0){ showError(`"${email}" ya está registrado.`,'Ya existe'); return; }
-    user = data.user;
-    // Create profile row manually as safety net
-    await sb.from('profiles').upsert({ user_id:user.id, email, created_at:new Date().toISOString() },{ onConflict:'user_id' });
-    showSuccess(`Cuenta creada. Revisa tu correo "${email}" para confirmarla.`,'¡Registro exitoso!',
-      ()=>showScreen('onboarding'));
-  } catch(err){ showError(err.message||'Error inesperado.','Error'); }
-  finally { btn.classList.remove('loading'); }
+      else showError(error.message,'Error');
+      return;
+    }
+    if(data?.user?.identities?.length===0){showError(`"${email}" ya está registrado.`,'Ya existe');return;}
+    // Pre-create profile row
+    if(data.user){
+      await sb.from('profiles').upsert({user_id:data.user.id,email,created_at:new Date().toISOString()},{onConflict:'user_id'});
+    }
+    // ← Go back to login, show instructions
+    showScreen('login');
+    showSuccess(
+      `Te enviamos un correo a "${email}". Haz clic en el enlace para verificar tu cuenta y luego inicia sesión.`,
+      '📬 Revisa tu correo',
+      null
+    );
+  }catch(err){showError(err.message||'Error inesperado.','Error');}
+  finally{btn.classList.remove('loading');}
 }
 
-async function handleLogout(){ await sb.auth.signOut(); user=null; showScreen('login'); toast('Sesión cerrada'); }
+async function handleLogout(){await sb.auth.signOut();user=null;showScreen('login');toast('Sesión cerrada');}
 
 async function handleRecovery(){
-  const email = document.getElementById('rec-email').value.trim();
-  if(!email.includes('@')){ showError('Ingresa un correo válido.','Correo'); return; }
-  const btn = document.getElementById('rec-send'); btn.classList.add('loading');
-  try {
-    const { error } = await sb.auth.resetPasswordForEmail(email,
-      { redirectTo:'https://flavioalejandrov24-lang.github.io/Citasyparejasleongto/' });
+  const email=document.getElementById('rec-email').value.trim();
+  if(!email.includes('@')){showError('Ingresa un correo válido.','Correo');return;}
+  const btn=document.getElementById('rec-send'); btn.classList.add('loading');
+  try{
+    const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:'https://flavioalejandrov24-lang.github.io/Citasyparejasleongto/'});
     if(error) throw error;
     closeModal('m-recovery');
     showSuccess(`Enlace enviado a "${email}". Revisa también spam.`,'Correo enviado');
-  } catch { showError('No se pudo enviar el correo.','Error'); }
-  finally { btn.classList.remove('loading'); }
+  }catch{showError('No se pudo enviar el correo.','Error');}
+  finally{btn.classList.remove('loading');}
 }
 
-/* ── PROFILE ── */
+/* ─── PROFILE ─── */
 async function loadProfile(){
-  try {
-    const { data, error } = await sb.from('profiles').select('*').eq('user_id', user.id).maybeSingle();
-    if(error){ console.error('loadProfile error:', error); user.profile=null; return; }
-    user.profile = data || null;
-  } catch(err){ console.error('loadProfile exception:', err); user.profile=null; }
+  try{
+    const {data,error}=await sb.from('profiles').select('*').eq('user_id',user.id).maybeSingle();
+    if(error){user.profile=null;return;}
+    user.profile=data||null;
+  }catch{user.profile=null;}
 }
 
 function renderProfile(){
-  const p = user.profile || {};
-  document.getElementById('prof-name').textContent = p.name || '—';
-  document.getElementById('prof-age').textContent  = p.age ? `${p.age} años · León, Gto` : 'León, Guanajuato';
-  document.getElementById('prof-bio').textContent  = p.bio || 'Sin biografía';
-  document.getElementById('prof-interests').textContent = p.interests || '—';
-  document.getElementById('prof-seeking').textContent   = p.seeking || '—';
+  const p=user.profile||{};
+  document.getElementById('prof-name').textContent=p.name||'—';
+  document.getElementById('prof-bio').textContent=p.bio||'Sin biografía';
+  document.getElementById('prof-seeking').textContent=p.seeking||(p.relation?p.relation+' · —':'—');
 
-  // Main avatar
-  const wrap = document.getElementById('prof-av-wrap');
-  if(p.photo_url){
-    wrap.outerHTML = `<img src="${p.photo_url}" class="profile-avatar" id="prof-av-wrap" alt="Foto">`;
+  // Stats pills
+  const stats=document.getElementById('prof-stats'); stats.innerHTML='';
+  if(p.age){const pill=document.createElement('div');pill.className='stat-pill age-pill';pill.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>${p.age} años`;stats.appendChild(pill);}
+  if(p.gender){const pill=document.createElement('div');pill.className='stat-pill gender-pill';const icon=p.gender==='Mujer'?'♀':'♂';pill.textContent=`${icon} ${p.gender}`;stats.appendChild(pill);}
+  const locPill=document.createElement('div');locPill.className='stat-pill loc-pill';locPill.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>León, Gto`;stats.appendChild(locPill);
+
+  // Avatar
+  const wrap=document.getElementById('prof-av-wrap');
+  if(p.photo_url&&wrap){
+    wrap.outerHTML=`<img src="${p.photo_url}" class="profile-avatar" id="prof-av-wrap" alt="Foto">`;
   }
 
   // Extra photos
-  const row = document.getElementById('prof-extra-photos');
-  row.innerHTML = '';
-  [p.photo2_url, p.photo3_url, p.photo4_url].forEach(url => {
-    if(url){ const img=document.createElement('img'); img.src=url; img.className='profile-photo-mini'; row.appendChild(img); }
+  const row=document.getElementById('prof-extra-photos'); row.innerHTML='';
+  [p.photo2_url,p.photo3_url,p.photo4_url].forEach(url=>{
+    if(url){const img=document.createElement('img');img.src=url;img.className='profile-photo-mini';row.appendChild(img);}
   });
+
+  // Interests as badges
+  const intWrap=document.getElementById('prof-interests'); intWrap.innerHTML='';
+  if(p.interests){
+    const d=document.createElement('div');d.className='interest-badges';
+    p.interests.split(',').map(s=>s.trim()).filter(Boolean).forEach(item=>{
+      const span=document.createElement('span');span.className='interest-badge';span.textContent=item;d.appendChild(span);
+    });
+    intWrap.appendChild(d);
+  } else {
+    intWrap.innerHTML='<p style="color:var(--c-muted);font-size:.92rem">—</p>';
+  }
 }
 
 function fillEditForm(){
-  const p = user.profile || {};
-  document.getElementById('edit-name').value = p.name||'';
-  document.getElementById('edit-bio').value  = p.bio||'';
-  document.getElementById('edit-bio-n').textContent = (p.bio||'').length;
-  document.getElementById('edit-seeking').value = p.seeking||'';
-  document.getElementById('edit-age-min').value = p.age_min||'';
-  document.getElementById('edit-age-max').value = p.age_max||'';
+  const p=user.profile||{};
+  deletedSlots={};
+  photoDataURL=null; photoDataURL2=null; photoDataURL3=null; photoDataURL4=null;
+  document.getElementById('edit-name').value=p.name||'';
+  document.getElementById('edit-birth').value=p.birthdate||'';
+  document.getElementById('edit-gender').value=p.gender||'';
+  document.getElementById('edit-bio').value=p.bio||'';
+  document.getElementById('edit-bio-n').textContent=(p.bio||'').length;
+  document.getElementById('edit-seeking').value=p.seeking||'';
+  document.getElementById('edit-age-min').value=p.age_min||'';
+  document.getElementById('edit-age-max').value=p.age_max||'';
+  document.getElementById('edit-relation').value=p.relation||'';
 
   // Seeking chips
-  document.querySelectorAll('#edit-seeking-chips .chip[data-v]').forEach(c=>
-    c.classList.toggle('on', c.dataset.v===p.seeking));
-
-  // Show age range if seeking set
+  document.querySelectorAll('#edit-seeking-chips .chip[data-v]').forEach(c=>c.classList.toggle('on',c.dataset.v===p.seeking));
   if(p.seeking) document.getElementById('edit-age-range-section').classList.add('show');
+  else document.getElementById('edit-age-range-section').classList.remove('show');
+
+  // Relation chips
+  document.querySelectorAll('#edit-relation-chips .chip[data-v3]').forEach(c=>c.classList.toggle('on',c.dataset.v3===p.relation));
 
   // Interests
-  loadInterestChipsFromString(p.interests||'', 'edit-interest-chips');
+  loadInterestChipsFrom(p.interests||'','edit-interest-chips');
 
   // Main photo
+  const zone=document.getElementById('photo-zone-edit');
+  zone.querySelectorAll('img.preview-img').forEach(i=>i.remove());
+  zone.querySelector('.upload-hint').style.display='';
   if(p.photo_url){
-    const zone = document.getElementById('photo-zone-edit');
-    zone.querySelectorAll('img.preview-img').forEach(i=>i.remove());
-    const img=document.createElement('img'); img.src=p.photo_url; img.className='preview-img';
+    const img=document.createElement('img');img.src=p.photo_url;img.className='preview-img';
     img.style.cssText='position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%;';
-    zone.insertBefore(img, zone.querySelector('.upload-hint'));
+    zone.insertBefore(img,zone.querySelector('.upload-hint'));
     zone.querySelector('.upload-hint').style.display='none';
   }
 
   // Extra photos
-  if(p.photo2_url) setMiniZonePreview('mini-zone-edit-2', p.photo2_url);
-  if(p.photo3_url) setMiniZonePreview('mini-zone-edit-3', p.photo3_url);
-  if(p.photo4_url) setMiniZonePreview('mini-zone-edit-4', p.photo4_url);
+  ['mini-zone-edit-2','mini-zone-edit-3','mini-zone-edit-4'].forEach((zid,i)=>{
+    const zone2=document.getElementById(zid); if(!zone2) return;
+    zone2.querySelectorAll('img.mini-preview').forEach(im=>im.remove());
+    zone2.querySelectorAll('svg,span.mini-label').forEach(el=>el.style.display='');
+    const url=[p.photo2_url,p.photo3_url,p.photo4_url][i];
+    if(url) setMiniPreview(zid,url);
+  });
 }
 
 async function handleUpdate(e){
   e.preventDefault();
-  const name = document.getElementById('edit-name').value.trim();
-  if(!name){ toast('El nombre es requerido','err'); return; }
-  const p = user.profile||{};
-  if(!p.photo_url && !photoDataURL){ toast('Agrega una foto de perfil','err'); return; }
+  const name=document.getElementById('edit-name').value.trim();
+  if(!name){toast('El nombre es requerido','err');return;}
+  const p=user.profile||{};
+  if(!p.photo_url&&!photoDataURL){toast('Agrega una foto de perfil','err');return;}
 
-  const bio       = document.getElementById('edit-bio').value;
-  const seeking   = document.getElementById('edit-seeking').value;
-  const age_min   = parseInt(document.getElementById('edit-age-min').value)||null;
-  const age_max   = parseInt(document.getElementById('edit-age-max').value)||null;
-  const interests = document.getElementById('edit-interests').value;
+  const birth=document.getElementById('edit-birth').value;
+  const gender=document.getElementById('edit-gender').value;
+  const bio=document.getElementById('edit-bio').value;
+  const seeking=document.getElementById('edit-seeking').value;
+  const age_min=parseInt(document.getElementById('edit-age-min').value)||null;
+  const age_max=parseInt(document.getElementById('edit-age-max').value)||null;
+  const relation=document.getElementById('edit-relation').value;
+  const interests=document.getElementById('edit-interests').value;
+  const age=birth?calcAge(birth):p.age||null;
 
-  const btn = e.target.querySelector('[type=submit]'); btn.classList.add('loading');
-  try {
-    let photo_url  = p.photo_url||null;
-    let photo2_url = p.photo2_url||null;
-    let photo3_url = p.photo3_url||null;
-    let photo4_url = p.photo4_url||null;
+  const btn=e.target.querySelector('[type=submit]'); btn.classList.add('loading');
+  try{
+    let photo_url=p.photo_url||null;
+    let photo2_url=deletedSlots[2]?null:(p.photo2_url||null);
+    let photo3_url=deletedSlots[3]?null:(p.photo3_url||null);
+    let photo4_url=deletedSlots[4]?null:(p.photo4_url||null);
 
     if(photoDataURL)  photo_url  = await uploadPhoto(photoDataURL,'');
     if(photoDataURL2) photo2_url = await uploadPhoto(photoDataURL2,'_2');
     if(photoDataURL3) photo3_url = await uploadPhoto(photoDataURL3,'_3');
     if(photoDataURL4) photo4_url = await uploadPhoto(photoDataURL4,'_4');
 
-    const { error } = await sb.from('profiles').upsert({
-      user_id:user.id, email:user.email,
-      name, bio, interests, seeking, age_min, age_max,
-      photo_url, photo2_url, photo3_url, photo4_url,
-      updated_at:new Date().toISOString()
-    },{ onConflict:'user_id' });
+    const {error}=await sb.from('profiles').upsert({
+      user_id:user.id,email:user.email,
+      name,birthdate:birth||null,age,gender,bio,seeking,age_min,age_max,relation,interests,
+      photo_url,photo2_url,photo3_url,photo4_url,
+      location:'León, Guanajuato',updated_at:new Date().toISOString()
+    },{onConflict:'user_id'});
     if(error) throw error;
 
     await loadProfile();
-    photoDataURL=null; photoDataURL2=null; photoDataURL3=null; photoDataURL4=null;
-    toast('Perfil actualizado','ok');
+    photoDataURL=null;photoDataURL2=null;photoDataURL3=null;photoDataURL4=null;deletedSlots={};
+    toast('Perfil actualizado ✓','ok');
     showScreen('profile'); renderProfile();
-  } catch(err){ console.error(err); toast('Error al actualizar: '+err.message,'err'); }
-  finally { btn.classList.remove('loading'); }
+  }catch(err){console.error(err);toast('Error: '+err.message,'err');}
+  finally{btn.classList.remove('loading');}
 }
 
 async function handleDelete(){
-  try {
+  try{
     await sb.from('profiles').delete().eq('user_id',user.id);
     await sb.from('likes').delete().or(`user_id.eq.${user.id},liked_user_id.eq.${user.id}`);
     await sb.from('matches').delete().or(`user1_id.eq.${user.id},user2_id.eq.${user.id}`);
     await sb.from('messages').delete().or(`sender_id.eq.${user.id},receiver_id.eq.${user.id}`);
     await sb.auth.signOut(); user=null;
     closeModal('m-delete'); showScreen('login'); toast('Cuenta eliminada');
-  } catch { toast('Error al eliminar','err'); }
+  }catch{toast('Error al eliminar','err');}
 }
 
-/* ── UPLOAD PHOTO ── */
-async function uploadPhoto(dataURL, suffix=''){
-  try {
-    const res = await fetch(dataURL);
-    const blob = await res.blob();
-    const ext = blob.type.split('/')[1]||'jpg';
-    const path = `avatars/${user.id}${suffix}.${ext}`;
-    const { error } = await sb.storage.from('avatars').upload(path, blob, { upsert:true, contentType:blob.type });
+/* ─── UPLOAD PHOTO ─── */
+async function uploadPhoto(dataURL,suffix){
+  try{
+    const res=await fetch(dataURL);
+    const blob=await res.blob();
+    const ext=blob.type.split('/')[1]||'jpg';
+    const path=`avatars/${user.id}${suffix}.${ext}`;
+    const {error}=await sb.storage.from('avatars').upload(path,blob,{upsert:true,contentType:blob.type});
     if(error) throw error;
-    const { data } = sb.storage.from('avatars').getPublicUrl(path);
+    const {data}=sb.storage.from('avatars').getPublicUrl(path);
     return data.publicUrl;
-  } catch(err){
-    console.warn('Storage fallback:', err);
-    return dataURL; // fallback: store as base64 (not ideal but works)
+  }catch(err){
+    console.warn('Storage fallback:',err);
+    return dataURL;
   }
 }
 
-/* ── ONBOARDING ── */
+/* ─── ONBOARDING ─── */
 function obUpdateUI(){
   document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
   document.querySelector(`.step[data-step="${obStep}"]`).classList.add('active');
-  document.getElementById('ob-prog').style.width = `${(obStep/3)*100}%`;
-  document.getElementById('ob-prev').style.display = obStep>1 ? '' : 'none';
-  document.getElementById('ob-next').style.display = obStep<3 ? '' : 'none';
-  document.getElementById('ob-finish').style.display = obStep===3 ? '' : 'none';
+  document.getElementById('ob-prog').style.width=`${(obStep/3)*100}%`;
+  document.getElementById('ob-prev').style.display=obStep>1?'':'none';
+  document.getElementById('ob-next').style.display=obStep<3?'':'none';
+  document.getElementById('ob-finish').style.display=obStep===3?'':'none';
 }
-
 function obNext(){
   if(obStep===1){
-    const name = document.getElementById('ob-name').value.trim();
-    if(!name){ toast('El nombre es requerido','err'); document.getElementById('ob-name').style.borderColor='var(--c-red)'; setTimeout(()=>document.getElementById('ob-name').style.borderColor='',2000); return; }
-    if(!photoDataURL){ toast('Por favor agrega una foto de perfil','err'); return; }
+    const name=document.getElementById('ob-name').value.trim();
+    if(!name){toast('El nombre es requerido','err');return;}
+    if(!photoDataURL){toast('Por favor sube una foto de perfil','err');return;}
   }
-  if(obStep<3){ obStep++; obUpdateUI(); }
+  if(obStep<3){obStep++;obUpdateUI();}
 }
-function obPrev(){ if(obStep>1){ obStep--; obUpdateUI(); } }
+function obPrev(){if(obStep>1){obStep--;obUpdateUI();}}
 
 async function handleCompleteProfile(e){
   e.preventDefault();
-  const name = document.getElementById('ob-name').value.trim();
-  if(!name){ toast('El nombre es requerido','err'); return; }
-  if(!photoDataURL){ toast('Por favor agrega una foto de perfil','err'); return; }
+  const name=document.getElementById('ob-name').value.trim();
+  if(!name){toast('El nombre es requerido','err');return;}
+  if(!photoDataURL){toast('Por favor sube una foto de perfil','err');return;}
 
-  const birth     = document.getElementById('ob-birth').value;
-  const gender    = document.getElementById('ob-gender').value;
-  const seeking   = document.getElementById('ob-seeking').value;
-  const bio       = document.getElementById('ob-bio').value||'';
-  const interests = document.getElementById('ob-interests').value||'';
-  const age_min   = parseInt(document.getElementById('ob-age-min').value)||null;
-  const age_max   = parseInt(document.getElementById('ob-age-max').value)||null;
-  const age       = birth ? calcAge(birth) : null;
+  const birth=document.getElementById('ob-birth').value;
+  const gender=document.getElementById('ob-gender').value;
+  const seeking=document.getElementById('ob-seeking').value;
+  const bio=document.getElementById('ob-bio').value||'';
+  const interests=document.getElementById('ob-interests').value||'';
+  const age_min=parseInt(document.getElementById('ob-age-min').value)||null;
+  const age_max=parseInt(document.getElementById('ob-age-max').value)||null;
+  const relation=document.getElementById('ob-relation').value||'';
+  const age=birth?calcAge(birth):null;
+  if(age&&age<18){toast('Debes ser mayor de 18 años','err');return;}
 
-  if(age && age<18){ toast('Debes ser mayor de 18 años','err'); return; }
+  const btn=document.getElementById('ob-finish'); btn.classList.add('loading');
+  try{
+    const photo_url=await uploadPhoto(photoDataURL,'');
+    const photo2_url=photoDataURL2?await uploadPhoto(photoDataURL2,'_2'):null;
+    const photo3_url=photoDataURL3?await uploadPhoto(photoDataURL3,'_3'):null;
+    const photo4_url=photoDataURL4?await uploadPhoto(photoDataURL4,'_4'):null;
 
-  const btn = document.getElementById('ob-finish'); btn.classList.add('loading');
-  try {
-    let photo_url  = await uploadPhoto(photoDataURL,'');
-    let photo2_url = photoDataURL2 ? await uploadPhoto(photoDataURL2,'_2') : null;
-    let photo3_url = photoDataURL3 ? await uploadPhoto(photoDataURL3,'_3') : null;
-    let photo4_url = photoDataURL4 ? await uploadPhoto(photoDataURL4,'_4') : null;
-
-    const { error } = await sb.from('profiles').upsert({
-      user_id:user.id, email:user.email,
-      name, birthdate:birth||null, age, gender, seeking, bio, interests,
-      age_min, age_max, photo_url, photo2_url, photo3_url, photo4_url,
-      location:'León, Guanajuato', updated_at:new Date().toISOString()
-    },{ onConflict:'user_id' });
-
-    if(error){ console.error('Profile upsert error:', JSON.stringify(error)); throw error; }
+    const {error}=await sb.from('profiles').upsert({
+      user_id:user.id,email:user.email,
+      name,birthdate:birth||null,age,gender,seeking,bio,interests,relation,
+      age_min,age_max,photo_url,photo2_url,photo3_url,photo4_url,
+      location:'León, Guanajuato',updated_at:new Date().toISOString()
+    },{onConflict:'user_id'});
+    if(error) throw error;
 
     await loadProfile();
-    photoDataURL=null; photoDataURL2=null; photoDataURL3=null; photoDataURL4=null;
+    photoDataURL=null;photoDataURL2=null;photoDataURL3=null;photoDataURL4=null;
     toast('¡Perfil completado!','ok');
     showScreen('discovery'); loadProfiles();
-  } catch(err){ console.error(err); toast('Error al guardar: '+err.message,'err'); }
-  finally { btn.classList.remove('loading'); }
+  }catch(err){console.error(err);toast('Error al guardar: '+err.message,'err');}
+  finally{btn.classList.remove('loading');}
 }
 
-/* ── DISCOVERY ── */
+/* ─── DISCOVERY ─── */
 async function loadProfiles(){
-  try {
-    const myP = user.profile||{};
-    const { data:liked } = await sb.from('likes').select('liked_user_id').eq('user_id',user.id);
-    const exc = (liked||[]).map(l=>l.liked_user_id); exc.push(user.id);
-    let q = sb.from('profiles').select('*').eq('location','León, Guanajuato')
-              .not('user_id','in',`(${exc.join(',')})`);
+  try{
+    const myP=user.profile||{};
+    const {data:liked}=await sb.from('likes').select('liked_user_id').eq('user_id',user.id);
+    const exc=(liked||[]).map(l=>l.liked_user_id); exc.push(user.id);
+    let q=sb.from('profiles').select('*').eq('location','León, Guanajuato')
+             .not('user_id','in',`(${exc.join(',')})`);
 
-    // Gender filter
-    if(myP.seeking && myP.seeking!=='Todos')
-      q = q.eq('gender', myP.seeking==='Hombres' ? 'Hombre' : 'Mujer');
+    // Gender filter — only apply if we have both seeking AND the target has gender set
+    if(myP.seeking&&myP.seeking!=='Todos'){
+      const targetGender=myP.seeking==='Hombres'?'Hombre':'Mujer';
+      q=q.eq('gender',targetGender);
+    }
+    if(myP.age_min) q=q.gte('age',myP.age_min);
+    if(myP.age_max) q=q.lte('age',myP.age_max);
 
-    // Age range filter
-    if(myP.age_min) q = q.gte('age', myP.age_min);
-    if(myP.age_max) q = q.lte('age', myP.age_max);
-
-    const { data, error } = await q.limit(20);
+    const {data,error}=await q.limit(20);
     if(error) throw error;
-    profiles = data||[]; pIdx=0; renderCard();
-  } catch(err){ console.error(err); toast('Error cargando perfiles','err'); }
+    profiles=data||[]; pIdx=0; renderCard();
+  }catch(err){console.error(err);toast('Error cargando perfiles','err');}
 }
 
 function renderCard(){
-  const stack = document.getElementById('card-stack');
+  const stack=document.getElementById('card-stack');
   stack.querySelectorAll('.swipe-card').forEach(c=>c.remove());
-  if(pIdx>=profiles.length){ document.getElementById('no-cards').style.display='flex'; return; }
+  if(pIdx>=profiles.length){document.getElementById('no-cards').style.display='flex';return;}
   document.getElementById('no-cards').style.display='none';
-  const p = profiles[pIdx];
-  const card = document.createElement('div');
-  card.className='swipe-card';
+  const p=profiles[pIdx];
+  const card=document.createElement('div'); card.className='swipe-card';
 
   if(p.photo_url){
     card.innerHTML=`<img src="${p.photo_url}" alt="${p.name}" draggable="false">`;
@@ -1468,11 +1311,13 @@ function renderCard(){
     card.innerHTML=`<div class="no-photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>`;
   }
 
-  const tags = p.interests ? p.interests.split(',').slice(0,3).map(t=>`<span class="card-tag">${t.trim()}</span>`).join('') : '';
-  card.innerHTML += `
+  const tags=p.interests?p.interests.split(',').slice(0,3).map(t=>`<span class="card-tag">${t.trim()}</span>`).join(''):'';
+  const meta=[p.gender,p.age?`${p.age} años`:''].filter(Boolean).join(' · ');
+  card.innerHTML+=`
     <div class="card-info">
-      <h3>${p.name}${p.age ? ', '+p.age : ''}</h3>
-      <p>${p.bio ? p.bio.slice(0,80)+(p.bio.length>80?'…':'') : 'León, Guanajuato'}</p>
+      <h3>${p.name}</h3>
+      ${meta?`<div class="card-meta">${meta}</div>`:''}
+      <p>${p.bio?p.bio.slice(0,80)+(p.bio.length>80?'…':''):'León, Guanajuato'}</p>
       ${tags}
     </div>
     <div class="hint hint-like">LIKE</div>
@@ -1482,8 +1327,8 @@ function renderCard(){
 }
 
 function addDragHandlers(card){
-  let sx=0, cx=0, drag=false;
-  const start=e=>{ drag=true; sx=e.touches?e.touches[0].clientX:e.clientX; card.style.transition='none'; };
+  let sx=0,cx=0,drag=false;
+  const start=e=>{drag=true;sx=e.touches?e.touches[0].clientX:e.clientX;card.style.transition='none';};
   const move=e=>{
     if(!drag) return;
     cx=e.touches?e.touches[0].clientX:e.clientX;
@@ -1497,120 +1342,197 @@ function addDragHandlers(card){
     const d=cx-sx; card.style.transition='transform .3s ease';
     if(d>100) swipe('like',card);
     else if(d<-100) swipe('dislike',card);
-    else { card.style.transform=''; card.querySelectorAll('.hint').forEach(h=>h.classList.remove('show')); }
+    else{card.style.transform='';card.querySelectorAll('.hint').forEach(h=>h.classList.remove('show'));}
   };
   card.addEventListener('mousedown',start); card.addEventListener('touchstart',start,{passive:true});
   card.addEventListener('mousemove',move);  card.addEventListener('touchmove',move,{passive:true});
   card.addEventListener('mouseup',end);     card.addEventListener('touchend',end);
-  card.addEventListener('mouseleave',()=>{ if(drag) end(); });
+  card.addEventListener('mouseleave',()=>{if(drag)end();});
 }
 
-async function swipe(action, cardEl=null){
+async function swipe(action,cardEl=null){
   if(!cardEl) cardEl=document.querySelector('.swipe-card');
   if(!cardEl||pIdx>=profiles.length) return;
   const p=profiles[pIdx];
   cardEl.style.transition='transform .35s ease,opacity .35s ease';
-  cardEl.style.transform=action==='like'||action==='super'?'translateX(150%) rotate(25deg)':'translateX(-150%) rotate(-25deg)';
+  cardEl.style.transform=action!=='dislike'?'translateX(150%) rotate(25deg)':'translateX(-150%) rotate(-25deg)';
   cardEl.style.opacity='0';
-  setTimeout(()=>{ pIdx++; renderCard(); },350);
-  try {
-    await sb.from('likes').insert({ user_id:user.id, liked_user_id:p.user_id, is_like:action!=='dislike', created_at:new Date().toISOString() });
+  setTimeout(()=>{pIdx++;renderCard();},350);
+
+  try{
+    await sb.from('likes').upsert({user_id:user.id,liked_user_id:p.user_id,is_like:action!=='dislike',created_at:new Date().toISOString()},{onConflict:'user_id,liked_user_id'});
+
     if(action!=='dislike'){
-      const { data:rec } = await sb.from('likes').select('*').eq('user_id',p.user_id).eq('liked_user_id',user.id).eq('is_like',true).maybeSingle();
-      if(rec){ await sb.from('matches').insert({ user1_id:user.id, user2_id:p.user_id, created_at:new Date().toISOString() }); showMatchModal(p); }
+      // Send pending message immediately
+      const pendingMsg='Hola, te vi en Parejas León 👋 espero que hagamos Match 😊';
+      await sb.from('messages').insert({
+        sender_id:user.id,receiver_id:p.user_id,
+        content:pendingMsg,status:'pending',
+        created_at:new Date().toISOString()
+      });
+
+      // Check if they already liked back → it's a match
+      const {data:rec}=await sb.from('likes').select('*')
+        .eq('user_id',p.user_id).eq('liked_user_id',user.id).eq('is_like',true).maybeSingle();
+      if(rec){
+        // Match! activate messages
+        await sb.from('matches').upsert({user1_id:user.id,user2_id:p.user_id,created_at:new Date().toISOString()},{onConflict:'user1_id,user2_id'});
+        // Activate pending messages between both
+        await sb.from('messages').update({status:'active'})
+          .eq('receiver_id',user.id).eq('sender_id',p.user_id).eq('status','pending');
+        await sb.from('messages').update({status:'active'})
+          .eq('sender_id',user.id).eq('receiver_id',p.user_id).eq('status','pending');
+        showMatchModal(p);
+      }
     }
-  } catch(err){ console.error(err); }
+  }catch(err){console.error(err);}
 }
 
 function showMatchModal(p){
   const wrap=document.getElementById('match-av-wrap');
-  if(p.photo_url){ wrap.outerHTML=`<img src="${p.photo_url}" class="match-av-big" id="match-av-wrap" alt="${p.name}">`; }
-  document.getElementById('match-name-txt').textContent=`¡Tú y ${p.name} se gustaron! Empieza la conversación.`;
+  if(p.photo_url) wrap.outerHTML=`<img src="${p.photo_url}" class="match-av-big" id="match-av-wrap" alt="${p.name}">`;
+  document.getElementById('match-name-txt').textContent=`¡Tú y ${p.name} se gustaron! El chat está desbloqueado.`;
   openModal('m-match');
 }
 
-/* ── MESSAGES ── */
+/* ─── MESSAGES ─── */
 async function loadMatches(){
-  const { data } = await sb.from('matches').select(
+  const {data}=await sb.from('matches').select(
     '*,u1:profiles!matches_user1_id_fkey(*),u2:profiles!matches_user2_id_fkey(*)'
   ).or(`user1_id.eq.${user.id},user2_id.eq.${user.id}`).order('created_at',{ascending:false});
   matches=data||[]; renderMatches();
 }
 function renderMatches(){
   const row=document.getElementById('matches-row'); row.innerHTML='';
+  if(!matches.length){row.innerHTML=`<p style="color:var(--c-muted);font-size:.85rem;padding:.5rem 0">Sin matches aún</p>`;return;}
   matches.forEach(m=>{
     const u=m.user1_id===user.id?m.u2:m.u1;
     const div=document.createElement('div'); div.className='match-bubble';
-    if(u.photo_url){ div.innerHTML=`<img src="${u.photo_url}" class="match-av" alt="${u.name}"><span>${u.name?.split(' ')[0]}</span>`; }
-    else { div.innerHTML=`<div class="match-av-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span>${u.name?.split(' ')[0]}</span>`; }
-    div.addEventListener('click',()=>openChat(u));
+    if(u.photo_url) div.innerHTML=`<img src="${u.photo_url}" class="match-av" alt="${u.name}"><span>${u.name?.split(' ')[0]}</span>`;
+    else div.innerHTML=`<div class="match-av-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><span>${u.name?.split(' ')[0]}</span>`;
+    div.addEventListener('click',()=>openChat(u,true));
     row.appendChild(div);
   });
 }
+
 async function loadConvos(){
-  const { data } = await sb.from('messages').select(
+  // Load ALL messages sent or received, grouped by conversation partner
+  const {data}=await sb.from('messages').select(
     '*,sender:profiles!messages_sender_id_fkey(*),receiver:profiles!messages_receiver_id_fkey(*)'
-  ).or(`sender_id.eq.${user.id},receiver_id.eq.${user.id}`).order('created_at',{ascending:false}).limit(50);
+  ).or(`sender_id.eq.${user.id},receiver_id.eq.${user.id}`).order('created_at',{ascending:false}).limit(100);
+
   const map=new Map();
   (data||[]).forEach(msg=>{
     const oid=msg.sender_id===user.id?msg.receiver_id:msg.sender_id;
-    if(!map.has(oid)) map.set(oid,{ u:msg.sender_id===user.id?msg.receiver:msg.sender, last:msg.content, time:fmtTime(msg.created_at), online:Math.random()>.5 });
+    if(!map.has(oid)){
+      const u=msg.sender_id===user.id?msg.receiver:msg.sender;
+      map.set(oid,{u,msgs:[],hasActive:false,hasPending:false});
+    }
+    const conv=map.get(oid);
+    conv.msgs.push(msg);
+    if(msg.status==='active') conv.hasActive=true;
+    else if(msg.status==='pending'&&msg.sender_id===user.id) conv.hasPending=true;
   });
+
   convos=Array.from(map.values()); renderConvos();
 }
+
 function renderConvos(){
-  const list=document.getElementById('conv-list');
-  if(!convos.length){ list.innerHTML=document.getElementById('empty-conv')?.outerHTML||''; return; }
-  list.innerHTML='';
-  convos.forEach(cv=>{
-    const div=document.createElement('div'); div.className='conv-item';
-    const avHtml=cv.u.photo_url?`<img src="${cv.u.photo_url}" class="conv-av" alt="${cv.u.name}">`:`<div class="conv-av-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>`;
-    div.innerHTML=`<div class="av-wrap">${avHtml}${cv.online?'<div class="online-dot"></div>':''}</div><div class="conv-info"><div class="conv-top"><span class="conv-name">${cv.u.name}</span><span class="conv-time">${cv.time}</span></div><p class="conv-last">${cv.last}</p></div>`;
-    div.addEventListener('click',()=>openChat(cv.u));
-    list.appendChild(div);
-  });
-}
-function openChat(u){
-  showScreen('chat');
-  currentChatUserId = u.user_id;
-  document.getElementById('chat-user-name').textContent=u.name;
-  const wrap=document.getElementById('chat-av-wrap');
-  if(u.photo_url){ wrap.outerHTML=`<img src="${u.photo_url}" class="chat-av" id="chat-av-wrap" alt="${u.name}">`; }
-  loadChatMsgs(u.user_id);
-}
-async function loadChatMsgs(oid){
-  const { data } = await sb.from('messages').select('*')
-    .or(`and(sender_id.eq.${user.id},receiver_id.eq.${oid}),and(sender_id.eq.${oid},receiver_id.eq.${user.id})`)
-    .order('created_at',{ascending:true});
-  const c=document.getElementById('chat-msgs'); c.innerHTML='';
-  (data||[]).forEach(msg=>{
-    const d=document.createElement('div');
-    d.className=`msg-row ${msg.sender_id===user.id?'me':'them'}`;
-    d.innerHTML=`<div class="bubble">${msg.content}</div>`;
-    c.appendChild(d);
-  });
-  c.scrollTop=c.scrollHeight;
-}
-async function sendMessage(){
-  const inp=document.getElementById('chat-input'), txt=inp.value.trim(); if(!txt) return;
-  if(!currentChatUserId) return;
-  try {
-    await sb.from('messages').insert({ sender_id:user.id, receiver_id:currentChatUserId, content:txt, created_at:new Date().toISOString() });
-    inp.value=''; loadChatMsgs(currentChatUserId);
-  } catch { toast('Error al enviar','err'); }
+  const list=document.getElementById('conv-list'); list.innerHTML='';
+  if(!convos.length){
+    list.innerHTML=`<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><h3>Sin conversaciones</h3><p>Cuando hagas match aparecerán aquí</p></div>`;
+    return;
+  }
+
+  // Separate: active chats vs pending outgoing
+  const activeConvs=convos.filter(cv=>cv.hasActive);
+  const pendingConvs=convos.filter(cv=>!cv.hasActive&&cv.hasPending);
+
+  if(activeConvs.length){
+    const label=document.createElement('div'); label.className='section-label'; label.style.marginTop='0'; label.textContent='Chats activos';
+    list.appendChild(label);
+    activeConvs.forEach(cv=>list.appendChild(buildConvItem(cv,false)));
+  }
+  if(pendingConvs.length){
+    const label=document.createElement('div'); label.className='section-label'; label.style.marginTop='1rem'; label.textContent='⏳ Esperando match';
+    list.appendChild(label);
+    pendingConvs.forEach(cv=>list.appendChild(buildConvItem(cv,true)));
+  }
 }
 
-/* ── UTILS ── */
+function buildConvItem(cv,isPending){
+  const lastMsg=cv.msgs[0];
+  const div=document.createElement('div');
+  div.className='conv-item'+(isPending?' pending-conv':'');
+  const avHtml=cv.u?.photo_url
+    ?`<img src="${cv.u.photo_url}" class="conv-av" alt="${cv.u?.name}">`
+    :`<div class="conv-av-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>`;
+  const dotHtml=isPending?'<div class="pending-dot"></div>':'<div class="online-dot"></div>';
+  const lastTxt=isPending
+    ?`<span class="conv-last pending-tag">⏳ Esperando que ${cv.u?.name?.split(' ')[0]} haga match</span>`
+    :`<p class="conv-last">${lastMsg?.content||''}</p>`;
+  div.innerHTML=`<div class="av-wrap">${avHtml}${dotHtml}</div><div class="conv-info"><div class="conv-top"><span class="conv-name">${cv.u?.name||'—'}</span><span class="conv-time">${fmtTime(lastMsg?.created_at)}</span></div>${lastTxt}</div>`;
+  if(!isPending) div.addEventListener('click',()=>openChat(cv.u,true));
+  return div;
+}
+
+function openChat(u,isActive){
+  showScreen('chat');
+  currentChatUserId=u.user_id;
+  currentChatIsActive=isActive;
+  document.getElementById('chat-user-name').textContent=u.name;
+  document.getElementById('chat-user-status').textContent='En línea';
+  const wrap=document.getElementById('chat-av-wrap');
+  if(u.photo_url) wrap.outerHTML=`<img src="${u.photo_url}" class="chat-av" id="chat-av-wrap" alt="${u.name}">`;
+  loadChatMsgs(u.user_id);
+  // Enable/disable input based on match status
+  const inp=document.getElementById('chat-input');
+  const sendBtn=document.getElementById('send-btn');
+  inp.disabled=!isActive; sendBtn.disabled=!isActive;
+  inp.placeholder=isActive?'Escribe un mensaje…':'Chat bloqueado hasta el Match ⏳';
+}
+
+async function loadChatMsgs(oid){
+  const {data}=await sb.from('messages').select('*')
+    .or(`and(sender_id.eq.${user.id},receiver_id.eq.${oid}),and(sender_id.eq.${oid},receiver_id.eq.${user.id})`)
+    .eq('status','active')
+    .order('created_at',{ascending:true});
+  const c=document.getElementById('chat-msgs'); c.innerHTML='';
+  if(!data||!data.length){
+    c.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;gap:.75rem;text-align:center;padding:1rem"><p style="font-size:1.5rem">🎉</p><p style="font-weight:700;color:var(--c-text)">¡Match desbloqueado!</p><p style="color:var(--c-muted);font-size:.88rem">Digan hola y comiencen a conocerse</p></div>`;
+  } else {
+    data.forEach(msg=>{
+      const d=document.createElement('div');
+      d.className=`msg-row ${msg.sender_id===user.id?'me':'them'}`;
+      d.innerHTML=`<div class="bubble">${msg.content}</div>`;
+      c.appendChild(d);
+    });
+  }
+  c.scrollTop=c.scrollHeight;
+}
+
+async function sendMessage(){
+  if(!currentChatIsActive){toast('Primero necesitas hacer Match 💫','info');return;}
+  const inp=document.getElementById('chat-input'),txt=inp.value.trim(); if(!txt) return;
+  if(!currentChatUserId) return;
+  try{
+    await sb.from('messages').insert({sender_id:user.id,receiver_id:currentChatUserId,content:txt,status:'active',created_at:new Date().toISOString()});
+    inp.value=''; loadChatMsgs(currentChatUserId);
+  }catch{toast('Error al enviar','err');}
+}
+
+/* ─── UTILS ─── */
 function calcAge(birth){
-  const t=new Date(),b=new Date(birth); let a=t.getFullYear()-b.getFullYear();
+  const t=new Date(),b=new Date(birth);let a=t.getFullYear()-b.getFullYear();
   const m=t.getMonth()-b.getMonth();
-  if(m<0||(m===0&&t.getDate()<b.getDate())) a--; return a;
+  if(m<0||(m===0&&t.getDate()<b.getDate()))a--;return a;
 }
 function fmtTime(ts){
+  if(!ts) return '';
   const d=new Date(ts),now=new Date(),diff=now-d;
   const m=Math.floor(diff/60000),h=Math.floor(diff/3600000),dd=Math.floor(diff/86400000);
-  if(m<1) return 'Ahora'; if(m<60) return `${m}m`; if(h<24) return `${h}h`;
-  if(dd<7) return `${dd}d`;
+  if(m<1)return 'Ahora';if(m<60)return `${m}m`;if(h<24)return `${h}h`;
+  if(dd<7)return `${dd}d`;
   return d.toLocaleDateString('es-MX',{day:'numeric',month:'short'});
 }
 
